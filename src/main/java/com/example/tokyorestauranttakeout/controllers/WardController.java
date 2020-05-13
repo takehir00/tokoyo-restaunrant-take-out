@@ -14,7 +14,7 @@ public class WardController {
      */
     @GetMapping("/")
     public ModelAndView index(ModelAndView mav) {
-        mav.setViewName("templates/wards/index");
+        mav.setViewName("wards/index");
         return mav;
     }
 }
