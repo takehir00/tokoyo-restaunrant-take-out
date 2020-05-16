@@ -1,28 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Nanpa_Picks</title>
+    <title>東京テイクアウト飲食店情報館</title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=UTF-8" />
     <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
-    <link rel="stylesheet" media="all" th:href="@{/css/articles.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/top.css}" />
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
 <div th:insert="~{header :: copy}"></div>
-<div class="contents container">
-    <div class="articles row">
-        <div class="article col-sm-3">
-            ほげ
-        </div>
-        <div class="article col-sm-3">
-            ほげ
-        </div>
-        <div class="article col-sm-3">
-            ほげ
+    <div class="jumbotron top-image">
+        <div class="container">
+            <h1>東京都内のテイクアウトグルメを楽しもう</h1>
+            <p>東京都内でテイクアウトが可能な飲食店の情報をまとめたグルメサイトです。</p>
+            <p>美味しいものを食べておうち時間を快適に過ごしましょう。</p>
         </div>
     </div>
-</div>
+    <div class="contents container">
+        <h2 class="border-bottom">エリアを選ぶ</h2>
+        <div class="wards row">
+            <div class="ward col-sm-3">
+                <p class="border-bottom">港区（250件）</p>
+                <img src="images/roppongiHils.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">新宿区（250件）</p>
+                <img src="images/shinjuku_station.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">渋谷区（250件</p>
+                <img src="images/shibuya.jpg" class="img-fluid rounded">
+            </div>
+        </div>
+        <div class="wards row">
+            <div class="ward col-sm-3">
+                <p class="border-bottom">豊島区</p>
+                <img src="images/kebukuro_station.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">豊島区</p>
+                <img src="images/kebukuro_station.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">豊島区</p>
+                <img src="images/kebukuro_station.jpg" class="img-fluid rounded">
+            </div>
+        </div>
+        <div class="wards row">
+            <div class="ward col-sm-3">
+                <p class="border-bottom">豊島区</p>
+                <img src="images/kebukuro_station.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">豊島区</p>
+                <img src="images/kebukuro_station.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">豊島区</p>
+                <img src="images/kebukuro_station.jpg" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
 <div th:insert="~{footer :: copy}"></div>
 </body>
 </html>
