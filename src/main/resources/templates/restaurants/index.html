@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/restaurant.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{header :: copy}"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="restaurant-search">
+                <div class="restaurant-search-title">
+                    エリアから探す
+                </div>
+                <div class="restaurant-search-aria">
+                    <form>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">池袋駅</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">大塚駅</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+                            <label class="form-check-label" for="inlineRadio3">目白駅</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">椎名町駅</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">落合南長崎駅</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+                            <label class="form-check-label" for="inlineRadio3">東池袋駅</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div>
+                <h3 class="restaurant-ward rounded shadow">豊島区エリアの飲食店</h3>
+            </div>
+            <div class="restaurant">
+                <h5 class="restaurant-title">キッチン南海</h5>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img th:src="@{/images/roppongiHils.jpg}" class="img-fluid rounded">
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="restaurant-introduction">
+                            <h6>＜お店の紹介＞</h6>
+                            <p>早稲田屈指の洋食専門店です。</p>
+                        </div>
+                        <div class="restaurant-menu-list">
+                            <h6>＜人気メニュー＞</h6>
+                            <ul>
+                                <li>煮込みハンバーグ</li>
+                                <li>オムライス</li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-sm-9"></div>
+                                <div class="col-sm-3">
+                                    <p>お店の詳細を見る</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="restaurant">
+                <h5 class="restaurant-title">キッチン南海</h5>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img th:src="@{/images/roppongiHils.jpg}" class="img-fluid rounded">
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="restaurant-introduction">
+                            <h6>＜お店の紹介＞</h6>
+                            <p>早稲田屈指の洋食専門店です。</p>
+                        </div>
+                        <div class="restaurant-menu-list">
+                            <h6>＜人気メニュー＞</h6>
+                            <ul>
+                                <li>煮込みハンバーグ</li>
+                                <li>オムライス</li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-sm-9"></div>
+                                <div class="col-sm-3">
+                                    <p>お店の詳細を見る</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="restaurant">
+                <h5 class="restaurant-title">キッチン南海</h5>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img th:src="@{/images/roppongiHils.jpg}" class="img-fluid rounded">
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="restaurant-introduction">
+                            <h6>＜お店の紹介＞</h6>
+                            <p>早稲田屈指の洋食専門店です。</p>
+                        </div>
+                        <div class="restaurant-menu-list">
+                            <h6>＜人気メニュー＞</h6>
+                            <ul>
+                                <li>煮込みハンバーグ</li>
+                                <li>オムライス</li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-sm-9"></div>
+                                <div class="col-sm-3">
+                                    <p>お店の詳細を見る</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="~{footer :: copy}"></div>
+</body>
+</html>
