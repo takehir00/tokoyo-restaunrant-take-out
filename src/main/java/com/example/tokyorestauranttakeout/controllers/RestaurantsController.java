@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class RestaurantController {
+public class RestaurantsController {
     /**
      * 飲食店一覧画面表示
      * @param mav
