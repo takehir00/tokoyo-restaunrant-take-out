@@ -1,4 +1,4 @@
-package com.example.tokyorestauranttakeout.controllers;
+package com.example.tokyorestauranttakeout.client.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
