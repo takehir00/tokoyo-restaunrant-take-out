@@ -17,4 +17,26 @@ public class AdminWardsController {
         mav.setViewName("admin/wards/index");
         return mav;
     }
+
+    /**
+     * 登録画面表示
+     * @param mav
+     * @return
+     */
+    @GetMapping("/admin/wards/register")
+    public ModelAndView registerForm(ModelAndView mav) {
+        mav.setViewName("admin/wards/registerForm");
+        return mav;
+    }
+
+    /**
+     * 登録画面表示
+     * @param mav
+     * @return
+     */
+    @GetMapping("/admin/wards/update")
+    public ModelAndView updateForm(ModelAndView mav) {
+        mav.setViewName("admin/wards/updateForm");
+        return mav;
+    }
 }
