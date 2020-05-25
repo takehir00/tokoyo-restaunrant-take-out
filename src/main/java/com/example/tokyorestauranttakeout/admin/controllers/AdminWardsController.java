@@ -1,19 +1,20 @@
-package com.example.tokyorestauranttakeout.client.controllers;
+package com.example.tokyorestauranttakeout.admin.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class QuestionsController {
+public class AdminWardsController {
+
     /**
-     * 問い合わせ画面
+     * トップ画面表示
      * @param mav
      * @return
      */
-    @GetMapping("/questions")
+    @GetMapping("/admin/wards")
     public ModelAndView index(ModelAndView mav) {
-        mav.setViewName("client/questions/index");
+        mav.setViewName("admin/wards/index");
         return mav;
     }
 }

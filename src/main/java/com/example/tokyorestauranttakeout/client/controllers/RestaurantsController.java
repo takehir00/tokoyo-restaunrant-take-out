@@ -14,7 +14,7 @@ public class RestaurantsController {
      */
     @GetMapping("/restaurants")
     public ModelAndView index(ModelAndView mav) {
-        mav.setViewName("restaurants/index");
+        mav.setViewName("client/restaurants/index");
         return mav;
     }
 
@@ -26,7 +26,7 @@ public class RestaurantsController {
     @GetMapping("/restaurants/{restaurantId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long restaurantId) {
-        mav.setViewName("restaurants/show");
+        mav.setViewName("client/restaurants/show");
         return mav;
     }
 }

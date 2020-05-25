@@ -1,0 +1,13 @@
+.main {
+    width: 90vw;
+    height: 100px;
+    background-color: red;
+}
+
+.admin-table {
+    width: 100vw;
+}
+
+.admin-title{
+    background-color: #D0D0D0;
+}

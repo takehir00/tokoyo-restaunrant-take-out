@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-top.css}" />
+</head>
+<body>
+    <div th:insert="~{admin/header :: copy}"></div>
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-sm-2" th:insert="~{admin/sidebar :: copy}"></div>
+            <div class="col-sm-10">
+                <h3 class="admin-title border-bottom">区</h3>
+                <table class="admin-table table">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">区名</th>
+                        <th scope="col">画像</th>
+                        <th scope="col">作成日時</th>
+                        <th scope="col">更新日時</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>豊島区</td>
+                        <td>画像</td>
+                        <td>5月20日</td>
+                        <td>5月20日</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>港区</td>
+                        <td>画像</td>
+                        <td>5月20日</td>
+                        <td>5月20日</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>渋谷区</td>
+                        <td>画像</td>
+                        <td>5月20日</td>
+                        <td>5月20日</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
