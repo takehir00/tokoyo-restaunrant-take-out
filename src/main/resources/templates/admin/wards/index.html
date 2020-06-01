@@ -13,10 +13,10 @@
     <div th:insert="~{admin/header :: copy}"></div>
     <div class="container-fluid p-0">
         <div class="row no-gutters">
-            <div class="col-sm-2" th:insert="~{admin/sidebar :: copy}"></div>
+            <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
             <div class="col-sm-10">
                 <h3 class="admin-title border-bottom">区</h3>
-                <table class="admin-table table">
+                <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">id</th>
@@ -24,6 +24,8 @@
                         <th scope="col">画像</th>
                         <th scope="col">作成日時</th>
                         <th scope="col">更新日時</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,6 +35,12 @@
                         <td>画像</td>
                         <td>5月20日</td>
                         <td>5月20日</td>
+                        <td>
+                            <a th:href="@{/admin/wards/update/1}">更新</a>
+                        </td>
+                        <td>
+                            <a href="articles/registerForm.html" th:href="@{/admin/wards/delete/1}">削除</a>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>

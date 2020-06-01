@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class AdminWardsController {
 
+public class AdminWardAreasController {
     /**
      * トップ画面表示
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards")
+    @GetMapping("/admin/ward-areas")
     public ModelAndView index(ModelAndView mav) {
-        mav.setViewName("admin/wards/index");
+        mav.setViewName("admin/ward-areas/index");
         return mav;
     }
 
@@ -24,10 +24,10 @@ public class AdminWardsController {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/{wardId}")
+    @GetMapping("/admin/ward-areas/{wardAreaId}")
     public ModelAndView show(ModelAndView mav,
-                             @PathVariable Long wardId) {
-        mav.setViewName("admin/wards/show");
+                             @PathVariable Long wardAreaId) {
+        mav.setViewName("admin/restaurants/show");
         return mav;
     }
 
@@ -36,9 +36,9 @@ public class AdminWardsController {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/register")
+    @GetMapping("/admin/ward-areas/register")
     public ModelAndView registerForm(ModelAndView mav) {
-        mav.setViewName("admin/wards/registerForm");
+        mav.setViewName("admin/ward-areas/registerForm");
         return mav;
     }
 
@@ -47,10 +47,10 @@ public class AdminWardsController {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/update/{wardId}")
+    @GetMapping("/admin/ward-areas/update/{wardAreaId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Long wardId) {
-        mav.setViewName("admin/wards/updateForm");
+                                   @PathVariable Long wardAreaId) {
+        mav.setViewName("admin/ward-areas/updateForm");
         return mav;
     }
 
@@ -59,10 +59,10 @@ public class AdminWardsController {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/delete/{wardId}")
+    @GetMapping("/admin/ward-areas/delete/{wardAreaId}")
     public ModelAndView deleteForm(ModelAndView mav,
-                                   @PathVariable Long wardId) {
-        mav.setViewName("admin/wards/deleteForm");
+                                   @PathVariable Long wardAreaId) {
+        mav.setViewName("admin/ward-areas/deleteForm");
         return mav;
     }
 }

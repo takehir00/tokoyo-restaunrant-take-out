@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-show.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
+        <div class="col-sm-10">
+            <div class="registerform">
+                <h3 class="registerform-title">問い合わせ除確認画面</h3>
+                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
+                    <input type="hidden" name="id" />
+                    <div class="admin-detail">
+                        <dl class="admin-detail-content">
+                            <dt>id</dt>
+                            <dd>1001</dd>
+                            <dt>件名</dt>
+                            <dd>もっと店を増やして欲しい</dd>
+                            <dt>本文</dt>
+                            <dd>もっと店を増やして欲しい
+                                もっと店を増やして欲しい
+                                もっと店を増やして欲しい
+                                もっと店を増やして欲しいもっと店を増やして
+                                欲しいもっと店を増やして
+                                欲しいもっと店を増やして欲しい
+                                もっと店を増やして欲しいもっと店を増やして
+                                欲しいもっと店を増やして欲しい</dd>
+                            <dt>送信者メールアドレス</dt>
+                            <dd>taro@mail.com</dd>
+                            <dt>解決フラグ</dt>
+                            <dd>未解決</dd>
+                            <dt>作成日時</dt>
+                            <dd>2020/9/21</dd>
+                            <dt>更新日時</dt>
+                            <dd>2020/9/21</dd>
+                        </dl>
+                        <button type="submit" class="btn btn-primary">削除する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -13,7 +13,7 @@
 <div th:insert="~{admin/header :: copy}"></div>
 <div class="container-fluid p-0">
     <div class="row">
-        <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
+        <div class="col-sm-2" th:insert="~{admin/sidebar :: copy}"></div>
         <div class="col-sm-10">
             <div class="registerform">
                 <h3 class="registerform-title">エリア更新</h3>
@@ -26,13 +26,37 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="title">区名</label>
+                            <label for="title">メニュー名</label>
                             <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="区名を入力してください">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
+                            <label for="price">価格</label>
+                            <input type="text" class="form-control" id="price" aria-describedby="emailHelp" placeholder="区名を入力してください">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
                             <label for="exampleInputEmail1">画像</label>
+                            <input type="file" class="form-control-file" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="exampleFormControlSelect1">レストラン</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>キッチン南海　id：１</option>
+                                <option>キッチンおとぼけ　id：２</option>
+                                <option>権兵衛　id：３</option>
+                                <option>キッチンみき</option>
+                                <option>高木屋</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="exampleInputEmail1">優先度</label>
                             <input type="file" class="form-control-file" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                     </div>

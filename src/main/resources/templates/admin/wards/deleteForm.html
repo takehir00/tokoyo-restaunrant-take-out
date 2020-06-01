@@ -8,6 +8,7 @@
     <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
     <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-show.css}" />
 </head>
 <body>
 <div th:insert="~{admin/header :: copy}"></div>
@@ -16,21 +17,24 @@
         <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
         <div class="col-sm-10">
             <div class="registerform">
-                <h3 class="registerform-title">区登録</h3>
+                <h3 class="registerform-title">区削除確認画面</h3>
                 <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="title">区名</label>
-                            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="区名を入力してください">
-                        </div>
+                    <input type="hidden" name="id" />
+                    <div class="admin-detail">
+                        <dl class="admin-detail-content">
+                            <dt>id</dt>
+                            <dd>1001</dd>
+                            <dt>区名</dt>
+                            <dd>豊島区</dd>
+                            <dt>店舗画像</dt>
+                            <dd>豊島区</dd>
+                            <dt>作成日時</dt>
+                            <dd>2020/9/21</dd>
+                            <dt>更新日時</dt>
+                            <dd>2020/9/21</dd>
+                        </dl>
+                        <button type="submit" class="btn btn-primary">削除する</button>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="exampleInputEmail1">画像</label>
-                            <input type="file" class="form-control-file" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">登録</button>
                 </form>
             </div>
         </div>
