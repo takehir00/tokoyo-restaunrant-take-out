@@ -1,19 +1,29 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.admin.services.AdminMenuService;
+import com.example.tokyorestauranttakeout.model.Menu;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+
+
 @Controller
 public class AdminMenusController {
+    @Autowired
+    AdminMenuService adminMenuService;
+
     /**
      * トップ画面表示
      * @param mav
      * @return
      */
     @GetMapping("/admin/menus")
-    public ModelAndView index(ModelAndView mav) {
+    public ModelAndView index(ModelAndView mav) throws IOException {
+        Menu menu = adminMenuService.getById(1);
         mav.setViewName("admin/menus/index");
         return mav;
     }
