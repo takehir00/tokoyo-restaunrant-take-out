@@ -1,6 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
-import com.example.tokyorestauranttakeout.model.Menu;
+import com.example.tokyorestauranttakeout.entity.Menu;
 
 import java.io.IOException;
 

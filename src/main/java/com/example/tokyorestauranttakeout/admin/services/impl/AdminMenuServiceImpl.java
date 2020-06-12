@@ -1,7 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.services.AdminMenuService;
-import com.example.tokyorestauranttakeout.model.Menu;
+import com.example.tokyorestauranttakeout.entity.Menu;
 import com.example.tokyorestauranttakeout.repositories.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

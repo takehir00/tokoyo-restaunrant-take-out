@@ -1,4 +1,4 @@
-package com.example.tokyorestauranttakeout.model;
+package com.example.tokyorestauranttakeout.entity;
 
 import java.util.Date;
 
