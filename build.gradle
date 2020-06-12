@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id 'war'
+	id "com.thinkimi.gradle.MybatisGenerator" version "2.2"
 }
 
 group = 'com.example'
@@ -32,6 +33,10 @@ dependencies {
     compile group: 'org.mybatis', name: 'mybatis', version: '3.5.3'
 }
 
+mybatisGenerator {
+	verbose = true
+	configFile = 'src/main/resources/generatorConfig.xml'
+}
 
 
 test {
