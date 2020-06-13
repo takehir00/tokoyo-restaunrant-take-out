@@ -1,7 +1,7 @@
 package com.example.tokyorestauranttakeout.repositories;
 
 import com.example.tokyorestauranttakeout.mapper.MenuMapper;
-import com.example.tokyorestauranttakeout.model.Menu;
+import com.example.tokyorestauranttakeout.entity.Menu;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
