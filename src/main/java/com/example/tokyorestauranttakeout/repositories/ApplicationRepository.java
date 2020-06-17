@@ -18,6 +18,6 @@ public class ApplicationRepository {
         InputStream is = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory =
                 new SqlSessionFactoryBuilder().build(is);
-        this.sqlSession = sqlSessionFactory.openSession();
+        this.sqlSession = sqlSessionFactory.openSession(true);
     }
 }

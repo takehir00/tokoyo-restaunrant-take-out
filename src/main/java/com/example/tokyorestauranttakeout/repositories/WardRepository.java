@@ -22,4 +22,15 @@ public class WardRepository extends ApplicationRepository {
         WardExample example = new WardExample();
         return mapper.selectByExample(example);
     }
+
+    /**
+     * 登録
+     * @param ward
+     */
+    public void create(Ward ward) {
+        WardMapper mapper = sqlSession.getMapper(WardMapper.class);
+        mapper.insert(ward);
+        //auto-commitがtrueの場合は不要
+        //sqlSession.commit();
+    }
 }
