@@ -1,5 +1,6 @@
+drop table menu;
 create table menu
-    (id int,
+    (id int not null AUTO_INCREMENT,
     name varchar(100),
     price int,
     image varchar(10000),

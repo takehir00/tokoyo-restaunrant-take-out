@@ -17,17 +17,17 @@
         <div class="col-sm-10">
             <div class="registerform">
                 <h3 class="registerform-title">区登録</h3>
-                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
+                <form method="post" th:action="@{'/admin/wards/register'}" th:object="${wardRegisterForm}">
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="title">区名</label>
-                            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="区名を入力してください">
+                            <label for="name">区名</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="区名を入力してください">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="exampleInputEmail1">画像</label>
-                            <input type="file" class="form-control-file" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <label for="image">画像</label>
+                            <input type="file" class="form-control-file" name="image" id="image" >
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">登録</button>

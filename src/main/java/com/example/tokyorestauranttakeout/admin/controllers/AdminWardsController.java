@@ -1,12 +1,23 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.admin.forms.WardRegisterForm;
+import com.example.tokyorestauranttakeout.admin.services.AdminWardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdminWardsController {
+
+    @Autowired
+    AdminWardService adminWardService;
 
     /**
      * トップ画面表示
@@ -41,6 +52,24 @@ public class AdminWardsController {
         mav.setViewName("admin/wards/registerForm");
         return mav;
     }
+
+    /**
+     * 登録
+     * @param wardRegisterForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     */
+    @Transactional
+    @PostMapping("/admin/wards/register")
+    public String register(
+            @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) {
+        adminWardService.create(wardRegisterForm);
+        return "redirect:/admin/wards";
+    }
+
 
     /**
      * 更新画面表示
