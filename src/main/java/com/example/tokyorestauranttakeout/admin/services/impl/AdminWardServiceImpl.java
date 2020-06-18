@@ -21,7 +21,7 @@ public class AdminWardServiceImpl implements AdminWardService {
         Date now = new Date();
         Ward ward = new Ward();
         ward.setName(wardRegisterForm.name);
-        ward.setImage(wardRegisterForm.image);
+        ward.setImage(wardRegisterForm.image.getName());
         ward.setCreatedAt(now);
         wardRepository.create(ward);
     }

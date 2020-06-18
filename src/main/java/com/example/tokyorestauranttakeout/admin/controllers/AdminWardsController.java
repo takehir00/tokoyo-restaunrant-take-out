@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,6 +67,7 @@ public class AdminWardsController {
             @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) {
+        MultipartFile image = wardRegisterForm.getImage();
         adminWardService.create(wardRegisterForm);
         return "redirect:/admin/wards";
     }
