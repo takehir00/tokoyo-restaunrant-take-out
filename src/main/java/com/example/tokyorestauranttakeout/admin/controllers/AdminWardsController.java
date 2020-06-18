@@ -60,6 +60,7 @@ public class AdminWardsController {
      * @param attributes
      * @return
      */
+    @Transactional
     @PostMapping("/admin/wards/register")
     public String register(
             @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
