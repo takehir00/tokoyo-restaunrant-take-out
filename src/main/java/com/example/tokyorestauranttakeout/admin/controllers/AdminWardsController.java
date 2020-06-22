@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+
 @Controller
 public class AdminWardsController {
 
@@ -66,8 +68,9 @@ public class AdminWardsController {
     public String register(
             @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
             BindingResult bindingResult,
-            RedirectAttributes attributes) {
+            RedirectAttributes attributes) throws IOException {
         MultipartFile image = wardRegisterForm.getImage();
+
         adminWardService.create(wardRegisterForm);
         return "redirect:/admin/wards";
     }
