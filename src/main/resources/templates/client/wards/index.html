@@ -15,7 +15,7 @@
         <div class="wards row" >
             <div class="ward col-sm-3" th:each="ward : ${wardIndexResponse.wardIndexModelList}">
                 <p class="border-bottom" ><span th:text="${ward.name}"></span>（250件）</p>
-                <img th:src="@{data:image/jpeg;base64,{image}(image=${ward.image})}" class="img-fluid rounded">
+                <img th:src="@{data:{mimeType};base64,{image}(image=${ward.image},mimeType=${ward.mimeType})}" class="img-fluid rounded">
             </div>
         </div>
     </div>
