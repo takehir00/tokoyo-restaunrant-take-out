@@ -11,4 +11,6 @@ public class WardIndexModel {
     public String name;
     /** 画像 */
     public String image;
+    /** MIME_TYPE */
+    public String mimeType;
 }

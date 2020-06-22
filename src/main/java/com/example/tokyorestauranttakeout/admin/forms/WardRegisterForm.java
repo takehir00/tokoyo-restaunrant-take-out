@@ -1,12 +1,13 @@
 package com.example.tokyorestauranttakeout.admin.forms;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class WardRegisterForm {
 
     public String name;
-    public String image;
+    public MultipartFile image;
 
 //    public String getName() {
 //        return name;

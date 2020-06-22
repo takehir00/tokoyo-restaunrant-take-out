@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.repositories;
 
+import com.example.tokyorestauranttakeout.entity.MenuExample;
 import com.example.tokyorestauranttakeout.mapper.MenuMapper;
 import com.example.tokyorestauranttakeout.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class MenuRepository {
      * @throws IOException
      */
     public Menu selectById(Integer id) throws IOException {
-            return mapper.selectById(id);
+        MenuExample example = new MenuExample();
+        return mapper.selectByExample(example).get(0);
     }
 }

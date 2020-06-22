@@ -26,6 +26,7 @@ public class WardServiceImpl implements WardService {
                     wardIndexModel.id = ward.getId();
                     wardIndexModel.image = ward.getImage();
                     wardIndexModel.name = ward.getName();
+                    wardIndexModel.mimeType = ward.getMimeType();
                     return wardIndexModel;
                 }).collect(Collectors.toList());
         return response;
