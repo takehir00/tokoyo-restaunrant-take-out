@@ -29,6 +29,7 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("wardIndexResponse", adminWardService.getIndexResponse());
         mav.setViewName("admin/wards/index");
         return mav;
     }

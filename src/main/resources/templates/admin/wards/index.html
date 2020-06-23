@@ -21,40 +21,28 @@
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">区名</th>
-                        <th scope="col">画像</th>
                         <th scope="col">作成日時</th>
                         <th scope="col">更新日時</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>豊島区</td>
-                        <td>画像</td>
-                        <td>5月20日</td>
-                        <td>5月20日</td>
+                    <tr th:each="ward : ${wardIndexResponse.wardIndexModelList}">
+                        <th scope="row" th:text="${ward.id}"></th>
+                        <td th:text="${ward.name}"></td>
+                        <td th:text="${ward.createdAt}"></td>
+                        <td th:text="${ward.updatedAt}"></td>
                         <td>
-                            <a th:href="@{/admin/wards/update/1}">更新</a>
+                            <a th:href="@{/admin/wards/{wardId}(wardId=${ward.id})}">詳細</a>
                         </td>
                         <td>
-                            <a href="articles/registerForm.html" th:href="@{/admin/wards/delete/1}">削除</a>
+                            <a th:href="@{/admin/wards/update/{wardId}(wardId=${ward.id})}">更新</a>
                         </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>港区</td>
-                        <td>画像</td>
-                        <td>5月20日</td>
-                        <td>5月20日</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>渋谷区</td>
-                        <td>画像</td>
-                        <td>5月20日</td>
-                        <td>5月20日</td>
+                        <td>
+                            <a href="articles/registerForm.html" th:href="@{/admin/wards/delete/{wardId}(wardId=${ward.id})}">削除</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
