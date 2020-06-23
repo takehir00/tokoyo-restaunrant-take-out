@@ -20,22 +20,24 @@
             <div class="admin-detail">
                 <dl class="admin-detail-content">
                     <dt>id</dt>
-                    <dd>1001</dd>
+                    <dd th:text="${ward.id}"></dd>
                     <dt>区名</dt>
-                    <dd>豊島区</dd>
-                    <dt>店舗画像</dt>
-                    <dd>豊島区</dd>
+                    <dd th:text="${ward.name}"></dd>
+                    <dt>区画像</dt>
+                    <dd>
+                        <img th:src="@{data:{mimeType};base64,{image}(image=${ward.image},mimeType=${ward.mimeType})}" class="img-fluid rounded">
+                    </dd>
                     <dt>作成日時</dt>
-                    <dd>2020/9/21</dd>
+                    <dd th:text="${ward.createdAt}"></dd>
                     <dt>更新日時</dt>
-                    <dd>2020/9/21</dd>
+                    <dd th:text="${ward.updatedAt}"></dd>
                 </dl>
                 <div class="row">
                     <div class="col-sm-2">
-                        <a th:href="@{/admin/wards/update/1}">更新</a>
+                        <a th:href="@{/admin/wards/update/{wardId}(wardId=${ward.id})}">更新</a>
                     </div>
                     <div class="col-sm-2">
-                        <a th:href="@{/admin/wards/delete/1}">削除</a>
+                        <a th:href="@{/admin/wards/delete/{wardId}(wardId=${ward.id})}">削除</a>
                     </div>
                 </div>
             </div>

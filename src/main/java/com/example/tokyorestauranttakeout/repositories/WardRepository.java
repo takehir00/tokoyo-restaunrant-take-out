@@ -34,4 +34,13 @@ public class WardRepository {
     public void create(Ward ward) {
         mapper.insert(ward);
     }
+
+    /**
+     * IDで取得
+     * @param wardId
+     * @return
+     */
+    public Ward selectById(Integer wardId) {
+        return mapper.selectByPrimaryKey(wardId);
+    }
 }

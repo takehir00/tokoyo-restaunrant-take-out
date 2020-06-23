@@ -17,7 +17,7 @@ public interface AdminWardService {
      * 区一覧画面ようレスポンス取得
      * @return
      */
-    AdminWardShowResponse getShowResponse();
+    AdminWardShowResponse getShowResponse(Integer wardId);
 
     /**
      * 区登録

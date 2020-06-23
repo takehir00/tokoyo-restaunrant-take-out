@@ -41,7 +41,8 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards/{wardId}")
     public ModelAndView show(ModelAndView mav,
-                             @PathVariable Long wardId) {
+                             @PathVariable Integer wardId) {
+        mav.addObject("ward", adminWardService.getShowResponse(wardId));
         mav.setViewName("admin/wards/show");
         return mav;
     }

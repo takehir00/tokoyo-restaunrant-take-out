@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 import com.example.tokyorestauranttakeout.admin.forms.WardRegisterForm;
 import com.example.tokyorestauranttakeout.admin.models.AdminWardIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.AdminWardIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.AdminWardShowResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardService;
 import com.example.tokyorestauranttakeout.entity.Ward;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
@@ -33,6 +34,19 @@ public class AdminWardServiceImpl implements AdminWardService {
                             adminWardIndexModel.updatedAt = ward.getUpdatedAt();
                             return adminWardIndexModel;
                         }).collect(Collectors.toList());
+        return response;
+    }
+
+    @Override
+    public AdminWardShowResponse getShowResponse(Integer wardId) {
+        Ward ward = wardRepository.selectById(wardId);
+        AdminWardShowResponse response = new AdminWardShowResponse();
+        response.id = ward.getId();
+        response.name = ward.getName();
+        response.image = ward.getImage();
+        response.mimeType = ward.getMimeType();
+        response.createdAt = ward.getCreatedAt();
+        response.updatedAt = ward.getUpdatedAt();
         return response;
     }
 
