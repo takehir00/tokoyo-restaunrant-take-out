@@ -1,6 +1,9 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.admin.forms.WardDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.WardRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.WardUpdateForm;
+import com.example.tokyorestauranttakeout.admin.responses.AdminWardDeleteResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +32,7 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("wardIndexResponse", adminWardService.getIndexResponse());
         mav.setViewName("admin/wards/index");
         return mav;
     }
@@ -40,7 +44,8 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards/{wardId}")
     public ModelAndView show(ModelAndView mav,
-                             @PathVariable Long wardId) {
+                             @PathVariable Integer wardId) {
+        mav.addObject("ward", adminWardService.getShowResponse(wardId));
         mav.setViewName("admin/wards/show");
         return mav;
     }
@@ -83,9 +88,21 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards/update/{wardId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Long wardId) {
+                                   @PathVariable Integer wardId) {
+        mav.addObject("wardUpdateForm", adminWardService.getUpdateForm(wardId));
         mav.setViewName("admin/wards/updateForm");
         return mav;
+    }
+
+    /**
+     * 更新画面表示
+     * @return
+     */
+    @Transactional
+    @PostMapping("/admin/wards/update")
+    public String update(@ModelAttribute("wardUpdateForm") WardUpdateForm wardUpdateForm) {
+        adminWardService.update(wardUpdateForm);
+        return "redirect:/admin/wards";
     }
 
     /**
@@ -95,8 +112,22 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards/delete/{wardId}")
     public ModelAndView deleteForm(ModelAndView mav,
-                                   @PathVariable Long wardId) {
+                                   @PathVariable Integer wardId) {
+        AdminWardDeleteResponse adminWardDeleteResponse =
+                adminWardService.getDeleteFormResponse(wardId);
+        mav.addObject("deleteFormResponse",adminWardService.getDeleteFormResponse(wardId));
         mav.setViewName("admin/wards/deleteForm");
         return mav;
+    }
+
+    /**
+     * 削除画面表示
+     * @return
+     */
+    @PostMapping("/admin/wards/delete")
+    public String delete(
+            @ModelAttribute("wardDeleteForm") WardDeleteForm wardDeleteForm) {
+        adminWardService.delete(wardDeleteForm.getId());
+        return "redirect:/admin/wards";
     }
 }
