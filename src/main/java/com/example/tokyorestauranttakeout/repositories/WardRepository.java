@@ -43,4 +43,20 @@ public class WardRepository {
     public Ward selectById(Integer wardId) {
         return mapper.selectByPrimaryKey(wardId);
     }
+
+    /**
+     * 更新
+     * @param ward
+     */
+    public void update(Ward ward) {
+        mapper.updateByPrimaryKey(ward);
+    }
+
+    /**
+     * 削除
+     * @param wardId
+     */
+    public void delete(Integer wardId) {
+        mapper.deleteByPrimaryKey(wardId);
+    }
 }

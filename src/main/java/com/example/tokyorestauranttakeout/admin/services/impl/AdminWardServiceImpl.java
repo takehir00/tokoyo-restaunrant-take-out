@@ -1,7 +1,9 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.WardRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.WardUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.AdminWardIndexModel;
+import com.example.tokyorestauranttakeout.admin.responses.AdminWardDeleteResponse;
 import com.example.tokyorestauranttakeout.admin.responses.AdminWardIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.AdminWardShowResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardService;
@@ -62,5 +64,41 @@ public class AdminWardServiceImpl implements AdminWardService {
         ward.setCreatedAt(now);
         ward.setUpdatedAt(now);
         wardRepository.create(ward);
+    }
+
+    @Override
+    public WardUpdateForm getUpdateForm(Integer wardId) {
+        Ward ward = wardRepository.selectById(wardId);
+        WardUpdateForm form = new WardUpdateForm();
+        form.id = ward.getId();
+        form.name = ward.getName();
+        return form;
+    }
+
+    @Override
+    public void update(WardUpdateForm wardUpdateForm) {
+        Date now = new Date();
+        Ward ward = wardRepository.selectById(wardUpdateForm.id);
+        ward.setName(wardUpdateForm.name);
+        ward.setUpdatedAt(now);
+        wardRepository.update(ward);
+    }
+
+    @Override
+    public void delete(Integer wardId) {
+        wardRepository.delete(wardId);
+    }
+
+    @Override
+    public AdminWardDeleteResponse getDeleteFormResponse(Integer wardId) {
+        Ward ward = wardRepository.selectById(wardId);
+        AdminWardDeleteResponse response = new AdminWardDeleteResponse();
+        response.id = ward.getId();
+        response.name = ward.getName();
+        response.image = ward.getImage();
+        response.mimeType = ward.getMimeType();
+        response.createdAt = ward.getCreatedAt();
+        response.updatedAt = ward.getUpdatedAt();
+        return response;
     }
 }
