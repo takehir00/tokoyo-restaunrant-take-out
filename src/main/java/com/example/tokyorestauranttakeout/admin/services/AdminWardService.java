@@ -1,10 +1,10 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
-import com.example.tokyorestauranttakeout.admin.forms.WardRegisterForm;
-import com.example.tokyorestauranttakeout.admin.forms.WardUpdateForm;
-import com.example.tokyorestauranttakeout.admin.responses.AdminWardDeleteResponse;
-import com.example.tokyorestauranttakeout.admin.responses.AdminWardIndexResponse;
-import com.example.tokyorestauranttakeout.admin.responses.AdminWardShowResponse;
+import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.ward.WardUpdateForm;
+import com.example.tokyorestauranttakeout.admin.responses.ward.AdminWardDeleteResponse;
+import com.example.tokyorestauranttakeout.admin.responses.ward.AdminWardIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.ward.AdminWardShowResponse;
 
 import java.io.IOException;
 

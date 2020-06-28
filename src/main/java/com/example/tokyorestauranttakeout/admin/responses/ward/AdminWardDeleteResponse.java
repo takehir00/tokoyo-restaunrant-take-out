@@ -1,8 +1,8 @@
-package com.example.tokyorestauranttakeout.admin.responses;
+package com.example.tokyorestauranttakeout.admin.responses.ward;
 
 import java.util.Date;
 
-public class AdminWardShowResponse {
+public class AdminWardDeleteResponse {
     /** id */
     public Integer id;
     /** 名前 */

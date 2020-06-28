@@ -1,9 +1,9 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
-import com.example.tokyorestauranttakeout.admin.forms.WardDeleteForm;
-import com.example.tokyorestauranttakeout.admin.forms.WardRegisterForm;
-import com.example.tokyorestauranttakeout.admin.forms.WardUpdateForm;
-import com.example.tokyorestauranttakeout.admin.responses.AdminWardDeleteResponse;
+import com.example.tokyorestauranttakeout.admin.forms.ward.WardDeleteForm;
+import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.ward.WardUpdateForm;
+import com.example.tokyorestauranttakeout.admin.responses.ward.AdminWardDeleteResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -74,8 +73,6 @@ public class AdminWardsController {
             @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
-        MultipartFile image = wardRegisterForm.getImage();
-
         adminWardService.create(wardRegisterForm);
         return "redirect:/admin/wards";
     }
