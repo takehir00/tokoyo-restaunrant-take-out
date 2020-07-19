@@ -2,9 +2,11 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaCreateFormWardModel;
+import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
+import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.WardArea;
 import com.example.tokyorestauranttakeout.repositories.WardAreaRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,8 +30,19 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
     @Override
     public AdminWardAreaIndexResponse getIndexResponse() {
         AdminWardAreaIndexResponse response = new AdminWardAreaIndexResponse();
-
-        return null;
+        List<CustomWardArea> customWardAreaList =
+                wardAreaRepository.selectAllWithWard();
+        response.setWardAreaIndexModelList(
+                customWardAreaList.stream().map(customWardArea -> {
+                    AdminWardAreaIndexModel adminWardAreaIndexModel = new AdminWardAreaIndexModel();
+                    adminWardAreaIndexModel.id = customWardArea.getId();
+                    adminWardAreaIndexModel.name = customWardArea.getName();
+                    adminWardAreaIndexModel.wardName = customWardArea.getWardName();
+                    adminWardAreaIndexModel.createdAt = customWardArea.getCreatedAt();
+                    adminWardAreaIndexModel.updatedAt = customWardArea.getUpdatedAt();
+                    return adminWardAreaIndexModel;
+        }).collect(Collectors.toList()));
+        return response;
     }
 
     @Override
