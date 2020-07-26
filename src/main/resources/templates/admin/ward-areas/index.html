@@ -21,42 +21,29 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">区内エリア名</th>
-                    <th scope="col">画像</th>
-                    <th scope="col">所属区名</th>
-                    <th scope="col">作成日時</th>
+                    <th scope="col" >所属区名</th>
+                    <th scope="col" >作成日時</th>
                     <th scope="col">更新日時</th>
                     <th></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>東大塚</td>
-                    <td>画像</td>
-                    <td>豊島区</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
+                <tr th:each="wardArea : ${wardAreaIndexResponse.wardAreaIndexModelList}">
+                    <th scope="row" th:text="${wardArea.id}"></th>
+                    <td th:text="${wardArea.name}"></td>
+                    <td th:text="${wardArea.wardName}"></td>
+                    <td th:text="${wardArea.createdAt}"></td>
+                    <td th:text="${wardArea.updatedAt}"></td>
                     <td>
-                        <a th:href="@{/admin/ward-areas/update/1}">更新</a>
+                        <a th:href="@{/admin/ward-areas/{wardAreaId}(wardAreaId=${wardArea.id})}">詳細</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/ward-areas/delete/1}">削除</a>
+                        <a th:href="@{/admin/ward-areas/update/{wardAreaId}(wardAreaId=${wardArea.id})}">更新</a>
                     </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>港区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>渋谷区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
+                    <td>
+                        <a th:href="@{/admin/ward-areas/delete/{wardAreaId}(wardAreaId=${wardArea.id})}">削除</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

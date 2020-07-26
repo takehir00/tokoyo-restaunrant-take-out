@@ -1,12 +1,14 @@
-package com.example.tokyorestauranttakeout.admin.responses;
+package com.example.tokyorestauranttakeout.admin.models.wardArea;
 
 import java.util.Date;
 
-public class AdminWardDeleteResponse {
-    /** id */
+public class AdminWardAreaShowModel {
+    /** ID */
     public Integer id;
-    /** 名前 */
+    /** 区内エリア名 */
     public String name;
+    /** 所属区名 */
+    public String wardName;
     /** 画像 */
     public String image;
     /** MIME_TYPE */

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tokyorestauranttakeout.mapper.CustomWardAreaMapper">
+    <resultMap id="BaseResultMap" type="com.example.tokyorestauranttakeout.entity.CustomWardArea">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="mime_type" jdbcType="VARCHAR" property="mimeType" />
+        <result column="ward_id" jdbcType="INTEGER" property="wardId" />
+        <result column="ward_name" jdbcType="VARCHAR" property="wardName" />
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.tokyorestauranttakeout.entity.CustomWardArea">
+        <result column="image" jdbcType="LONGVARCHAR" property="image" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        ward_area.id,
+        ward_area.name,
+        ward_area.mime_type,
+        ward_area.ward_id,
+        ward.name as ward_name,
+        ward_area.created_at,
+        ward_area.updated_at
+    </sql>
+    <sql id="Blob_Column_List">
+        ward_area.image
+    </sql>
+    <select id="select" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from ward_area
+        inner join ward
+        on ward_area.ward_id = ward.id
+    </select>
+    <select id="selectByPk" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from ward_area
+        inner join ward
+        on ward_area.ward_id = ward.id
+        where ward_area.id = #{id}
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.example.tokyorestauranttakeout.admin.forms;
+package com.example.tokyorestauranttakeout.admin.forms.ward;
 
 import lombok.Data;
 
