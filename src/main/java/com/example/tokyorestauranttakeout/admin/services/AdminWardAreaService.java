@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.admin.services;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
 
 import java.io.IOException;
 
@@ -25,4 +26,11 @@ public interface AdminWardAreaService {
      * @return
      */
     AdminWardAreaCreateFormResponse getCreateFormResponse();
+
+    /**
+     * 詳細画面用レスポンス取得
+     * @param wardAreaId
+     * @return
+     */
+    AdminWardAreaShowResponse getShowResponse(Integer wardAreaId);
 }

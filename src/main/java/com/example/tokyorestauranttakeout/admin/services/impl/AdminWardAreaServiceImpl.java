@@ -3,8 +3,10 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaCreateFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
+import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaShowModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.WardArea;
@@ -73,6 +75,25 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
                             wardModel.name = ward.getName();
                             return wardModel;
                         }).collect(Collectors.toList());
+        return response;
+    }
+
+    @Override
+    public AdminWardAreaShowResponse getShowResponse(Integer wardAreaId) {
+        AdminWardAreaShowResponse response = new AdminWardAreaShowResponse();
+
+        AdminWardAreaShowModel showModel = new AdminWardAreaShowModel();
+        CustomWardArea customWardArea =
+                wardAreaRepository.selectByIDWithWard(wardAreaId);
+        showModel.id = customWardArea.getId();
+        showModel.name = customWardArea.getName();
+        showModel.wardName = customWardArea.getWardName();
+        showModel.image = customWardArea.getImage();
+        showModel.mimeType = customWardArea.getMimeType();
+        showModel.createdAt = customWardArea.getCreatedAt();
+        showModel.updatedAt = customWardArea.getUpdatedAt();
+
+        response.wardAreaShowModel = showModel;
         return response;
     }
 }

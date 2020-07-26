@@ -40,6 +40,14 @@ public class WardAreaRepository {
     }
 
     /**
+     * 全件取得
+     * @return
+     */
+    public CustomWardArea selectByIDWithWard(Integer id) {
+        return customWardAreaMapper.selectByPk(id);
+    }
+
+    /**
      * 登録
      * @param wardArea
      */

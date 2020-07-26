@@ -34,4 +34,14 @@
         inner join ward
         on ward_area.ward_id = ward.id
     </select>
+    <select id="selectByPk" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from ward_area
+        inner join ward
+        on ward_area.ward_id = ward.id
+        where ward_area.id = #{id}
+    </select>
 </mapper>

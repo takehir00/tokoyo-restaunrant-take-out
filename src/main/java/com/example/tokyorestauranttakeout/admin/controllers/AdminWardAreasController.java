@@ -4,6 +4,7 @@ import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,6 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas")
     public ModelAndView index(ModelAndView mav) {
-        AdminWardAreaIndexResponse res = adminWardAreaService.getIndexResponse();
         mav.addObject("wardAreaIndexResponse", adminWardAreaService.getIndexResponse());
         mav.setViewName("admin/ward-areas/index");
         return mav;
@@ -43,8 +43,11 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas/{wardAreaId}")
     public ModelAndView show(ModelAndView mav,
-                             @PathVariable Long wardAreaId) {
-        mav.setViewName("admin/restaurants/show");
+                             @PathVariable Integer wardAreaId) {
+        AdminWardAreaShowResponse m = adminWardAreaService.getShowResponse(wardAreaId);
+        mav.addObject("wardAreaShowResponse",
+                adminWardAreaService.getShowResponse(wardAreaId));
+        mav.setViewName("admin/ward-areas/show");
         return mav;
     }
 
