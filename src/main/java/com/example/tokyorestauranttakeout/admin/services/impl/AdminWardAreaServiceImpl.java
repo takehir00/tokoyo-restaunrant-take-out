@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaCreateFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaShowModel;
@@ -95,5 +96,11 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
 
         response.wardAreaShowModel = showModel;
         return response;
+    }
+
+    @Override
+    public WardAreaUpdateForm getUpdateForm(Integer wardAreaId) {
+        
+        return null;
     }
 }

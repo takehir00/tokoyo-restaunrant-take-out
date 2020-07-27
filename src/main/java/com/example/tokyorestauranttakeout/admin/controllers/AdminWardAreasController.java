@@ -2,6 +2,7 @@ package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
@@ -81,7 +82,9 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas/update/{wardAreaId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Long wardAreaId) {
+                                   @PathVariable Integer wardAreaId) {
+        WardAreaUpdateForm form =
+                adminWardAreaService.getUpdateForm(wardAreaId);
         mav.setViewName("admin/ward-areas/updateForm");
         return mav;
     }
@@ -93,7 +96,7 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas/delete/{wardAreaId}")
     public ModelAndView deleteForm(ModelAndView mav,
-                                   @PathVariable Long wardAreaId) {
+                                   @PathVariable Integer wardAreaId) {
         mav.setViewName("admin/ward-areas/deleteForm");
         return mav;
     }
