@@ -6,6 +6,7 @@ import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateFor
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,7 +84,7 @@ public class AdminWardAreasController {
     @GetMapping("/admin/ward-areas/update/{wardAreaId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer wardAreaId) {
-        WardAreaUpdateForm form =
+        AdminWardAreaUpdateFormResponse form =
                 adminWardAreaService.getUpdateForm(wardAreaId);
         mav.setViewName("admin/ward-areas/updateForm");
         return mav;

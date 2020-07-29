@@ -8,6 +8,7 @@ import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaSho
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.WardArea;
@@ -99,8 +100,13 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
     }
 
     @Override
-    public WardAreaUpdateForm getUpdateForm(Integer wardAreaId) {
-        
-        return null;
+    public AdminWardAreaUpdateFormResponse getUpdateForm(Integer wardAreaId) {
+        AdminWardAreaUpdateFormResponse response = new AdminWardAreaUpdateFormResponse();
+
+        WardAreaUpdateForm updateForm = new WardAreaUpdateForm();
+        WardArea wardArea = wardAreaRepository.selectById(wardAreaId);
+        updateForm.id = wardArea.getId();
+        updateForm.name = wardArea.getName();
+        return response;
     }
 }

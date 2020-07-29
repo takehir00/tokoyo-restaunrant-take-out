@@ -5,6 +5,7 @@ import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateFor
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaUpdateFormResponse;
 
 import java.io.IOException;
 
@@ -40,5 +41,5 @@ public interface AdminWardAreaService {
      * @param wardAreaId
      * @return
      */
-    WardAreaUpdateForm getUpdateForm(Integer wardAreaId);
+    AdminWardAreaUpdateFormResponse getUpdateForm(Integer wardAreaId);
 }
