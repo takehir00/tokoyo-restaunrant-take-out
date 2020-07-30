@@ -64,5 +64,11 @@ public class WardAreaRepository {
         wardAreaMapper.insert(wardArea);
     }
 
-
+    /**
+     * 更新
+     * @param wardArea
+     */
+    public void update(WardArea wardArea) {
+        wardAreaMapper.updateByPrimaryKey(wardArea);
+    }
 }

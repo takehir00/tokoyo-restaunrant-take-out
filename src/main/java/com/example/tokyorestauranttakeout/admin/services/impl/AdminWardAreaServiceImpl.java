@@ -2,7 +2,7 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
-import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaCreateFormWardModel;
+import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaShowModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaCreateFormResponse;
@@ -72,7 +72,7 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
         response.wardList =
                 wardRepository.selectAll().stream()
                         .map(ward -> {
-                            AdminWardAreaCreateFormWardModel wardModel = new AdminWardAreaCreateFormWardModel();
+                            AdminWardAreaFormWardModel wardModel = new AdminWardAreaFormWardModel();
                             wardModel.id = ward.getId();
                             wardModel.name = ward.getName();
                             return wardModel;
@@ -107,6 +107,42 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
         WardArea wardArea = wardAreaRepository.selectById(wardAreaId);
         updateForm.id = wardArea.getId();
         updateForm.name = wardArea.getName();
+        updateForm.wardId = wardArea.getWardId();
+        updateForm.imageConvertedByBase64 = wardArea.getImage();
+        updateForm.mimeType = wardArea.getMimeType();
+        response.updateForm = updateForm;
+
+        response.wardList = wardRepository.selectAll().stream()
+                .map(ward -> {
+                    AdminWardAreaFormWardModel wardModel = new AdminWardAreaFormWardModel();
+                    wardModel.id = ward.getId();
+                    wardModel.name = ward.getName();
+                    return wardModel;
+                }).collect(Collectors.toList());
         return response;
+    }
+
+    @Override
+    public void update(WardAreaUpdateForm wardAreaUpdateForm) throws IOException {
+        WardArea wardArea =
+                wardAreaRepository.selectById(wardAreaUpdateForm.getId());
+        Date now = new Date();
+        wardArea.setName(wardAreaUpdateForm.getName());
+
+        if (wardAreaUpdateForm.imageUpdateFlg) {
+            if (wardAreaUpdateForm.image != null ) {
+                wardArea.setImage(FileUtil.encodeBase64(
+                        wardAreaUpdateForm.image));
+                wardArea.setMimeType(
+                        wardAreaUpdateForm.image.getContentType());
+            } else {
+                wardArea.setImage(null);
+                wardArea.setMimeType(null);
+            }
+        }
+
+        wardArea.setWardId(wardAreaUpdateForm.getWardId());
+        wardArea.setUpdatedAt(now);
+        wardAreaRepository.update(wardArea);
     }
 }

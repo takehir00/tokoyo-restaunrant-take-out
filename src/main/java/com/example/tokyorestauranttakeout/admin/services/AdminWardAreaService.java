@@ -42,4 +42,10 @@ public interface AdminWardAreaService {
      * @return
      */
     AdminWardAreaUpdateFormResponse getUpdateForm(Integer wardAreaId);
+
+    /**
+     * 更新
+     * @param wardAreaUpdateForm
+     */
+    void update(WardAreaUpdateForm wardAreaUpdateForm) throws IOException;
 }

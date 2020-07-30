@@ -84,10 +84,25 @@ public class AdminWardAreasController {
     @GetMapping("/admin/ward-areas/update/{wardAreaId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer wardAreaId) {
-        AdminWardAreaUpdateFormResponse form =
-                adminWardAreaService.getUpdateForm(wardAreaId);
+        mav.addObject("updateFormResponse", adminWardAreaService.getUpdateForm(wardAreaId));
         mav.setViewName("admin/ward-areas/updateForm");
         return mav;
+    }
+
+    /**
+     * 更新
+     * @param wardAreaRegisterForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     */
+    @PostMapping("/admin/ward-areas/update")
+    public String update(
+            @ModelAttribute("wardAreaUpdateForm") WardAreaUpdateForm wardAreaUpdateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) {
+        adminWardAreaService.update(wardAreaUpdateForm);
+        return "redirect:/admin/ward-areas";
     }
 
     /**
