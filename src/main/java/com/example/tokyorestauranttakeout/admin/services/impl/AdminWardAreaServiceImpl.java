@@ -1,14 +1,12 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
+import com.example.tokyorestauranttakeout.admin.forms.wardArea.AdminWardAreaDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaShowModel;
-import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaCreateFormResponse;
-import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
-import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
-import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaUpdateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.*;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.WardArea;
@@ -146,5 +144,30 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
             wardArea.setUpdatedAt(now);
             wardAreaRepository.update(wardArea);
         }
+    }
+
+    @Override
+    public AdminWardAreaDeleteFormResponse getDeleteFormResponse(Integer wardAreaId) {
+        AdminWardAreaDeleteFormResponse response = new AdminWardAreaDeleteFormResponse();
+
+        AdminWardAreaDeleteForm deleteForm = new AdminWardAreaDeleteForm();
+        CustomWardArea customWardArea =
+                wardAreaRepository.selectByIDWithWard(wardAreaId);
+        deleteForm.id = customWardArea.getId();
+        deleteForm.name = customWardArea.getName();
+        deleteForm.wardName = customWardArea.getWardName();
+        deleteForm.image = customWardArea.getImage();
+        deleteForm.mimeType = customWardArea.getMimeType();
+        deleteForm.createdAt = customWardArea.getCreatedAt();
+        deleteForm.updatedAt = customWardArea.getUpdatedAt();
+
+        response.deleteForm = deleteForm;
+        return response;
+
+    }
+
+    @Override
+    public void delete(AdminWardAreaDeleteForm wardAreaDeleteForm) {
+        wardAreaRepository.delete(wardAreaDeleteForm.id);
     }
 }

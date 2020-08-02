@@ -71,4 +71,12 @@ public class WardAreaRepository {
     public void update(WardArea wardArea) {
         wardAreaMapper.updateByPrimaryKey(wardArea);
     }
+
+    /**
+     * 削除
+     * @param id
+     */
+    public void delete(Integer id) {
+        wardAreaMapper.deleteByPrimaryKey(id);
+    }
 }

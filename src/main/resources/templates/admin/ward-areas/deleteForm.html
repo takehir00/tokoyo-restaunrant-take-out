@@ -17,22 +17,22 @@
         <div class="col-sm-10">
             <div class="registerform">
                 <h3 class="registerform-title">区内エリア削除確認画面</h3>
-                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
-                    <input type="hidden" name="id" />
+                <form method="post" th:action="@{'/admin/ward-areas/delete'}" th:object="${wardAreaDeleteForm}">
+                    <input type="hidden" name="id" th:value="${deleteFormResponse.deleteForm.id}" />
                     <div class="admin-detail">
                         <dl class="admin-detail-content">
                             <dt>id</dt>
-                            <dd>1001</dd>
+                            <dd th:text="${deleteFormResponse.deleteForm.id}"></dd>
                             <dt>区内エリア名</dt>
-                            <dd>東大塚</dd>
+                            <dd th:text="${deleteFormResponse.deleteForm.name}"></dd>
                             <dt>画像</dt>
                             <dd>画像１</dd>
                             <dt>所属区名</dt>
-                            <dd>豊島区</dd>
+                            <dd th:text="${deleteFormResponse.deleteForm.wardName}"></dd>
                             <dt>作成日時</dt>
-                            <dd>2020/9/21</dd>
+                            <dd th:text="${deleteFormResponse.deleteForm.createdAt}">2020/9/21</dd>
                             <dt>更新日時</dt>
-                            <dd>2020/9/21</dd>
+                            <dd th:text="${deleteFormResponse.deleteForm.updatedAt}">2020/9/21</dd>
                         </dl>
                         <button type="submit" class="btn btn-primary">削除する</button>
                     </div>

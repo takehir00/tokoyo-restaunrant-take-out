@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.wardArea.AdminWardAreaDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
@@ -113,7 +114,24 @@ public class AdminWardAreasController {
     @GetMapping("/admin/ward-areas/delete/{wardAreaId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer wardAreaId) {
+
+        mav.addObject("deleteFormResponse",adminWardAreaService.getDeleteFormResponse(wardAreaId));
         mav.setViewName("admin/ward-areas/deleteForm");
         return mav;
+    }
+
+    /**
+     * 削除
+     * @param wardAreaDeleteForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     */
+    @PostMapping("/admin/ward-areas/delete")
+    public String delete(@ModelAttribute("wardAreaDeleteForm") AdminWardAreaDeleteForm wardAreaDeleteForm,
+                               BindingResult bindingResult,
+                               RedirectAttributes attributes) {
+        adminWardAreaService.delete(wardAreaDeleteForm);
+        return "redirect:/admin/ward-areas";
     }
 }
