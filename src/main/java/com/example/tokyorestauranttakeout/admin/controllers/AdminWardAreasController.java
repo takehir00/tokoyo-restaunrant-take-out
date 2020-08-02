@@ -91,7 +91,7 @@ public class AdminWardAreasController {
 
     /**
      * 更新
-     * @param wardAreaRegisterForm
+     * @param wardAreaUpdateForm
      * @param bindingResult
      * @param attributes
      * @return
@@ -100,7 +100,7 @@ public class AdminWardAreasController {
     public String update(
             @ModelAttribute("wardAreaUpdateForm") WardAreaUpdateForm wardAreaUpdateForm,
             BindingResult bindingResult,
-            RedirectAttributes attributes) {
+            RedirectAttributes attributes) throws IOException {
         adminWardAreaService.update(wardAreaUpdateForm);
         return "redirect:/admin/ward-areas";
     }

@@ -126,23 +126,25 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
     public void update(WardAreaUpdateForm wardAreaUpdateForm) throws IOException {
         WardArea wardArea =
                 wardAreaRepository.selectById(wardAreaUpdateForm.getId());
-        Date now = new Date();
-        wardArea.setName(wardAreaUpdateForm.getName());
+        if (wardArea != null) {
+            Date now = new Date();
+            wardArea.setName(wardAreaUpdateForm.getName());
 
-        if (wardAreaUpdateForm.imageUpdateFlg) {
-            if (wardAreaUpdateForm.image != null ) {
-                wardArea.setImage(FileUtil.encodeBase64(
-                        wardAreaUpdateForm.image));
-                wardArea.setMimeType(
-                        wardAreaUpdateForm.image.getContentType());
-            } else {
-                wardArea.setImage(null);
-                wardArea.setMimeType(null);
+            if (wardAreaUpdateForm.imageUpdateFlg) {
+                if (wardAreaUpdateForm.image != null ) {
+                    wardArea.setImage(FileUtil.encodeBase64(
+                            wardAreaUpdateForm.image));
+                    wardArea.setMimeType(
+                            wardAreaUpdateForm.image.getContentType());
+                } else {
+                    wardArea.setImage(null);
+                    wardArea.setMimeType(null);
+                }
             }
-        }
 
-        wardArea.setWardId(wardAreaUpdateForm.getWardId());
-        wardArea.setUpdatedAt(now);
-        wardAreaRepository.update(wardArea);
+            wardArea.setWardId(wardAreaUpdateForm.getWardId());
+            wardArea.setUpdatedAt(now);
+            wardAreaRepository.update(wardArea);
+        }
     }
 }
