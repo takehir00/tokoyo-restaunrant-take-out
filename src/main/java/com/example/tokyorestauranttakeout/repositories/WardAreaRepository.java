@@ -23,6 +23,15 @@ public class WardAreaRepository {
     }
 
     /**
+     * IDで取得
+     * @param id
+     * @return
+     */
+    public WardArea selectById(Integer id) {
+        return wardAreaMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 全件取得
      * @return
      */
@@ -32,7 +41,7 @@ public class WardAreaRepository {
     }
 
     /**
-     * 全件取得
+     * 区テーブルと結合し全件取得
      * @return
      */
     public List<CustomWardArea> selectAllWithWard() {
@@ -40,7 +49,7 @@ public class WardAreaRepository {
     }
 
     /**
-     * 全件取得
+     * 区テーブルと結合しIDで取得
      * @return
      */
     public CustomWardArea selectByIDWithWard(Integer id) {
@@ -55,5 +64,19 @@ public class WardAreaRepository {
         wardAreaMapper.insert(wardArea);
     }
 
+    /**
+     * 更新
+     * @param wardArea
+     */
+    public void update(WardArea wardArea) {
+        wardAreaMapper.updateByPrimaryKey(wardArea);
+    }
 
+    /**
+     * 削除
+     * @param id
+     */
+    public void delete(Integer id) {
+        wardAreaMapper.deleteByPrimaryKey(id);
+    }
 }

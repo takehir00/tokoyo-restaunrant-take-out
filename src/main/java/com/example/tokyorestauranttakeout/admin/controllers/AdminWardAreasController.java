@@ -1,10 +1,13 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.wardArea.AdminWardAreaDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
+import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,9 +84,26 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas/update/{wardAreaId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Long wardAreaId) {
+                                   @PathVariable Integer wardAreaId) {
+        mav.addObject("updateFormResponse", adminWardAreaService.getUpdateForm(wardAreaId));
         mav.setViewName("admin/ward-areas/updateForm");
         return mav;
+    }
+
+    /**
+     * 更新
+     * @param wardAreaUpdateForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     */
+    @PostMapping("/admin/ward-areas/update")
+    public String update(
+            @ModelAttribute("wardAreaUpdateForm") WardAreaUpdateForm wardAreaUpdateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) throws IOException {
+        adminWardAreaService.update(wardAreaUpdateForm);
+        return "redirect:/admin/ward-areas";
     }
 
     /**
@@ -93,8 +113,25 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas/delete/{wardAreaId}")
     public ModelAndView deleteForm(ModelAndView mav,
-                                   @PathVariable Long wardAreaId) {
+                                   @PathVariable Integer wardAreaId) {
+
+        mav.addObject("deleteFormResponse",adminWardAreaService.getDeleteFormResponse(wardAreaId));
         mav.setViewName("admin/ward-areas/deleteForm");
         return mav;
+    }
+
+    /**
+     * 削除
+     * @param wardAreaDeleteForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     */
+    @PostMapping("/admin/ward-areas/delete")
+    public String delete(@ModelAttribute("wardAreaDeleteForm") AdminWardAreaDeleteForm wardAreaDeleteForm,
+                               BindingResult bindingResult,
+                               RedirectAttributes attributes) {
+        adminWardAreaService.delete(wardAreaDeleteForm);
+        return "redirect:/admin/ward-areas";
     }
 }
