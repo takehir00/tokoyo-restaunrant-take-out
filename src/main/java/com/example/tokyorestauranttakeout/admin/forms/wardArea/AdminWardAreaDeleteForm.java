@@ -1,7 +1,9 @@
 package com.example.tokyorestauranttakeout.admin.forms.wardArea;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.Date;
+@Data
 public class AdminWardAreaDeleteForm {
     /** ID */
     public Integer id;

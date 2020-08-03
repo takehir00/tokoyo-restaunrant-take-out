@@ -26,7 +26,7 @@
                             <dt>区内エリア名</dt>
                             <dd th:text="${deleteFormResponse.deleteForm.name}"></dd>
                             <dt>画像</dt>
-                            <dd>画像１</dd>
+                            <img th:src="@{data:{mimeType};base64,{image}(image=${deleteFormResponse.deleteForm.image},mimeType=${deleteFormResponse.deleteForm.mimeType})}" class="img-fluid rounded">
                             <dt>所属区名</dt>
                             <dd th:text="${deleteFormResponse.deleteForm.wardName}"></dd>
                             <dt>作成日時</dt>
