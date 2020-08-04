@@ -31,7 +31,8 @@
 
 <!--        <table tableName="menu"></table>-->
 <!--        <table tableName="ward"></table>-->
-        <table tableName="ward_area"></table>
+<!--        <table tableName="ward_area"></table>-->
+        <table tableName="restaurant"></table>
     </context>
 </generatorConfiguration>
 

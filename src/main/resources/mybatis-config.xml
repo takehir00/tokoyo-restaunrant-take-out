@@ -8,5 +8,6 @@
         <mapper resource="mapper/WardMapper.xml"/>
         <mapper resource="mapper/WardAreaMapper.xml"/>
         <mapper resource="mapper/CustomWardAreaMapper.xml"/>
+        <mapper resource="mapper/RestaurantMapper.xml"/>
     </mappers>
 </configuration>
