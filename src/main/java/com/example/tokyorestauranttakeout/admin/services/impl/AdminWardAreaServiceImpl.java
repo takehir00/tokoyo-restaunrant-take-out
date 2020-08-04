@@ -3,7 +3,7 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.AdminWardAreaDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
-import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaFormWardModel;
+import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaShowModel;
 import com.example.tokyorestauranttakeout.admin.responses.wardArea.*;
@@ -70,7 +70,7 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
         response.wardList =
                 wardRepository.selectAll().stream()
                         .map(ward -> {
-                            AdminWardAreaFormWardModel wardModel = new AdminWardAreaFormWardModel();
+                            PullDownFormWardModel wardModel = new PullDownFormWardModel();
                             wardModel.id = ward.getId();
                             wardModel.name = ward.getName();
                             return wardModel;
@@ -112,7 +112,7 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
 
         response.wardList = wardRepository.selectAll().stream()
                 .map(ward -> {
-                    AdminWardAreaFormWardModel wardModel = new AdminWardAreaFormWardModel();
+                    PullDownFormWardModel wardModel = new PullDownFormWardModel();
                     wardModel.id = ward.getId();
                     wardModel.name = ward.getName();
                     return wardModel;

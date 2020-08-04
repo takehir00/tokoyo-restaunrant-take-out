@@ -6,7 +6,7 @@ create table restaurant
      phone_number varchar(100),
      image MEDIUMTEXT,
      mime_type varchar(100),
-     introduction text,
+     introduction varchar(2000),
      genre_id int,
      from_time varchar(10),
      to_time varchar(10),

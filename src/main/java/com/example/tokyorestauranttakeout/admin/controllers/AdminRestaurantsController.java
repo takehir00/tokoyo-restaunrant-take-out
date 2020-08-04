@@ -1,5 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminRestaurantsController {
+
+    @Autowired
+    AdminRestaurantsService adminRestaurantsService;
     /**
      * トップ画面表示
      * @param mav
@@ -37,6 +42,7 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants/register")
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.addObject("registerForm", adminRestaurantsService.getCreateFormResponse());
         mav.setViewName("admin/restaurants/registerForm");
         return mav;
     }
