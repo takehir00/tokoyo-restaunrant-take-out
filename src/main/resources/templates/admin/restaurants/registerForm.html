@@ -17,52 +17,54 @@
         <div class="col-sm-10">
             <div class="registerform">
                 <h3 class="registerform-title">レストラン登録</h3>
-                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
+                <form method="post" th:action="@{'/admin/restaurants/register'}" th:object="${registerForm}">
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="name">レストラン名</label>
-                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="区名を入力してください">
+                            <input type="text" class="form-control" id="name" name="name"  placeholder="区名を入力してください">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="adress">住所</label>
-                            <input type="file" class="form-control-file" id="adress" aria-describedby="emailHelp">
+                            <label for="address">住所</label>
+                            <input type="file" class="form-control-file" id="address" name="address" placeholder="住所を入力してください" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="phone-number">電話番号</label>
-                            <input type="file" class="form-control-file" id="phone-number" aria-describedby="emailHelp">
+                            <label for="phoneNumber">電話番号</label>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="電話番号を入力してください" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="image">画像</label>
+                            <input type="file" class="form-control-file" id="image" name="image" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="introduction">紹介文</label>
-                            <textarea placeholder="店舗紹介を入力してください" class="form-control" id="introduction"></textarea>
+                            <textarea placeholder="店舗紹介を入力してください" class="form-control" id="introduction" name="introduction"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="from-time">営業開始時間</label>
-                            <input type="datetime-local" class="form-control-file" id="from-time" aria-describedby="emailHelp">
+                            <label for="fromTime">営業開始時間</label>
+                            <input type="time" class="form-control" id="fromTime" name="fromTime" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="to-time">営業終了時間</label>
-                            <input type="datetime-local" class="form-control-file" id="to-time" aria-describedby="emailHelp">
+                            <label for="toTime">営業終了時間</label>
+                            <input type="time" class="form-control" id="toTime" name="toTime" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="exampleFormControlSelect1">所属区名</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>豊島区</option>
-                                <option>港区</option>
-                                <option>新宿区</option>
-                                <option>渋谷区</option>
-                                <option>中央区</option>
+                            <label for="wardId">所属区名</label>
+                            <select class="form-control" id="wardId" name="wardId">
+                                <option th:each="ward : ${createFormResponse.wardList}" th:text="${ward.name}" th:value="${ward.id}" ></option>
                             </select>
                         </div>
                     </div>

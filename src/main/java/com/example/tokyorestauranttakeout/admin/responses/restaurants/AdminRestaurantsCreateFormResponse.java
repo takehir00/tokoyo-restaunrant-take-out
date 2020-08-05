@@ -9,5 +9,5 @@ public class AdminRestaurantsCreateFormResponse {
     /** プルダウン用区リスト */
     public List<PullDownFormWardModel> wardList;
     /** 登録フォーム */
-    public AdminRestaurantCreateForm createForm;
+    public AdminRestaurantCreateForm registerForm;
 }
