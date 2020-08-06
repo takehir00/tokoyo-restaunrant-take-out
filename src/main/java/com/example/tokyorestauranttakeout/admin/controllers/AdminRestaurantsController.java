@@ -28,6 +28,7 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants")
     public ModelAndView index(ModelAndView mav) {
+        adminRestaurantsService.getIndexResponse();
         mav.setViewName("admin/restaurants/index");
         return mav;
     }

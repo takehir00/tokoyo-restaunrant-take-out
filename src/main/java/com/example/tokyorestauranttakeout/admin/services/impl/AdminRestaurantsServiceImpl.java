@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
@@ -25,6 +26,11 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
     WardRepository wardRepository;
     @Autowired
     RestaurantRepository restaurantRepository;
+
+    @Override
+    public AdminRestaurantIndexResponse getIndexResponse() {
+        return null;
+    }
 
     @Override
     public AdminRestaurantsCreateFormResponse getCreateFormResponse() {

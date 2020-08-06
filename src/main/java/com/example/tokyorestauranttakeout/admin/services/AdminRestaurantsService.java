@@ -1,9 +1,17 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
 
 public interface AdminRestaurantsService {
+
+    /**
+     * 一覧画面
+     * @return
+     */
+    AdminRestaurantIndexResponse getIndexResponse();
+
     /**
      * 登録画面用レスポンス取得
      * @return
@@ -15,4 +23,6 @@ public interface AdminRestaurantsService {
      * @param registerForm
      */
     void create(AdminRestaurantCreateForm registerForm);
+
+
 }
