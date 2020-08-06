@@ -1,13 +1,15 @@
 package com.example.tokyorestauranttakeout.admin.forms.restaurant;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Data
 public class AdminRestaurantCreateForm {
     public String name;
     public String address;
     public String phoneNumber;
-    public String image;
+    public MultipartFile image;
     public String mimeType;
     public String introduction;
     public Integer genreId;
