@@ -2,6 +2,7 @@ package com.example.tokyorestauranttakeout.admin.services;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantShowResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
 
 public interface AdminRestaurantsService {
@@ -24,5 +25,10 @@ public interface AdminRestaurantsService {
      */
     void create(AdminRestaurantCreateForm registerForm);
 
-
+    /**
+     * 詳細画面
+     * @param restaurantId
+     * @return
+     */
+    AdminRestaurantShowResponse getShowResponse(Integer restaurantId);
 }

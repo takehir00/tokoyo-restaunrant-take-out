@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tokyorestauranttakeout.mapper.CustomRestaurantMapper">
+    <resultMap id="BaseResultMap" type="com.example.tokyorestauranttakeout.entity.CustomRestaurant">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+        <result column="mime_type" jdbcType="VARCHAR" property="mimeType" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+        <result column="genre_id" jdbcType="INTEGER" property="genreId" />
+        <result column="from_time" jdbcType="VARCHAR" property="fromTime" />
+        <result column="to_time" jdbcType="VARCHAR" property="toTime" />
+        <result column="ward_id" jdbcType="INTEGER" property="wardId" />
+        <result column="ward_name" jdbcType="VARCHAR" property="wardName" />
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.tokyorestauranttakeout.entity.CustomRestaurant">
+        <result column="image" jdbcType="LONGVARCHAR" property="image" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        restaurant.id,
+        restaurant.name,
+        restaurant.address,
+        restaurant.phone_number,
+        restaurant.mime_type,
+        restaurant.introduction,
+        restaurant.genre_id,
+        restaurant.from_time,
+        restaurant.to_time,
+        restaurant.ward_id,
+        ward.name as ward_name,
+        restaurant.created_at,
+        restaurant.updated_at
+    </sql>
+    <sql id="Blob_Column_List">
+        restaurant.image
+    </sql>
+    <select id="select"  resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from restaurant
+        inner join ward
+        on restaurant.ward_id = ward.id
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from restaurant
+        inner join ward
+        on restaurant.ward_id = ward.id
+        where restaurant.id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="countByExample" parameterType="com.example.tokyorestauranttakeout.entity.RestaurantExample" resultType="java.lang.Long">
+        select count(*) from restaurant
+    </select>
+
+</mapper>

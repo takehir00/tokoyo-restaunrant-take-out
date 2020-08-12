@@ -93,7 +93,7 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
         showModel.createdAt = customWardArea.getCreatedAt();
         showModel.updatedAt = customWardArea.getUpdatedAt();
 
-        response.wardAreaShowModel = showModel;
+        response.showModel = showModel;
         return response;
     }
 

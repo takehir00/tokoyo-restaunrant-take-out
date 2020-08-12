@@ -15,12 +15,12 @@
     <div class="row no-gutters">
         <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
         <div class="col-sm-10">
-            <h3 class="admin-title border-bottom">区</h3>
+            <h3 class="admin-title border-bottom">店舗一覧</h3>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">レストラン</th>
+                    <th scope="col">店舗名</th>
                     <th scope="col">住所</th>
                     <th scope="col">エリア</th>
                     <th scope="col">作成日時</th>
@@ -31,36 +31,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>キッチン南海</td>
-                    <td>早稲田２丁目</td>
-                    <td>新宿区</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
+                <tr th:each="restaurant : ${restaurantIndexResponse.restaurantIndexModelList}">
+                    <th scope="row" th:text="${restaurant.id}"></th>
+                    <td th:text="${restaurant.name}"></td>
+                    <td th:text="${restaurant.address}"></td>
+                    <td th:text="${restaurant.wardName}"></td>
+                    <td th:text="${restaurant.createdAt}"></td>
+                    <td th:text="${restaurant.updatedAt}"></td>
                     <td>
-                        <a th:href="@{/admin/restaurants/1}">詳細</a>
+                        <a th:href="@{/admin/ward-areas/{restaurantId}(restaurantId=${restaurant.id})}">詳細</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/restaurants/update/1}">更新</a>
+                        <a th:href="@{/admin/ward-areas/update/{restaurantId}(restaurantId=${restaurant.id})}">更新</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/restaurants/delete/1}">削除</a>
+                        <a th:href="@{/admin/ward-areas/delete/{restaurantId}(restaurantId=${restaurant.id})}">削除</a>
                     </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>港区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>渋谷区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
                 </tr>
                 </tbody>
             </table>

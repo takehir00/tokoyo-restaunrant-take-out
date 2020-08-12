@@ -2,15 +2,20 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
+import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantIndexModel;
+import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantShowModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantShowResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService;
+import com.example.tokyorestauranttakeout.entity.CustomRestaurant;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.Restaurant;
 import com.example.tokyorestauranttakeout.repositories.RestaurantRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
 import com.example.tokyorestauranttakeout.util.FileUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +34,25 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
 
     @Override
     public AdminRestaurantIndexResponse getIndexResponse() {
-        return null;
+        AdminRestaurantIndexResponse response = new AdminRestaurantIndexResponse();
+
+        List<CustomRestaurant> restaurantList =
+                restaurantRepository.selectAllWithWard();
+
+        response.restaurantIndexModelList =
+                restaurantList.stream()
+                        .map(restaurant -> {
+                            AdminRestaurantIndexModel restaurantIndexModel = new AdminRestaurantIndexModel();
+                            restaurantIndexModel.id = restaurant.getId();
+                            restaurantIndexModel.name = restaurant.getName();
+                            restaurantIndexModel.address = restaurant.getAddress();
+                            restaurantIndexModel.wardName = restaurant.getWardName();
+                            restaurantIndexModel.createdAt = restaurant.getCreatedAt();
+                            restaurantIndexModel.updatedAt = restaurant.getUpdatedAt();
+                            return restaurantIndexModel;
+                        }).collect(Collectors.toList());
+
+        return response;
     }
 
     @Override
@@ -43,6 +66,7 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
                             wardModel.name = ward.getName();
                             return wardModel;
                         }).collect(Collectors.toList());
+
         return response;
     }
 
@@ -70,5 +94,18 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
                     registerForm.image.getContentType());
         }
         restaurantRepository.create(restaurant);
+    }
+
+    @Override
+    public AdminRestaurantShowResponse getShowResponse(Integer restaurantId) {
+        AdminRestaurantShowResponse response = new AdminRestaurantShowResponse();
+
+        CustomRestaurant customRestaurant =
+                restaurantRepository.selectByIdWithWard(restaurantId);
+        AdminRestaurantShowModel showModel = new AdminRestaurantShowModel();
+        BeanUtils.copyProperties(customRestaurant, showModel);
+        response.showModel = showModel;
+
+        return response;
     }
 }

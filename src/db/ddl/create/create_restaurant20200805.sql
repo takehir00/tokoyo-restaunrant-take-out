@@ -11,8 +11,9 @@ create table restaurant
      from_time varchar(10),
      to_time varchar(10),
      ward_id int not null,
+     ward_area_id int,
      created_at datetime,
-         updated_at datetime,
-         FOREIGN KEY (ward_id)
-             references ward(id)
+     updated_at datetime,
+     FOREIGN KEY (ward_id) references ward(id),
+     FOREIGN KEY (ward_area_id) references ward_area(id)
     );

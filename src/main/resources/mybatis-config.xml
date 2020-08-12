@@ -9,5 +9,6 @@
         <mapper resource="mapper/WardAreaMapper.xml"/>
         <mapper resource="mapper/CustomWardAreaMapper.xml"/>
         <mapper resource="mapper/RestaurantMapper.xml"/>
+        <mapper resource="mapper/CustomRestaurantMapper.xml"/>
     </mappers>
 </configuration>

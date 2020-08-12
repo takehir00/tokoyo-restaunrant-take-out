@@ -28,7 +28,8 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants")
     public ModelAndView index(ModelAndView mav) {
-        adminRestaurantsService.getIndexResponse();
+        mav.addObject("restaurantIndexResponse",
+                adminRestaurantsService.getIndexResponse());
         mav.setViewName("admin/restaurants/index");
         return mav;
     }
@@ -40,7 +41,10 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants/{restaurantId}")
     public ModelAndView show(ModelAndView mav,
-                             @PathVariable Long restaurantId) {
+                             @PathVariable Integer restaurantId) {
+        mav.addObject("showResponse",
+                adminRestaurantsService.getShowResponse(restaurantId));
+
         mav.setViewName("admin/restaurants/show");
         return mav;
     }
