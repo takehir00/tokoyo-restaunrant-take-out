@@ -1,7 +1,9 @@
 package com.example.tokyorestauranttakeout.admin.models.restaurants;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.Date;
+@Data
 public class AdminRestaurantShowModel {
     /** ID */
     public Integer id;
