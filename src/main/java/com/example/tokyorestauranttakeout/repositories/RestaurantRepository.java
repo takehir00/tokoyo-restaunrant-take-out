@@ -56,4 +56,21 @@ public class RestaurantRepository {
     public CustomRestaurant selectByIdWithWard(Integer restaurantId) {
         return customRestaurantMapper.selectByPrimaryKey(restaurantId);
     }
+
+    /**
+     * IDで検索
+     * @param id
+     * @return
+     */
+    public Restaurant selectById(Integer id) {
+        return restaurantMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 更新
+     * @param restaurant
+     */
+    public void update(Restaurant restaurant) {
+        restaurantMapper.updateByPrimaryKeyWithBLOBs(restaurant);
+    }
 }

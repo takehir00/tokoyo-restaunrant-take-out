@@ -1,7 +1,9 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
 import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,6 +63,14 @@ public class AdminRestaurantsController {
         return mav;
     }
 
+    /**
+     * 登録
+     * @param registerForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     * @throws IOException
+     */
     @Transactional
     @PostMapping("/admin/restaurants/register")
     public String register(
@@ -68,7 +78,7 @@ public class AdminRestaurantsController {
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
         adminRestaurantsService.create(registerForm);
-        return "redirect:/admin/ward-areas";
+        return "redirect:/admin/restaurants";
     }
 
     /**
@@ -78,9 +88,30 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants/update/{restaurantId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Long restaurantId) {
+                                   @PathVariable Integer restaurantId) {
+        adminRestaurantsService.getUpdateFormResponse(restaurantId);
+        mav.addObject("updateFormResponse",
+                adminRestaurantsService.getUpdateFormResponse(restaurantId));
         mav.setViewName("admin/restaurants/updateForm");
         return mav;
+    }
+
+    /**
+     * 更新
+     * @param restaurantUpdateForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     * @throws IOException
+     */
+    @Transactional
+    @PostMapping("/admin/restaurants/update")
+    public String update(
+            @ModelAttribute("restaurantUpdateForm") AdminRestaurantUpdateForm restaurantUpdateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) throws IOException {
+        adminRestaurantsService.update(restaurantUpdateForm);
+        return "redirect:/admin/restaurants";
     }
 
     /**

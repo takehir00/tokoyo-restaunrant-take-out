@@ -39,13 +39,13 @@
                     <td th:text="${restaurant.createdAt}"></td>
                     <td th:text="${restaurant.updatedAt}"></td>
                     <td>
-                        <a th:href="@{/admin/ward-areas/{restaurantId}(restaurantId=${restaurant.id})}">詳細</a>
+                        <a th:href="@{/admin/restaurants/{restaurantId}(restaurantId=${restaurant.id})}">詳細</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/ward-areas/update/{restaurantId}(restaurantId=${restaurant.id})}">更新</a>
+                        <a th:href="@{/admin/restaurants/update/{restaurantId}(restaurantId=${restaurant.id})}">更新</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/ward-areas/delete/{restaurantId}(restaurantId=${restaurant.id})}">削除</a>
+                        <a th:href="@{/admin/restaurants/delete/{restaurantId}(restaurantId=${restaurant.id})}">削除</a>
                     </td>
                 </tr>
                 </tbody>

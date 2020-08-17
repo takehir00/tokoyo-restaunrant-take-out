@@ -1,9 +1,13 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantShowResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsUpdateFormResponse;
+
+import java.io.IOException;
 
 public interface AdminRestaurantsService {
 
@@ -31,4 +35,16 @@ public interface AdminRestaurantsService {
      * @return
      */
     AdminRestaurantShowResponse getShowResponse(Integer restaurantId);
+
+    /**
+     * 更新画面レスポンス取得
+     * @param restaurantId
+     */
+    AdminRestaurantsUpdateFormResponse getUpdateFormResponse(Integer restaurantId);
+
+    /**
+     * 更新
+     * @param restaurantUpdateForm
+     */
+    void update(AdminRestaurantUpdateForm restaurantUpdateForm) throws IOException;
 }

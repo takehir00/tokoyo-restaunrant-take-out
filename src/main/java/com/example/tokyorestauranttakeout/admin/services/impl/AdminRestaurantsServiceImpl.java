@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantShowModel;
@@ -8,6 +9,7 @@ import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaInd
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantShowResponse;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService;
 import com.example.tokyorestauranttakeout.entity.CustomRestaurant;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
@@ -107,5 +109,49 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
         response.showModel = showModel;
 
         return response;
+    }
+
+    @Override
+    public AdminRestaurantsUpdateFormResponse getUpdateFormResponse(Integer restaurantId) {
+        AdminRestaurantsUpdateFormResponse response = new AdminRestaurantsUpdateFormResponse();
+
+        AdminRestaurantUpdateForm updateForm = new AdminRestaurantUpdateForm();
+
+        Restaurant restaurant = restaurantRepository.selectById(restaurantId);
+        BeanUtils.copyProperties(restaurant,updateForm);
+        updateForm.imageConvertedByBase64 = restaurant.getImage();
+        response.updateForm = updateForm;
+
+        response.wardList = wardRepository.selectAll().stream()
+                .map(ward -> {
+                    PullDownFormWardModel wardModel = new PullDownFormWardModel();
+                    wardModel.id = ward.getId();
+                    wardModel.name = ward.getName();
+                    return wardModel;
+                }).collect(Collectors.toList());
+        return response;
+    }
+
+    @Override
+    public void update(AdminRestaurantUpdateForm restaurantUpdateForm) throws IOException {
+        Restaurant restaurant =
+                restaurantRepository.selectById(restaurantUpdateForm.getId());
+        if (restaurant != null) {
+            Date now = new Date();
+            BeanUtils.copyProperties(restaurantUpdateForm, restaurant);
+
+            if (restaurantUpdateForm.imageUpdateFlg) {
+                if (restaurantUpdateForm.image != null) {
+                    restaurant.setImage(FileUtil.encodeBase64(
+                            restaurantUpdateForm.image));
+                    restaurant.setMimeType(
+                            restaurantUpdateForm.image.getContentType());
+                } else {
+                    restaurant.setImage(null);
+                    restaurant.setMimeType(null);
+                }
+            }
+            restaurantRepository.update(restaurant);
+        }
     }
 }
