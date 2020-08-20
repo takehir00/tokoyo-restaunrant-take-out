@@ -121,7 +121,8 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants/delete/{restaurantId}")
     public ModelAndView deleteForm(ModelAndView mav,
-                                   @PathVariable Long restaurantId) {
+                                   @PathVariable Integer restaurantId) {
+        mav.addObject("deleteFormResponse",adminRestaurantsService.getDeleteFormResponse(restaurantId));
         mav.setViewName("admin/restaurants/deleteForm");
         return mav;
     }

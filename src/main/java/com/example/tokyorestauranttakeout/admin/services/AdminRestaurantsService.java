@@ -2,10 +2,7 @@ package com.example.tokyorestauranttakeout.admin.services;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantShowResponse;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsUpdateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.*;
 
 import java.io.IOException;
 
@@ -47,4 +44,11 @@ public interface AdminRestaurantsService {
      * @param restaurantUpdateForm
      */
     void update(AdminRestaurantUpdateForm restaurantUpdateForm) throws IOException;
+
+    /**
+     * 削除画面
+     * @param restaurantId
+     * @return
+     */
+    AdminRestaurantsDeleteFormResponse getDeleteFormResponse(Integer restaurantId);
 }

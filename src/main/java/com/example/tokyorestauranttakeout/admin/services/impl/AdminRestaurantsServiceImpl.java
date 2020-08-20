@@ -1,15 +1,13 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantShowModel;
 import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantIndexResponse;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantShowResponse;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsCreateFormResponse;
-import com.example.tokyorestauranttakeout.admin.responses.restaurants.AdminRestaurantsUpdateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.restaurants.*;
 import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService;
 import com.example.tokyorestauranttakeout.entity.CustomRestaurant;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
@@ -153,5 +151,16 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
             }
             restaurantRepository.update(restaurant);
         }
+    }
+
+    @Override
+    public AdminRestaurantsDeleteFormResponse getDeleteFormResponse(Integer restaurantId) {
+        AdminRestaurantsDeleteFormResponse response = new AdminRestaurantsDeleteFormResponse();
+        AdminRestaurantDeleteForm deleteForm = new AdminRestaurantDeleteForm();
+        CustomRestaurant customRestaurant =
+                restaurantRepository.selectByIdWithWard(restaurantId);
+        BeanUtils.copyProperties(customRestaurant, deleteForm);
+        response.deleteForm = deleteForm;
+        return response;
     }
 }
