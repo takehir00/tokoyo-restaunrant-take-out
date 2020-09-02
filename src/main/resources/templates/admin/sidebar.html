@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:fragment="copy" class=" bg-dark navbar-dark side-bar">
+    <div class="sidebar-contents border-top border-bottom">
+        <div class="sidebar-contents-title">
+            <h6>区</h6>
+        </div>
+        <div class="sidebar-contents-menu">
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/wards}">一覧</a>
+                </p>
+            </div>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/wards/register}">登録</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-contents border-top border-bottom">
+        <div class="sidebar-contents-title">
+            <h6>区内エリア</h6>
+        </div>
+        <div class="sidebar-contents-menu">
+            <p>一覧</p>
+            <p>登録</p>
+        </div>
+    </div>
+    <div class="sidebar-contents border-top border-bottom">
+        <div class="sidebar-contents-title">
+            <h6>飲食店</h6>
+        </div>
+        <div class="sidebar-contents-menu">
+            <p>一覧</p>
+            <p>登録</p>
+        </div>
+    </div>
+    <div class="sidebar-contents border-top border-bottom">
+        <div class="sidebar-contents-title">
+            <h6>メニュー</h6>
+        </div>
+        <div class="sidebar-contents-menu">
+            <p>一覧</p>
+            <p>登録</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

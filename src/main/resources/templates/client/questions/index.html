@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/question.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{client/header :: copy}"></div>
+<div class="contents container">
+    <h3>問い合わせ</h3>
+    <div class="question">
+        <div class="form">
+            <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="title">問い合わせ件名</label>
+                        <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="件名を入力してください">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail1">メールアドレス</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="メールアドレスを入力してください">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail1">問い合わせ本文</label>
+                        <textarea placeholder="問い合わせ本文を入力してください" class="form-control" name="content"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="~{client/footer :: copy}"></div>
+</body>
+</html>

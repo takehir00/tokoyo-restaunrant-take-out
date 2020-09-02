@@ -1,0 +1,34 @@
+.side-bar{
+    color: white;
+    padding-top: 1vh;
+}
+
+.sidebar-contents{
+    padding-top: 1vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-bottom: 1vh;
+}
+
+.sidebar-contents-title{
+    padding-left: 1vw;
+    border-bottom: solid 1px;
+    border-color: #D0D0D0;
+}
+
+.sidebar-contents-menu{
+    padding-left: 1vw;
+}
+
+.sidebar-contents-menu-select{
+    padding-top: 1vh;
+    padding-left: 1vw;
+    border-bottom: solid 1px;
+    border-color: #D0D0D0;
+}
+
+a.sidebar-contents-menu-select-link{
+    color: #D0D0D0;
+}
+
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
+        <div class="col-sm-10">
+            <div class="registerform">
+                <h3 class="registerform-title">レストラン登録</h3>
+                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="name">レストラン名</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="区名を入力してください">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="adress">住所</label>
+                            <input type="file" class="form-control-file" id="adress" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="phone-number">電話番号</label>
+                            <input type="file" class="form-control-file" id="phone-number" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="introduction">紹介文</label>
+                            <textarea placeholder="店舗紹介を入力してください" class="form-control" id="introduction"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="from-time">営業開始時間</label>
+                            <input type="datetime-local" class="form-control-file" id="from-time" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="to-time">営業終了時間</label>
+                            <input type="datetime-local" class="form-control-file" id="to-time" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="exampleFormControlSelect1">所属区名</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>豊島区</option>
+                                <option>港区</option>
+                                <option>新宿区</option>
+                                <option>渋谷区</option>
+                                <option>中央区</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">登録</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

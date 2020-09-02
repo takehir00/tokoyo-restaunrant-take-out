@@ -1,0 +1,61 @@
+.contents {
+    margin-top: 5vh;
+    padding-bottom: 10vh;
+}
+
+.restaurant-search {
+    border:solid 1px;
+    border-color: #D0D0D0;
+
+}
+
+.restaurant-search-title{
+    margin: 1vh 1vh 1vw 1vw;
+    padding-bottom: 1vh;
+    border-bottom:solid 1px;
+    border-color: #D0D0D0;
+}
+
+.restaurant-search-aria{
+    margin: 0 0 1vw 1vw;
+    padding-bottom:5vh;
+}
+
+.restaurant-ward{
+    border-top:solid 1vh;
+    padding: 1vh 1vw;
+}
+
+.restaurant{
+    border-bottom:solid 1px;
+    padding: 2vh 0;
+}
+
+.restaurant-title{
+    padding-bottom: 1vh;
+    border-bottom:solid 1px;
+    border-color: #D0D0D0;
+}
+
+.restaurant-introduction{
+    border-color: #D0D0D0;
+    padding-bottom: 1vh;
+}
+
+.menu-list{
+    margin: 3vh 0 0 0;
+    padding: 5vh 0 0 0;
+    border-top:solid 1px;
+    border-color: #D0D0D0;
+}
+
+.menu-title {
+    margin: 0vh 0 2vh 0;
+}
+
+.menu-name{
+    margin: 3vh 0 0 0;
+    padding: 1vh 0 0 1vw;
+    border-left: solid 1vh;
+    border-color: #D0D0D0;
+}

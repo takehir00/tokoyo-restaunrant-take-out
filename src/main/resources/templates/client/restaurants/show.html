@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/restaurant.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{client/header :: copy}"></div>
+<div class="contents container">
+    <h2 class="restaurant-title border-bottom">キッチン南海</h2>
+    <div class="restaurant-introduction row">
+        <div class="col-sm-4 restaurant-introduction-image">
+            <img th:src="@{/images/roppongiHils.jpg}" class="img-fluid rounded">
+        </div>
+        <div class="col-sm-8 restaurant-introduction-description">
+            <p>住所：東毛袋２ー２０２</p>
+            <p>電話番号：000-0000-0000</p>
+            <p>営業時間：10:00-19:00</p>
+        </div>
+    </div>
+    <div class="menu-list">
+        <div class="menu-title">
+            <h4>メニュー</h4>
+        </div>
+        <dev class="row">
+            <div class="col-sm-3">
+                <img th:src="@{/images/pasta.jpeg}" class="img-fluid rounded">
+                <div class="menu-name rounded">
+                    <p>パスタ</p>
+                    <p>480円(税抜き)</p>
+                </div>
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="col-sm-3">
+                <img th:src="@{/images/humberg.jpeg}" class="img-fluid rounded">
+                <div class="menu-name rounded">
+                    <p>ハンバーグ弁当</p>
+                    <p>480円(税抜き)</p>
+                </div>
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="col-sm-3">
+                <div>
+                    <img th:src="@{/images/karaage.jpg}" class="img-fluid rounded">
+                </div>
+                <div class="menu-name rounded">
+                    <p>唐揚げ</p>
+                    <p>480円(税抜き)</p>
+                </div>
+            </div>
+        </dev>
+        <dev class="wards row">
+            <div class="ward col-sm-3">
+                <p class="border-bottom">パスタ</p>
+                <img th:src="@{/images/pasta.jpeg}" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">ハンバーグ</p>
+                <img th:src="@{/images/humberg.jpeg}" class="img-fluid rounded">
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <div class="ward col-sm-3">
+                <p class="border-bottom">唐揚げ</p>
+                <img th:src="@{/images/karaage.jpg}" class="img-fluid rounded">
+            </div>
+        </dev>
+    </div>
+</div>
+<div th:insert="~{client/footer :: copy}"></div>
+</body>
+</html>

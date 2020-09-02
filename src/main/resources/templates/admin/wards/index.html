@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-top.css}" />
+</head>
+<body>
+    <div th:insert="~{admin/header :: copy}"></div>
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
+            <div class="col-sm-10">
+                <h3 class="admin-title border-bottom">区</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">区名</th>
+                        <th scope="col">作成日時</th>
+                        <th scope="col">更新日時</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ward : ${wardIndexResponse.wardIndexModelList}">
+                        <th scope="row" th:text="${ward.id}"></th>
+                        <td th:text="${ward.name}"></td>
+                        <td th:text="${ward.createdAt}"></td>
+                        <td th:text="${ward.updatedAt}"></td>
+                        <td>
+                            <a th:href="@{/admin/wards/{wardId}(wardId=${ward.id})}">詳細</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/admin/wards/update/{wardId}(wardId=${ward.id})}">更新</a>
+                        </td>
+                        <td>
+                            <a href="articles/registerForm.html" th:href="@{/admin/wards/delete/{wardId}(wardId=${ward.id})}">削除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

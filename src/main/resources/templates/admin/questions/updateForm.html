@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
+        <div class="col-sm-10">
+            <div class="registerform">
+                <h3 class="registerform-title">問い合わせ登更新</h3>
+                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" aria-describedby="emailHelp" placeholder="idが入る" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="name">件名</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="区名を入力してください">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="text">本文</label>
+                            <input type="datetime-local" class="form-control" id="text" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="phone-number">送信者メールアドレス</label>
+                            <input type="email" class="form-control" id="phone-number" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="resolved">解決フラグ</label>
+                            <input type="email" class="form-control" id="resolved" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">更新</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

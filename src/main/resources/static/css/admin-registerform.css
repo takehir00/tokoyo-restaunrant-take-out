@@ -1,0 +1,11 @@
+.registerform{
+ padding-top: 2vh;
+ padding-left: 2vw;
+ padding-right: 2vw;
+}
+
+.registerform-title{
+    border-bottom: solid 1px;
+    border-color: #D0D0D0;
+    padding-bottom: 1vh;
+}
