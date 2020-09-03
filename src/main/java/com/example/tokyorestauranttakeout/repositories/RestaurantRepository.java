@@ -73,4 +73,12 @@ public class RestaurantRepository {
     public void update(Restaurant restaurant) {
         restaurantMapper.updateByPrimaryKeyWithBLOBs(restaurant);
     }
+
+    /**
+     * 削除
+     * @param wardId
+     */
+    public void delete (Integer wardId) {
+        restaurantMapper.deleteByPrimaryKey(wardId);
+    }
 }

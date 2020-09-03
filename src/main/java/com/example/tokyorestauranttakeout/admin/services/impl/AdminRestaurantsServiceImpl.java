@@ -163,4 +163,9 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
         response.deleteForm = deleteForm;
         return response;
     }
+
+    @Override
+    public void delete(AdminRestaurantDeleteForm deleteForm) {
+        restaurantRepository.delete(deleteForm.getId());
+    }
 }

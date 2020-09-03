@@ -18,8 +18,8 @@
         <div class="col-sm-10">
             <div class="registerform">
                 <h3 class="registerform-title">レストラン削除確認画面</h3>
-                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
-                    <input type="hidden" name="id" />
+                <form method="post" th:action="@{'/admin/restaurants/delete'}" th:object="${deleteForm}">
+                    <input type="hidden" name="id" th:value="${deleteFormResponse.deleteForm.id}"/>
                     <div class="admin-detail">
                         <dl class="admin-detail-content">
                             <dt>id</dt>
@@ -39,7 +39,7 @@
                             <dt>所属区名</dt>
                             <dd th:text="${deleteFormResponse.deleteForm.wardName}"></dd>
                             <dt>店舗画像</dt>
-                            <dd >
+                            <dd>
                                 <img th:src="@{data:{mimeType};base64,{image}(image=${deleteFormResponse.deleteForm.image},mimeType=${deleteFormResponse.deleteForm.mimeType})}" class="img-fluid rounded">
                             </dd>
                             <dt>作成日時</dt>

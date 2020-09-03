@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.*;
 
@@ -51,4 +52,10 @@ public interface AdminRestaurantsService {
      * @return
      */
     AdminRestaurantsDeleteFormResponse getDeleteFormResponse(Integer restaurantId);
+
+    /**
+     * 削除
+     * @param deleteForm
+     */
+    void delete(AdminRestaurantDeleteForm deleteForm);
 }

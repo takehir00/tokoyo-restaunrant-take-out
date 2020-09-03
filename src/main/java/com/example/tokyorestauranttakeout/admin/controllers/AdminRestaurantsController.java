@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
@@ -125,5 +126,23 @@ public class AdminRestaurantsController {
         mav.addObject("deleteFormResponse",adminRestaurantsService.getDeleteFormResponse(restaurantId));
         mav.setViewName("admin/restaurants/deleteForm");
         return mav;
+    }
+
+    /**
+     * 削除
+     * @param deleteForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     * @throws IOException
+     */
+    @Transactional
+    @PostMapping("/admin/restaurants/delete")
+    public String delete(
+            @ModelAttribute("deleteForm") AdminRestaurantDeleteForm deleteForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) throws IOException {
+        adminRestaurantsService.delete(deleteForm);
+        return "redirect:/admin/restaurants";
     }
 }
