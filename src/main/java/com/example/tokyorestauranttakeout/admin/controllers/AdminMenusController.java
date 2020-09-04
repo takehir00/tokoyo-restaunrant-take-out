@@ -23,7 +23,8 @@ public class AdminMenusController {
      */
     @GetMapping("/admin/menus")
     public ModelAndView index(ModelAndView mav) throws IOException {
-        Menu menu = adminMenuService.getById(1);
+        mav.addObject("menuIndexResponse",
+                adminMenuService.getIndexResponse());
         mav.setViewName("admin/menus/index");
         return mav;
     }

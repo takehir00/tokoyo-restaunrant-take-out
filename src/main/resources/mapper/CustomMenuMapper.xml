@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tokyorestauranttakeout.mapper.CustomMenuMapper">
+    <resultMap id="BaseResultMap" type="com.example.tokyorestauranttakeout.entity.CustomMenu">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="price" jdbcType="INTEGER" property="price" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="mime_type" jdbcType="VARCHAR" property="mimeType" />
+        <result column="restaurant_id" jdbcType="INTEGER" property="restaurantId" />
+        <result column="restaurant_name" jdbcType="VARCHAR" property="restaurantName" />
+        <result column="priority" jdbcType="INTEGER" property="priority" />
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        menu.id,
+        menu.name,
+        menu.price,
+        menu.image,
+        menu.mime_type,
+        menu.restaurant_id,
+        restaurant.name as restaurant_name,
+        menu.priority,
+        menu.created_at,
+        menu.updated_at
+    </sql>
+    <select id="select" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from menu
+        inner join restaurant
+        on menu.restaurant_id = restaurant.id
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from menu
+        inner join restaurant
+        on menu.restaurant_id = restaurant.id
+        where menu.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="countByExample" resultType="java.lang.Long">
+        select count(*) from menu
+    </select>
+    <select id="selectById" resultType="com.example.tokyorestauranttakeout.entity.Menu">
+        select * from Menu where id = #{id}
+    </select>
+</mapper>

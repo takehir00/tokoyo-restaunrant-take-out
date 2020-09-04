@@ -22,9 +22,7 @@
                     <th scope="col">id</th>
                     <th scope="col">メニュー名</th>
                     <th scope="col">価格</th>
-                    <th scope="col">画像</th>
                     <th scope="col">レストラン</th>
-                    <th scope="col">優先度</th>
                     <th scope="col">作成日時</th>
                     <th scope="col">更新日時</th>
                     <th></th>
@@ -32,35 +30,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>ハンバーグ</td>
-                    <td>５００円</td>
-                    <td>画像</td>
-                    <td>キッチン南海</td>
-                    <td>１</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
+                <tr th:each="menu : ${menuIndexResponse.menuIndexModelList}">
+                    <th scope="row" th:text="${menu.id}"></th>
+                    <td th:text="${menu.name}"></td>
+                    <td th:text="${menu.price}"></td>
+                    <td th:text="${menu.restaurantName}"></td>
+                    <td th:text="${menu.createdAt}"></td>
+                    <td th:text="${menu.updatedAt}"></td>
                     <td>
-                        <a th:href="@{/admin/menus/update/1}">更新</a>
+                        <a th:href="@{/admin/menus/{menuId}(menuId=${menu.id})}">詳細</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/menus/delete/1}">削除</a>
+                        <a th:href="@{/admin/menus/update/{menuId}(menuId=${menu.id})}">更新</a>
                     </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>港区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>渋谷区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
+                    <td>
+                        <a th:href="@{/admin/menus/delete/{menuId}(menuId=${menu.id})}">削除</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

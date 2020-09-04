@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
+import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuIndexResponse;
 import com.example.tokyorestauranttakeout.entity.Menu;
 
 import java.io.IOException;
@@ -11,4 +12,6 @@ public interface AdminMenuService {
      * @return
      */
     public Menu getById(Integer id) throws IOException;
+
+    AdminMenuIndexResponse getIndexResponse();
 }
