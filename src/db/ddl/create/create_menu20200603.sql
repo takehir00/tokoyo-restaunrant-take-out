@@ -3,7 +3,7 @@ create table menu
     (id int not null primary key AUTO_INCREMENT,
     name varchar(100),
     price int,
-    image varchar(10000),
+    image MEDIUMTEXT,
     mime_type varchar(100),
     restaurant_id int,
     priority int,

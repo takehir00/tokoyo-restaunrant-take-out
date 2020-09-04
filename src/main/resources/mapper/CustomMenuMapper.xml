@@ -5,7 +5,6 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="price" jdbcType="INTEGER" property="price" />
-        <result column="image" jdbcType="VARCHAR" property="image" />
         <result column="mime_type" jdbcType="VARCHAR" property="mimeType" />
         <result column="restaurant_id" jdbcType="INTEGER" property="restaurantId" />
         <result column="restaurant_name" jdbcType="VARCHAR" property="restaurantName" />
@@ -13,11 +12,13 @@
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.tokyorestauranttakeout.entity.CustomMenu">
+        <result column="image" jdbcType="LONGVARCHAR" property="image" />
+    </resultMap>
     <sql id="Base_Column_List">
         menu.id,
         menu.name,
         menu.price,
-        menu.image,
         menu.mime_type,
         menu.restaurant_id,
         restaurant.name as restaurant_name,
@@ -25,19 +26,26 @@
         menu.created_at,
         menu.updated_at
     </sql>
-    <select id="select" resultMap="BaseResultMap">
+    <sql id="Blob_Column_List">
+        menu.image
+    </sql>
+    <select id="select" resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
         from menu
         inner join restaurant
         on menu.restaurant_id = restaurant.id
     </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
         from menu
         inner join restaurant
         on menu.restaurant_id = restaurant.id
@@ -46,8 +54,5 @@
 
     <select id="countByExample" resultType="java.lang.Long">
         select count(*) from menu
-    </select>
-    <select id="selectById" resultType="com.example.tokyorestauranttakeout.entity.Menu">
-        select * from Menu where id = #{id}
     </select>
 </mapper>

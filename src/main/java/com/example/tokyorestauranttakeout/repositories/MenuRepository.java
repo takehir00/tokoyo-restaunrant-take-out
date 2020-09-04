@@ -41,4 +41,12 @@ public class MenuRepository {
         MenuExample example = new MenuExample();
         return menuMapper.selectByExample(example).get(0);
     }
+
+    /**
+     * 登録
+     * @param menu
+     */
+    public void create(Menu menu) {
+        menuMapper.insert(menu);
+    }
 }
