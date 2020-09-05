@@ -21,7 +21,6 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">件名</th>
-                    <th scope="col">送信者メールアドレス</th>
                     <th scope="col">解決フラグ</th>
                     <th scope="col">作成日時</th>
                     <th scope="col">更新日時</th>
@@ -31,37 +30,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1001</th>
-                    <td>１</td>
-                    <td>もっと店を増やして欲しい</td>
-                    <td>taro@mail.com</td>
-                    <td>未解決</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
+                <tr th:each="question : ${questionIndexResponse.questionIndexModelList}">
+                    <th scope="row" th:text="${question.id}"></th>
+                    <td th:text="${question.title}"></td>
+                    <td th:text="${question.resolvedFlg}"></td>
+                    <td th:text="${question.createdAt}"></td>
+                    <td th:text="${question.updatedAt}"></td>
                     <td>
-                        <a th:href="@{/admin/questions/1}">詳細</a>
+                        <a th:href="@{/admin/questions/{questionId}(questionId=${question.id})}">詳細</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/questions/update/1}">更新</a>
+                        <a th:href="@{/admin/questions/update/{questionId}(questionId=${question.id})}">更新</a>
                     </td>
                     <td>
-                        <a th:href="@{/admin/questions/delete/1}">削除</a>
+                        <a th:href="@{/admin/questions/delete/{questionId}(questionId=${question.id})}">削除</a>
                     </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>港区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>渋谷区</td>
-                    <td>画像</td>
-                    <td>5月20日</td>
-                    <td>5月20日</td>
                 </tr>
                 </tbody>
             </table>

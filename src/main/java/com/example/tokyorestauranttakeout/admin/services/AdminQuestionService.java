@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.admin.services;
 
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionCreateForm;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionCreateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionIndexResponse;
 
 public interface AdminQuestionService {
     /**
@@ -16,4 +17,10 @@ public interface AdminQuestionService {
      * @param registerForm
      */
     void create(AdminQuestionCreateForm registerForm);
+
+    /**
+     * 一覧画面
+     * @return
+     */
+    AdminQuestionIndexResponse getIndexResponse();
 }

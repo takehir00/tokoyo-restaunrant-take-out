@@ -28,6 +28,7 @@ public class AdminQuestionsController {
      */
     @GetMapping("/admin/questions")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("questionIndexResponse", adminQuestionService.getIndexResponse());
         mav.setViewName("admin/questions/index");
         return mav;
     }
