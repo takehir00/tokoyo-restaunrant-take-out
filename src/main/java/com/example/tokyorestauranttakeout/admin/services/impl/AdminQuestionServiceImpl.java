@@ -1,6 +1,8 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateForm;
+import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionIndexResponse;
@@ -35,6 +37,27 @@ public class AdminQuestionServiceImpl implements AdminQuestionService {
         question.setCreatedAt(now);
         question.setUpdatedAt(now);
         questionRepository.create(question);
+    }
+
+    @Override
+    public AdminQuestionUpdateFormResponse getUpdateFormResponse(Integer questionId) {
+        AdminQuestionUpdateFormResponse response = new AdminQuestionUpdateFormResponse();
+        Question question = questionRepository.selectById(questionId);
+        AdminQuestionUpdateForm updateForm = new AdminQuestionUpdateForm();
+        BeanUtils.copyProperties(question, updateForm);
+        response.updateForm = updateForm;
+        return response;
+    }
+
+    @Override
+    public void update(AdminQuestionUpdateForm updateForm) {
+        Question question = questionRepository.selectById(updateForm.getId());
+        if (question != null) {
+            Date now = new Date();
+            BeanUtils.copyProperties(updateForm, question);
+            question.setUpdatedAt(now);
+            questionRepository.update(question);
+        }
     }
 
     @Override

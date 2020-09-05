@@ -34,4 +34,21 @@ public class QuestionRepository {
         QuestionExample example = new QuestionExample();
         return questionMapper.selectByExample(example);
     }
+
+    /**
+     * IDで取得
+     * @param questionId
+     * @return
+     */
+    public Question selectById(Integer questionId) {
+        return questionMapper.selectByPrimaryKey(questionId);
+    }
+
+    /**
+     * 更新
+     * @param question
+     */
+    public void update(Question question) {
+        questionMapper.updateByPrimaryKey(question);
+    }
 }
