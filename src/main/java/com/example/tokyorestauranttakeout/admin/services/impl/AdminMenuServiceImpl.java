@@ -1,15 +1,13 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
+import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormRestaurantModel;
 import com.example.tokyorestauranttakeout.admin.models.menu.AdminMenuIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.menu.AdminMenuShowModel;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuIndexResponse;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuRegisterFormResponse;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuShowResponse;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuUpdateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.menu.*;
 import com.example.tokyorestauranttakeout.admin.services.AdminMenuService;
 import com.example.tokyorestauranttakeout.entity.CustomMenu;
 import com.example.tokyorestauranttakeout.entity.Menu;
@@ -66,6 +64,21 @@ public class AdminMenuServiceImpl implements AdminMenuService {
         response.showModel = showModel;
 
         return response;
+    }
+
+    @Override
+    public AdminMenuDeleteFormResponse getDeleteFormResponse(Integer menuId) {
+        AdminMenuDeleteFormResponse response = new AdminMenuDeleteFormResponse();
+        AdminMenuDeleteForm deleteForm = new AdminMenuDeleteForm();
+        CustomMenu customMenu = menuRepository.selectByIdWithRestaurant(menuId);
+        BeanUtils.copyProperties(customMenu, deleteForm);
+        response.deleteForm = deleteForm;
+        return response;
+    }
+
+    @Override
+    public void delete(AdminMenuDeleteForm deleteForm) {
+        menuRepository.delete(deleteForm.getId());
     }
 
     @Override

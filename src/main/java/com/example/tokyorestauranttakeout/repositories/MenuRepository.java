@@ -65,4 +65,12 @@ public class MenuRepository {
     public void update(Menu menu) {
         menuMapper.updateByPrimaryKeyWithBLOBs(menu);
     }
+
+    /**
+     * 削除
+     * @param id
+     */
+    public void delete(Integer id) {
+        menuMapper.deleteByPrimaryKey(id);
+    }
 }

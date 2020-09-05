@@ -1,8 +1,8 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
-import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.services.AdminMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -116,10 +116,30 @@ public class AdminMenusController {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/menus/delete/{wardId}")
+    @GetMapping("/admin/menus/delete/{menuId}")
     public ModelAndView deleteForm(ModelAndView mav,
-                                   @PathVariable Long menuId) {
+                                   @PathVariable Integer menuId) {
+        mav.addObject("deleteFormResponse",
+                adminMenuService.getDeleteFormResponse(menuId));
         mav.setViewName("admin/menus/deleteForm");
         return mav;
+    }
+
+    /**
+     * 削除
+     * @param deleteForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     * @throws IOException
+     */
+    @Transactional
+    @PostMapping("/admin/menus/delete")
+    public String delete(
+            @ModelAttribute("deleteForm") AdminMenuDeleteForm deleteForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) throws IOException {
+        adminMenuService.delete(deleteForm);
+        return "redirect:/admin/menus";
     }
 }

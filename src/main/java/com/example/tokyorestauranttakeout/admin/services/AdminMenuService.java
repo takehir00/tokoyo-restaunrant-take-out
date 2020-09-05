@@ -1,12 +1,10 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
+import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuIndexResponse;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuRegisterFormResponse;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuShowResponse;
-import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuUpdateFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.menu.*;
 import com.example.tokyorestauranttakeout.entity.Menu;
 
 import java.io.IOException;
@@ -51,4 +49,17 @@ public interface AdminMenuService {
      * @return
      */
     AdminMenuShowResponse getShowResponse(Integer menuId);
+
+    /**
+     * 削除画面レスポンス取得
+     * @param menuId
+     * @return
+     */
+    AdminMenuDeleteFormResponse getDeleteFormResponse(Integer menuId);
+
+    /**
+     * 削除
+     * @param deleteForm
+     */
+    void delete(AdminMenuDeleteForm deleteForm);
 }
