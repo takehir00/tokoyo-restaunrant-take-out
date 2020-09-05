@@ -6,6 +6,7 @@ import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpda
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionShowResponse;
 
 public interface AdminQuestionService {
 
@@ -14,6 +15,13 @@ public interface AdminQuestionService {
      * @return
      */
     AdminQuestionIndexResponse getIndexResponse();
+
+    /**
+     * 詳細画面
+     * @param questionId
+     * @return
+     */
+    AdminQuestionShowResponse getShowResponse(Integer questionId);
 
     /**
      * 登録画面用レスポンス取得
@@ -39,4 +47,6 @@ public interface AdminQuestionService {
      * @param updateForm
      */
     void update(AdminQuestionUpdateForm updateForm);
+
+
 }

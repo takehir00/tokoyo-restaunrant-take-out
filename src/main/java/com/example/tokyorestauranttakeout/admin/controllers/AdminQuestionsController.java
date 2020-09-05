@@ -42,7 +42,9 @@ public class AdminQuestionsController {
      */
     @GetMapping("/admin/questions/{questionId}")
     public ModelAndView show(ModelAndView mav,
-                             @PathVariable Long questionId) {
+                             @PathVariable Integer questionId) {
+        mav.addObject("showResponse",
+                adminQuestionService.getShowResponse(questionId));
         mav.setViewName("admin/questions/show");
         return mav;
     }

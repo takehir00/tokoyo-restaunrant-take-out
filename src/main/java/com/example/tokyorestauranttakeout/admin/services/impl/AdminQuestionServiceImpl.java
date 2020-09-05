@@ -3,9 +3,11 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionCreateForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateFormResponse;
+import com.example.tokyorestauranttakeout.admin.models.question.AdminQuestionShowModel;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionCreateFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionShowResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminQuestionService;
 import com.example.tokyorestauranttakeout.entity.Question;
 import com.example.tokyorestauranttakeout.repositories.QuestionRepository;
@@ -72,6 +74,16 @@ public class AdminQuestionServiceImpl implements AdminQuestionService {
                             return adminQuestionIndexModel;
                         }).collect(Collectors.toList());
 
+        return response;
+    }
+
+    @Override
+    public AdminQuestionShowResponse getShowResponse(Integer questionId) {
+        AdminQuestionShowResponse response = new AdminQuestionShowResponse();
+        Question question = questionRepository.selectById(questionId);
+        AdminQuestionShowModel showModel = new AdminQuestionShowModel();
+        BeanUtils.copyProperties(question, showModel);
+        response.showModel = showModel;
         return response;
     }
 }
