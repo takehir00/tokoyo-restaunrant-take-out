@@ -97,6 +97,7 @@ public class AdminWardAreasController {
      * @param attributes
      * @return
      */
+    @Transactional
     @PostMapping("/admin/ward-areas/update")
     public String update(
             @ModelAttribute("wardAreaUpdateForm") WardAreaUpdateForm wardAreaUpdateForm,
@@ -127,6 +128,7 @@ public class AdminWardAreasController {
      * @param attributes
      * @return
      */
+    @Transactional
     @PostMapping("/admin/ward-areas/delete")
     public String delete(@ModelAttribute("wardAreaDeleteForm") AdminWardAreaDeleteForm wardAreaDeleteForm,
                                BindingResult bindingResult,

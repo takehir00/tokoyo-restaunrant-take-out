@@ -16,38 +16,29 @@
         <div class="col-sm-2" th:insert="~{admin/sidebar :: copy}"></div>
         <div class="col-sm-10">
             <div class="registerform">
-                <h3 class="registerform-title">削除</h3>
-                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="title">メニュー名</label>
-                            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="区名を入力してください" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="price">価格</label>
-                            <input type="text" class="form-control" id="price" aria-describedby="emailHelp" placeholder="区名を入力してください" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="exampleInputEmail1">画像</label>
-                            <input type="file" class="form-control-file" id="exampleInputEmail1" aria-describedby="emailHelp" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="ward">レストラン</label>
-                            <input type="text" class="form-control" id="ward" aria-describedby="emailHelp" placeholder="区名を入力してください" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="ward">優先度</label>
-                            <input type="text" class="form-control" id="ward" aria-describedby="emailHelp" placeholder="区名を入力してください" readonly>
-                        </div>
-                    </div>
+                <h3 class="registerform-title">メニュー削除</h3>
+                <form method="post" th:action="@{'/admin/menus/delete'}" th:object="${deleteForm}">
+                    <input type="hidden" name="id" th:value="${deleteFormResponse.deleteForm.id}"/>
+                    <dl class="admin-detail-content">
+                        <dt>id</dt>
+                        <dd th:text="${deleteFormResponse.deleteForm.id}"></dd>
+                        <dt>メニュー名</dt>
+                        <dd th:text="${deleteFormResponse.deleteForm.name}"></dd>
+                        <dt>価格</dt>
+                        <dd th:text="${deleteFormResponse.deleteForm.price}"></dd>
+                        <dt>画像</dt>
+                        <dd>
+                            <img th:src="@{data:{mimeType};base64,{image}(image=${deleteFormResponse.deleteForm.image},mimeType=${deleteFormResponse.deleteForm.mimeType})}" class="img-fluid rounded">
+                        </dd>
+                        <dt>レストラン名</dt>
+                        <dd th:text="${deleteFormResponse.deleteForm.restaurantName}"></dd>
+                        <dt>優先度</dt>
+                        <dd th:text="${deleteFormResponse.deleteForm.priority}"></dd>
+                        <dt>作成日時</dt>
+                        <dd th:text="${deleteFormResponse.deleteForm.createdAt}"></dd>
+                        <dt>更新日時</dt>
+                        <dd th:text="${deleteFormResponse.deleteForm.updatedAt}"></dd>
+                    </dl>
                     <button type="submit" class="btn btn-primary">削除する</button>
                 </form>
             </div>

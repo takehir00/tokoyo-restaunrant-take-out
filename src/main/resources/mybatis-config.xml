@@ -5,8 +5,12 @@
 <configuration>
     <mappers>
         <mapper resource="mapper/MenuMapper.xml"/>
+        <mapper resource="mapper/CustomMenuMapper.xml"/>
         <mapper resource="mapper/WardMapper.xml"/>
         <mapper resource="mapper/WardAreaMapper.xml"/>
         <mapper resource="mapper/CustomWardAreaMapper.xml"/>
+        <mapper resource="mapper/RestaurantMapper.xml"/>
+        <mapper resource="mapper/CustomRestaurantMapper.xml"/>
+        <mapper resource="mapper/QuestionMapper.xml"/>
     </mappers>
 </configuration>

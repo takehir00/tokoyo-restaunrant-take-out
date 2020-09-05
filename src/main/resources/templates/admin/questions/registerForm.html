@@ -17,29 +17,40 @@
         <div class="col-sm-10">
             <div class="registerform">
                 <h3 class="registerform-title">問い合わせ登録</h3>
-                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
+                <form method="post" th:action="@{'/admin/questions/register'}" th:object="${registerForm}">
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="name">件名</label>
-                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="区名を入力してください">
+                            <label for="title">件名</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="件名を入力してください">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="text">本文</label>
-                            <input type="datetime-local" class="form-control" id="text" aria-describedby="emailHelp">
+                            <textarea placeholder="本文を入力してください" class="form-control" id="text" name="text"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="phone-number">送信者メールアドレス</label>
-                            <input type="email" class="form-control" id="phone-number" aria-describedby="emailHelp">
+                            <label for="senderMailAddress">送信者メールアドレス</label>
+                            <input type="email" class="form-control" id="senderMailAddress" name="senderMailAddress" placeholder="送信者メールアドレスを入力してください">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="resolved">解決フラグ</label>
-                            <input type="email" class="form-control" id="resolved" aria-describedby="emailHelp">
+                            <div class="row">
+                                <label class="col-form-label col-sm-2">解決フラグ</label>
+                                <div class="col-sm-10">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="resolvedFlg" id="resolvedFlg" value="false" checked>
+                                        <label class="form-check-label" for="resolvedFlg">未解決</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="resolvedFlg" id="unResolvedFlg" value="true">
+                                        <label class="form-check-label" for="unResolvedFlg">解決済み</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">登録</button>
