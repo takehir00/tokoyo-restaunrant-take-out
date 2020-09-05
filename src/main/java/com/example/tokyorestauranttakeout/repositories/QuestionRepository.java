@@ -51,4 +51,12 @@ public class QuestionRepository {
     public void update(Question question) {
         questionMapper.updateByPrimaryKey(question);
     }
+
+    /**
+     * 削除
+     * @param id
+     */
+    public void delete(Integer id) {
+        questionMapper.deleteByPrimaryKey(id);
+    }
 }

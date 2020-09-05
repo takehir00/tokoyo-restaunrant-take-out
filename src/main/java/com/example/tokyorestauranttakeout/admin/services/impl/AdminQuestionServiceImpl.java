@@ -1,6 +1,8 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionDeleteForm;
+import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionDeleteFormResponse;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.models.question.AdminQuestionShowModel;
@@ -60,6 +62,21 @@ public class AdminQuestionServiceImpl implements AdminQuestionService {
             question.setUpdatedAt(now);
             questionRepository.update(question);
         }
+    }
+
+    @Override
+    public AdminQuestionDeleteFormResponse getDeleteFormResponse(Integer questionId) {
+        AdminQuestionDeleteFormResponse response = new AdminQuestionDeleteFormResponse();
+        Question question = questionRepository.selectById(questionId);
+        AdminQuestionDeleteForm deleteForm = new AdminQuestionDeleteForm();
+        BeanUtils.copyProperties(question, deleteForm);
+        response.deleteForm = deleteForm;
+        return response;
+    }
+
+    @Override
+    public void delete(AdminQuestionDeleteForm deleteForm) {
+        questionRepository.delete(deleteForm.getId());
     }
 
     @Override
