@@ -43,8 +43,11 @@ public class AdminMenusController {
      */
     @GetMapping("/admin/menus/{menuId}")
     public ModelAndView show(ModelAndView mav,
-                             @PathVariable Long menuId) {
-        mav.setViewName("admin/menus/index");
+                             @PathVariable Integer menuId) {
+        mav.addObject("showResponse",
+                adminMenuService.getShowResponse(menuId));
+
+        mav.setViewName("admin/menus/show");
         return mav;
     }
 

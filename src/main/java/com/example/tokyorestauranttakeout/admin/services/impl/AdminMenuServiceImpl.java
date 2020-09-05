@@ -5,8 +5,10 @@ import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormRestaurantModel;
 import com.example.tokyorestauranttakeout.admin.models.menu.AdminMenuIndexModel;
+import com.example.tokyorestauranttakeout.admin.models.menu.AdminMenuShowModel;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuRegisterFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuShowResponse;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminMenuService;
 import com.example.tokyorestauranttakeout.entity.CustomMenu;
@@ -51,6 +53,18 @@ public class AdminMenuServiceImpl implements AdminMenuService {
                             adminMenuIndexModel.updatedAt = customMenu.getUpdatedAt();
                             return adminMenuIndexModel;
                         }).collect(Collectors.toList()));
+        return response;
+    }
+
+    @Override
+    public AdminMenuShowResponse getShowResponse(Integer menuId) {
+        AdminMenuShowResponse response = new AdminMenuShowResponse();
+        CustomMenu customMenu = menuRepository.selectByIdWithRestaurant(menuId);
+
+        AdminMenuShowModel showModel = new AdminMenuShowModel();
+        BeanUtils.copyProperties(customMenu, showModel);
+        response.showModel = showModel;
+
         return response;
     }
 

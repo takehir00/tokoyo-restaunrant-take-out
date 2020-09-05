@@ -32,6 +32,15 @@ public class MenuRepository {
     }
 
     /**
+     * IDで取得
+     * @param id
+     * @return
+     */
+    public CustomMenu selectByIdWithRestaurant(Integer id){
+        return customMenuMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * idで検索
      * @param id
      * @return

@@ -5,6 +5,7 @@ import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuRegisterFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuShowResponse;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuUpdateFormResponse;
 import com.example.tokyorestauranttakeout.entity.Menu;
 
@@ -43,4 +44,11 @@ public interface AdminMenuService {
      * @param updateForm
      */
     void update(AdminMenuUpdateForm updateForm) throws IOException;
+
+    /**
+     * 詳細画面レスポンス取得
+     * @param menuId
+     * @return
+     */
+    AdminMenuShowResponse getShowResponse(Integer menuId);
 }

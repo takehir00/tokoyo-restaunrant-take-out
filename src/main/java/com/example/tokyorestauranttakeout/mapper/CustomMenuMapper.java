@@ -15,4 +15,6 @@ public interface CustomMenuMapper {
      * @return
      */
     List<CustomMenu> select();
+
+    CustomMenu selectByPrimaryKey(@Param("id")Integer id);
 }
