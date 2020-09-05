@@ -37,9 +37,8 @@ public class MenuRepository {
      * @return
      * @throws IOException
      */
-    public Menu selectById(Integer id) throws IOException {
-        MenuExample example = new MenuExample();
-        return menuMapper.selectByExample(example).get(0);
+    public Menu selectById(Integer id){
+        return menuMapper.selectByPrimaryKey(id);
     }
 
     /**
@@ -48,5 +47,13 @@ public class MenuRepository {
      */
     public void create(Menu menu) {
         menuMapper.insert(menu);
+    }
+
+    /**
+     * 更新
+     * @param menu
+     */
+    public void update(Menu menu) {
+        menuMapper.updateByPrimaryKeyWithBLOBs(menu);
     }
 }

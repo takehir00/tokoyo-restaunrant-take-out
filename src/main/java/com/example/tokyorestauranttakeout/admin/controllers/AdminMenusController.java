@@ -1,6 +1,8 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.services.AdminMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,9 +85,27 @@ public class AdminMenusController {
      */
     @GetMapping("/admin/menus/update/{menuId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Long menuId) {
+                                   @PathVariable Integer menuId) {
+        mav.addObject("updateFormResponse",adminMenuService.getUpdateFormResponse(menuId));
         mav.setViewName("admin/menus/updateForm");
         return mav;
+    }
+
+    /**
+     * 更新
+     * @param updateForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     */
+    @Transactional
+    @PostMapping("/admin/menus/update")
+    public String update(
+            @ModelAttribute("updateForm") AdminMenuUpdateForm updateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) throws IOException {
+        adminMenuService.update(updateForm);
+        return "redirect:/admin/menus";
     }
 
     /**

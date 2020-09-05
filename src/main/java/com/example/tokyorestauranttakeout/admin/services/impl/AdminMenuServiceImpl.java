@@ -1,10 +1,13 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuRegisterForm;
+import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
+import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormRestaurantModel;
 import com.example.tokyorestauranttakeout.admin.models.menu.AdminMenuIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuRegisterFormResponse;
+import com.example.tokyorestauranttakeout.admin.responses.menu.AdminMenuUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminMenuService;
 import com.example.tokyorestauranttakeout.entity.CustomMenu;
 import com.example.tokyorestauranttakeout.entity.Menu;
@@ -83,5 +86,50 @@ public class AdminMenuServiceImpl implements AdminMenuService {
                     registerForm.image.getContentType());
         }
         menuRepository.create(menu);
+    }
+
+    @Override
+    public AdminMenuUpdateFormResponse getUpdateFormResponse(Integer menuId) {
+        AdminMenuUpdateFormResponse response = new AdminMenuUpdateFormResponse();
+
+        AdminMenuUpdateForm updateForm = new AdminMenuUpdateForm();
+
+        Menu menu = menuRepository.selectById(menuId);
+        BeanUtils.copyProperties(menu,updateForm);
+        updateForm.imageConvertedByBase64 = menu.getImage();
+        response.updateForm = updateForm;
+
+        response.restaurantList =
+                restaurantRepository.selectAll().stream()
+                        .map(restaurant -> {
+                            PullDownFormRestaurantModel pullDownFormRestaurantModel = new PullDownFormRestaurantModel();
+                            pullDownFormRestaurantModel.id = restaurant.getId();
+                            pullDownFormRestaurantModel.name = restaurant.getName();
+                            return pullDownFormRestaurantModel;
+                        }).collect(Collectors.toList());
+
+        return response;
+    }
+
+    @Override
+    public void update(AdminMenuUpdateForm updateForm) throws IOException {
+        Menu menu = menuRepository.selectById(updateForm.getId());
+        if (menu != null) {
+            Date now = new Date();
+            BeanUtils.copyProperties(updateForm, menu);
+
+            if (updateForm.imageUpdateFlg) {
+                if (updateForm.image != null) {
+                    menu.setImage(FileUtil.encodeBase64(
+                            updateForm.image));
+                    menu.setMimeType(
+                            updateForm.image.getContentType());
+                } else {
+                    menu.setImage(null);
+                    menu.setMimeType(null);
+                }
+            }
+            menuRepository.update(menu);
+        }
     }
 }
