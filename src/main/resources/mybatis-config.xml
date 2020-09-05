@@ -5,6 +5,7 @@
 <configuration>
     <mappers>
         <mapper resource="mapper/MenuMapper.xml"/>
+        <mapper resource="mapper/CustomMenuMapper.xml"/>
         <mapper resource="mapper/WardMapper.xml"/>
         <mapper resource="mapper/WardAreaMapper.xml"/>
         <mapper resource="mapper/CustomWardAreaMapper.xml"/>

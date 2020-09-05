@@ -20,28 +20,30 @@
             <div class="admin-detail">
                 <dl class="admin-detail-content">
                     <dt>id</dt>
-                    <dd>1001</dd>
+                    <dd th:text="${showResponse.showModel.id}"></dd>
                     <dt>メニュー名</dt>
-                    <dd>ハンバーグ</dd>
+                    <dd th:text="${showResponse.showModel.name}"></dd>
                     <dt>価格</dt>
-                    <dd>５００円</dd>
+                    <dd th:text="${showResponse.showModel.price}"></dd>
                     <dt>画像</dt>
-                    <dd>画像１</dd>
+                    <dd>
+                        <img th:src="@{data:{mimeType};base64,{image}(image=${showResponse.showModel.image},mimeType=${showResponse.showModel.mimeType})}" class="img-fluid rounded">
+                    </dd>
                     <dt>レストラン名</dt>
-                    <dd>キッチン南海</dd>
+                    <dd th:text="${showResponse.showModel.restaurantName}"></dd>
                     <dt>優先度</dt>
-                    <dd>1</dd>
+                    <dd th:text="${showResponse.showModel.priority}"></dd>
                     <dt>作成日時</dt>
-                    <dd>2020/9/21</dd>
+                    <dd th:text="${showResponse.showModel.createdAt}"></dd>
                     <dt>更新日時</dt>
-                    <dd>2020/9/21</dd>
+                    <dd th:text="${showResponse.showModel.updatedAt}"></dd>
                 </dl>
                 <div class="row">
                     <div class="col-sm-2">
-                        <a th:href="@{/admin/menus/update/1}">更新</a>
+                        <a th:href="@{/admin/menus/update/{menuId}(menuId=${showResponse.showModel.id})}">更新</a>
                     </div>
                     <div class="col-sm-2">
-                        <a th:href="@{/admin/menus/delete/1}">削除</a>
+                        <a th:href="@{/admin/menus/delete/{menuId}(menuId=${showResponse.showModel.id})}">削除</a>
                     </div>
                 </div>
             </div>
