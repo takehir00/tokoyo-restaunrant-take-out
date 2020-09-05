@@ -11,5 +11,6 @@
         <mapper resource="mapper/CustomWardAreaMapper.xml"/>
         <mapper resource="mapper/RestaurantMapper.xml"/>
         <mapper resource="mapper/CustomRestaurantMapper.xml"/>
+        <mapper resource="mapper/QuestionMapper.xml"/>
     </mappers>
 </configuration>

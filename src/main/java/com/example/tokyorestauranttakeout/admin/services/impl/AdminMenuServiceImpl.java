@@ -156,6 +156,7 @@ public class AdminMenuServiceImpl implements AdminMenuService {
                     menu.setMimeType(null);
                 }
             }
+            menu.setUpdatedAt(now);
             menuRepository.update(menu);
         }
     }

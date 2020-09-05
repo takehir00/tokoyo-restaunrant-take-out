@@ -149,6 +149,7 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
                     restaurant.setMimeType(null);
                 }
             }
+            restaurant.setUpdatedAt(now);
             restaurantRepository.update(restaurant);
         }
     }

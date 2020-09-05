@@ -29,10 +29,11 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="menu"></table>
+<!--        <table tableName="menu"></table>-->
 <!--        <table tableName="ward"></table>-->
 <!--        <table tableName="ward_area"></table>-->
 <!--        <table tableName="restaurant"></table>-->
+<!--        <table tableName="question"></table>-->
     </context>
 </generatorConfiguration>
 
