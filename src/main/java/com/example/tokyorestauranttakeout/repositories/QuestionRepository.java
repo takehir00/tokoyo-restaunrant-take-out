@@ -1,9 +1,12 @@
 package com.example.tokyorestauranttakeout.repositories;
 
 import com.example.tokyorestauranttakeout.entity.Question;
+import com.example.tokyorestauranttakeout.entity.QuestionExample;
 import com.example.tokyorestauranttakeout.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class QuestionRepository {
@@ -21,5 +24,39 @@ public class QuestionRepository {
      */
     public void create(Question question) {
         questionMapper.insert(question);
+    }
+
+    /**
+     * 全件取得
+     * @return
+     */
+    public List<Question> selectAll() {
+        QuestionExample example = new QuestionExample();
+        return questionMapper.selectByExample(example);
+    }
+
+    /**
+     * IDで取得
+     * @param questionId
+     * @return
+     */
+    public Question selectById(Integer questionId) {
+        return questionMapper.selectByPrimaryKey(questionId);
+    }
+
+    /**
+     * 更新
+     * @param question
+     */
+    public void update(Question question) {
+        questionMapper.updateByPrimaryKey(question);
+    }
+
+    /**
+     * 削除
+     * @param id
+     */
+    public void delete(Integer id) {
+        questionMapper.deleteByPrimaryKey(id);
     }
 }
