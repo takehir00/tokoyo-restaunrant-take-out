@@ -32,8 +32,16 @@
             <h6>区内エリア</h6>
         </div>
         <div class="sidebar-contents-menu">
-            <p>一覧</p>
-            <p>登録</p>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/ward-areas}">一覧</a>
+                </p>
+            </div>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/ward-areas/register}">登録</a>
+                </p>
+            </div>
         </div>
     </div>
     <div class="sidebar-contents border-top border-bottom">
@@ -41,8 +49,16 @@
             <h6>飲食店</h6>
         </div>
         <div class="sidebar-contents-menu">
-            <p>一覧</p>
-            <p>登録</p>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/restaurants}">一覧</a>
+                </p>
+            </div>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/restaurants/register}">登録</a>
+                </p>
+            </div>
         </div>
     </div>
     <div class="sidebar-contents border-top border-bottom">
@@ -50,8 +66,33 @@
             <h6>メニュー</h6>
         </div>
         <div class="sidebar-contents-menu">
-            <p>一覧</p>
-            <p>登録</p>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/menus}">一覧</a>
+                </p>
+            </div>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/menus/register}">登録</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-contents border-top border-bottom">
+        <div class="sidebar-contents-title">
+            <h6>問い合わせ</h6>
+        </div>
+        <div class="sidebar-contents-menu">
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/questions}">一覧</a>
+                </p>
+            </div>
+            <div class="sidebar-contents-menu-select">
+                <p>
+                    <a class="sidebar-contents-menu-select-link" th:href="@{/admin/questions/register}">登録</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>

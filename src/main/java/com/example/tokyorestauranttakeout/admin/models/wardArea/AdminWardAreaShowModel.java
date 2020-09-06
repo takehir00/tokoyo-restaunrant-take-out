@@ -1,7 +1,10 @@
 package com.example.tokyorestauranttakeout.admin.models.wardArea;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class AdminWardAreaShowModel {
     /** ID */
     public Integer id;

@@ -20,26 +20,26 @@
             <div class="admin-detail">
                 <dl class="admin-detail-content">
                     <dt>id</dt>
-                    <dd th:text="${wardAreaShowResponse.wardAreaShowModel.id}"></dd>
+                    <dd th:text="${wardAreaShowResponse.showModel.id}"></dd>
                     <dt>区内エリア名</dt>
-                    <dd th:text="${wardAreaShowResponse.wardAreaShowModel.name}"></dd>
+                    <dd th:text="${wardAreaShowResponse.showModel.name}"></dd>
                     <dt>画像</dt>
                     <dd >
-                        <img th:src="@{data:{mimeType};base64,{image}(image=${wardAreaShowResponse.wardAreaShowModel.image},mimeType=${wardAreaShowResponse.wardAreaShowModel.mimeType})}" class="img-fluid rounded">
+                        <img th:src="@{data:{mimeType};base64,{image}(image=${wardAreaShowResponse.showModel.image},mimeType=${wardAreaShowResponse.showModel.mimeType})}" class="img-fluid rounded">
                     </dd>
                     <dt>所属区名</dt>
-                    <dd th:text="${wardAreaShowResponse.wardAreaShowModel.wardName}"></dd>
+                    <dd th:text="${wardAreaShowResponse.showModel.wardName}"></dd>
                     <dt>作成日時</dt>
-                    <dd th:text="${wardAreaShowResponse.wardAreaShowModel.createdAt}"></dd>
+                    <dd th:text="${wardAreaShowResponse.showModel.createdAt}"></dd>
                     <dt>更新日時</dt>
-                    <dd th:text="${wardAreaShowResponse.wardAreaShowModel.updatedAt}"></dd>
+                    <dd th:text="${wardAreaShowResponse.showModel.updatedAt}"></dd>
                 </dl>
                 <div class="row">
                     <div class="col-sm-2">
-                        <a th:href="@{/admin/ward-areas/update/1}">更新</a>
+                        <a th:href="@{/admin/ward-areas/update/{wardAreaId}(wardAreaId=${wardAreaShowResponse.showModel.id})}">更新</a>
                     </div>
                     <div class="col-sm-2">
-                        <a th:href="@{/admin/ward-areas/delete/1}">削除</a>
+                        <a th:href="@{/admin/ward-areas/delete/{wardAreaId}(wardAreaId=${wardAreaShowResponse.showModel.id})}">削除</a>
                     </div>
                 </div>
             </div>

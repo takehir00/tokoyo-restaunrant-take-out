@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
+import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardAreaModel;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantShowModel;
@@ -12,7 +13,9 @@ import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService
 import com.example.tokyorestauranttakeout.entity.CustomRestaurant;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.Restaurant;
+import com.example.tokyorestauranttakeout.entity.WardArea;
 import com.example.tokyorestauranttakeout.repositories.RestaurantRepository;
+import com.example.tokyorestauranttakeout.repositories.WardAreaRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
 import com.example.tokyorestauranttakeout.util.FileUtil;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +32,8 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
 
     @Autowired
     WardRepository wardRepository;
+    @Autowired
+    WardAreaRepository wardAreaRepository;
     @Autowired
     RestaurantRepository restaurantRepository;
 
@@ -127,6 +132,15 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
                     wardModel.name = ward.getName();
                     return wardModel;
                 }).collect(Collectors.toList());
+
+        response.wardAreaList =
+                wardAreaRepository.selectByWardId(restaurant.getWardId()).stream()
+                        .map(wardArea -> {
+                            PullDownFormWardAreaModel pullDownFormWardAreaModel = new PullDownFormWardAreaModel();
+                            pullDownFormWardAreaModel.id = wardArea.getId();
+                            pullDownFormWardAreaModel.name = wardArea.getName();
+                            return pullDownFormWardAreaModel;
+                        }).collect(Collectors.toList());
         return response;
     }
 
