@@ -91,6 +91,14 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="wardAreaId">所属区内エリア名</label>
+                            <select class="form-control" id="wardAreaId" name="wardAreaId">
+                                <option th:each="wardArea : ${updateFormResponse.wardAreaList}" th:text="${wardArea.name}" th:value="${wardArea.id}" th:selected="${wardArea.id==updateFormResponse.updateForm.wardAreaId}" ></option>
+                            </select>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary">更新</button>
                 </form>
             </div>

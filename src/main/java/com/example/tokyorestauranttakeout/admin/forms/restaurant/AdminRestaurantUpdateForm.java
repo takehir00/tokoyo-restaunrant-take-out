@@ -16,6 +16,7 @@ public class AdminRestaurantUpdateForm {
     public String fromTime;
     public String toTime;
     public Integer wardId;
+    public Integer wardAreaId;
     /** 画像更新フラグ */
     public boolean imageUpdateFlg;
     /** Base64画像 */

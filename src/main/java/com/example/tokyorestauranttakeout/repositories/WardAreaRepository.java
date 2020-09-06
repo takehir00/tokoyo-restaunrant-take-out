@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.repositories;
 import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.WardArea;
 import com.example.tokyorestauranttakeout.entity.WardAreaExample;
+import com.example.tokyorestauranttakeout.entity.WardAreaExample.Criteria;
 import com.example.tokyorestauranttakeout.mapper.CustomWardAreaMapper;
 import com.example.tokyorestauranttakeout.mapper.WardAreaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,7 @@ public class WardAreaRepository {
      * @param wardArea
      */
     public void update(WardArea wardArea) {
-        wardAreaMapper.updateByPrimaryKey(wardArea);
+        wardAreaMapper.updateByPrimaryKeyWithBLOBs(wardArea);
     }
 
     /**
@@ -78,5 +79,17 @@ public class WardAreaRepository {
      */
     public void delete(Integer id) {
         wardAreaMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 区IDで検索
+     * @param wardId
+     * @return
+     */
+    public List<WardArea> selectByWardId(Integer wardId) {
+        WardAreaExample example = new WardAreaExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andWardIdEqualTo(wardId);
+        return wardAreaMapper.selectByExample(example);
     }
 }
