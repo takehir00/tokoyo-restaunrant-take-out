@@ -38,7 +38,7 @@ public class WardAreaRepository {
      */
     public List<WardArea> selectAll() {
         WardAreaExample example = new WardAreaExample();
-        return wardAreaMapper.selectByExample(example);
+        return wardAreaMapper.selectByExampleWithBLOBs(example);
     }
 
     /**
