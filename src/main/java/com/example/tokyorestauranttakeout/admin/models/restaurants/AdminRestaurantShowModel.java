@@ -25,6 +25,8 @@ public class AdminRestaurantShowModel {
     public String toTime;
     /** エリア名 */
     public String wardName;
+    /** 区内エリア名 */
+    public String wardAreaName;
     /** 作成日時 */
     public Date createdAt;
     /** 更新日時 */

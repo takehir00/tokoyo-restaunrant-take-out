@@ -16,4 +16,5 @@ public class AdminRestaurantCreateForm {
     public String fromTime;
     public String toTime;
     public Integer wardId;
+    public Integer wardAreaId;
 }

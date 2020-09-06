@@ -72,6 +72,15 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
                             return wardModel;
                         }).collect(Collectors.toList());
 
+        response.wardAreaList =
+                wardAreaRepository.selectAll().stream()
+                        .map(wardArea -> {
+                            PullDownFormWardAreaModel pullDownFormWardAreaModel = new PullDownFormWardAreaModel();
+                            pullDownFormWardAreaModel.id = wardArea.getId();
+                            pullDownFormWardAreaModel.name = wardArea.getName();
+                            return pullDownFormWardAreaModel;
+                        }).collect(Collectors.toList());
+
         return response;
     }
 

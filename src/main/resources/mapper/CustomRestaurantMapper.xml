@@ -13,6 +13,8 @@
         <result column="to_time" jdbcType="VARCHAR" property="toTime" />
         <result column="ward_id" jdbcType="INTEGER" property="wardId" />
         <result column="ward_name" jdbcType="VARCHAR" property="wardName" />
+        <result column="ward_area_id" jdbcType="INTEGER" property="wardAreaId" />
+        <result column="ward_area_name" jdbcType="VARCHAR" property="wardAreaName" />
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     </resultMap>
@@ -31,6 +33,8 @@
         restaurant.to_time,
         restaurant.ward_id,
         ward.name as ward_name,
+        restaurant.ward_area_id,
+        ward_area.name as ward_area_name,
         restaurant.created_at,
         restaurant.updated_at
     </sql>
@@ -48,6 +52,8 @@
         from restaurant
         inner join ward
         on restaurant.ward_id = ward.id
+        left join ward_area
+        on restaurant.ward_area_id = ward_area.id
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
@@ -57,6 +63,8 @@
         from restaurant
         inner join ward
         on restaurant.ward_id = ward.id
+        left join ward_area
+        on restaurant.ward_area_id = ward_area.id
         where restaurant.id = #{id,jdbcType=INTEGER}
     </select>
     <select id="countByExample" parameterType="com.example.tokyorestauranttakeout.entity.RestaurantExample" resultType="java.lang.Long">
