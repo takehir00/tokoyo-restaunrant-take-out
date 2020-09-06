@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TOSHIMA飲食テイクアウト情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/top.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{client/header :: copy}"></div>
+    <div class="contents container">
+        <h2 class="border-bottom">エリアを選ぶ</h2>
+        <div class="wards row" >
+            <div class="ward col-sm-3" th:each="wardArea : ${wardAreaIndexResponse.wardAreaIndexModelList}">
+                <p class="border-bottom" ><span th:text="${wardArea.name}"></span>（250件）</p>
+                <img th:src="@{data:{mimeType};base64,{image}(image=${wardArea.image},mimeType=${wardArea.mimeType})}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+<div th:insert="~{client/footer :: copy}"></div>
+</body>
+</html>
