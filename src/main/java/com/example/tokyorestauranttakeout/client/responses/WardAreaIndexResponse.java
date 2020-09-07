@@ -1,6 +1,6 @@
 package com.example.tokyorestauranttakeout.client.responses;
 
-import com.example.tokyorestauranttakeout.client.models.WardAreaIndexModel;
+import com.example.tokyorestauranttakeout.client.models.wardArea.WardAreaIndexModel;
 
 import java.util.List;
 

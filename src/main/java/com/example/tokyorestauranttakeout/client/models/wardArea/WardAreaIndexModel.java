@@ -1,4 +1,4 @@
-package com.example.tokyorestauranttakeout.client.models;
+package com.example.tokyorestauranttakeout.client.models.wardArea;
 
 import lombok.Data;
 

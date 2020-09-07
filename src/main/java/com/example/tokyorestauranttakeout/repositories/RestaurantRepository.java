@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.repositories;
 import com.example.tokyorestauranttakeout.entity.CustomRestaurant;
 import com.example.tokyorestauranttakeout.entity.Restaurant;
 import com.example.tokyorestauranttakeout.entity.RestaurantExample;
+import com.example.tokyorestauranttakeout.entity.RestaurantExample.Criteria;
 import com.example.tokyorestauranttakeout.mapper.CustomRestaurantMapper;
 import com.example.tokyorestauranttakeout.mapper.RestaurantMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,17 @@ public class RestaurantRepository {
     public List<Restaurant> selectAll() {
         RestaurantExample example = new RestaurantExample();
         return restaurantMapper.selectByExample(example);
+    }
+
+    /**
+     * 全件取得
+     * @return
+     */
+    public List<Restaurant> selectByWardAreaId(Integer wardAreaId) {
+        RestaurantExample example = new RestaurantExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andWardAreaIdEqualTo(wardAreaId);
+        return restaurantMapper.selectByExampleWithBLOBs(example);
     }
 
     /**
