@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TOSHIMAテイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/restaurant.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{client/header :: copy}"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div>
+                <h3 class="restaurant-ward rounded shadow"><span th:text="${wardAreaShowResponse.wardAreaName}"></span>エリアの飲食店</h3>
+            </div>
+            <div class="restaurant" th:each="restaurant : ${wardAreaShowResponse.restaurantModelList}">
+                <h5 class="restaurant-title" th:text="${restaurant.name}"></h5>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img th:src="@{data:{mimeType};base64,{image}(image=${restaurant.image},mimeType=${restaurant.mimeType})}"  class="img-fluid rounded">
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="restaurant-introduction">
+                            <h6>＜お店の紹介＞</h6>
+                            <p th:text="${restaurant.introduction}"></p>
+                        </div>
+                        <div class="restaurant-menu-list">
+                            <h6>＜人気メニュー＞</h6>
+                            <ul th:each="menu : ${restaurant.menuModelList}">
+                                <li th:text="${menu.name}"></li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-sm-9"></div>
+                                <div class="col-sm-3">
+                                    <a th:href="@{/restaurants/{restaurantId}(restaurantId=${restaurant.id})}">お店の詳細を見る</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="~{client/footer :: copy}"></div>
+</body>
+</html>

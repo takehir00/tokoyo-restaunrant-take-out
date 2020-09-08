@@ -2,6 +2,7 @@ package com.example.tokyorestauranttakeout.repositories;
 
 import com.example.tokyorestauranttakeout.entity.CustomMenu;
 import com.example.tokyorestauranttakeout.entity.MenuExample;
+import com.example.tokyorestauranttakeout.entity.MenuExample.Criteria;
 import com.example.tokyorestauranttakeout.mapper.CustomMenuMapper;
 import com.example.tokyorestauranttakeout.mapper.MenuMapper;
 import com.example.tokyorestauranttakeout.entity.Menu;
@@ -29,6 +30,18 @@ public class MenuRepository {
      */
     public List<CustomMenu> selectAllWithRestaurant() {
         return customMenuMapper.select();
+    }
+
+    /**
+     * 店舗IDで取得
+     * @param restaurantId
+     * @return
+     */
+    public List<Menu> selectByRestaurantId(Integer restaurantId) {
+        MenuExample example = new MenuExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andRestaurantIdEqualTo(restaurantId);
+        return menuMapper.selectByExampleWithBLOBs(example);
     }
 
     /**

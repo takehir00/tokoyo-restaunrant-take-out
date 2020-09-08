@@ -1,13 +1,15 @@
-package com.example.tokyorestauranttakeout.admin.models.restaurants;
+package com.example.tokyorestauranttakeout.client.models.restaurants;
 
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
+
 @Data
-public class AdminRestaurantShowModel {
+public class RestaurantShowModel {
     /** ID */
     public Integer id;
-    /** 区名 */
+    /** 店名 */
     public String name;
     /** 住所 */
     public String address;
@@ -31,4 +33,6 @@ public class AdminRestaurantShowModel {
     public Date createdAt;
     /** 更新日時 */
     public Date updatedAt;
+    /** メニューリスト */
+    List<RestaurantMenuModel> menuModelList;
 }

@@ -35,6 +35,8 @@
                     <dd th:text="${showResponse.showModel.toTime}"></dd>
                     <dt>所属区名</dt>
                     <dd th:text="${showResponse.showModel.wardName}"></dd>
+                    <dt>区内エリア名</dt>
+                    <dd th:text="${showResponse.showModel.wardAreaName}"></dd>
                     <dt>店舗画像</dt>
                     <dd>
                         <img th:src="@{data:{mimeType};base64,{image}(image=${showResponse.showModel.image},mimeType=${showResponse.showModel.mimeType})}" class="img-fluid rounded">

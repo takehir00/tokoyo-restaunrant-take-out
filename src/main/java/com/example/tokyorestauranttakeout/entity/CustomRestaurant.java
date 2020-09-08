@@ -26,6 +26,10 @@ public class CustomRestaurant {
 
     private String wardName;
 
+    private Integer wardAreaId;
+
+    private String wardAreaName;
+
     private Date createdAt;
 
     private Date updatedAt;
@@ -112,12 +116,28 @@ public class CustomRestaurant {
         this.wardId = wardId;
     }
 
+    public void setWardName(String wardName) {
+        this.wardName = wardName;
+    }
+
     public String getWardName() {
         return wardName;
     }
 
-    public void setWardName(String wardName) {
-        this.wardName = wardName;
+    public Integer getWardAreaId() {
+        return wardAreaId;
+    }
+
+    public void setWardAreaId(Integer wardAreaId) {
+        this.wardAreaId = wardAreaId;
+    }
+
+    public String getWardAreaName() {
+        return wardAreaName;
+    }
+
+    public void setWardAreaName(String wardAreaName) {
+        this.wardAreaName = wardAreaName;
     }
 
     public Date getCreatedAt() {
