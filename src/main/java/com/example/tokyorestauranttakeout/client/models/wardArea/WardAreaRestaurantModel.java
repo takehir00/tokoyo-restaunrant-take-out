@@ -7,6 +7,8 @@ import java.util.List;
 
 @Data
 public class WardAreaRestaurantModel {
+    /** 店舗ID */
+    public Integer id;
     /** 店舗名*/
     public String name;
     /** 店舗紹介 */

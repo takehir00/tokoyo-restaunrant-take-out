@@ -41,7 +41,7 @@ public class MenuRepository {
         MenuExample example = new MenuExample();
         Criteria criteria = example.createCriteria();
         criteria.andRestaurantIdEqualTo(restaurantId);
-        return menuMapper.selectByExample(example);
+        return menuMapper.selectByExampleWithBLOBs(example);
     }
 
     /**
