@@ -18,7 +18,7 @@ public class UserDaoRealm implements UserDetailsService {
 
     @Autowired
     AccountRepository accountRepository;
-    
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<GrantedAuthority> authorityList = new ArrayList<>();

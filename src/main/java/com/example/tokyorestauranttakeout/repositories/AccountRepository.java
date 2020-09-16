@@ -33,4 +33,46 @@ public class AccountRepository {
         //アカウント名は一意なので１件目を取得
         return accountList.get(0);
     }
+
+    /**
+     * 登録
+     * @param account
+     */
+    public void create(Account account) {
+        accountMapper.insert(account);
+    }
+
+    /**
+     * 全件取得
+     * @return
+     */
+    public List<Account> selectAll() {
+        AccountExample example = new AccountExample();
+        return accountMapper.selectByExample(example);
+    }
+
+    /**
+     * IDで取得
+     * @param accountId
+     * @return
+     */
+    public Account selectById(Integer accountId) {
+        return accountMapper.selectByPrimaryKey(accountId);
+    }
+
+    /**
+     * 更新
+     * @param account
+     */
+    public void update(Account account) {
+        accountMapper.updateByPrimaryKey(account);
+    }
+
+    /**
+     * 削除
+     * @param id
+     */
+    public void delete(Integer id) {
+       accountMapper.deleteByPrimaryKey(id);
+    }
 }

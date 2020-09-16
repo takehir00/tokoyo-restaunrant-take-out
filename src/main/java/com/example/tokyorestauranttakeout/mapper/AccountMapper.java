@@ -3,6 +3,8 @@ package com.example.tokyorestauranttakeout.mapper;
 import com.example.tokyorestauranttakeout.entity.Account;
 import com.example.tokyorestauranttakeout.entity.AccountExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper

@@ -53,7 +53,7 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        String[] permittedUrls = {"/css/**", "/webjars/bootstrap/4.3.1/css/bootstrap.css", "/user/registerForm", "/signUp"};
+        String[] permittedUrls = {"/css/**","/**", "/webjars/bootstrap/4.3.1/css/bootstrap.css", "/user/registerForm", "/signUp"};
 
         //認証がかからないエンドポイントを明示する。それ以外にはかかるようにする
         httpSecurity.authorizeRequests()
@@ -73,7 +73,7 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 //ログイン失敗時の遷移先
                 .failureForwardUrl("/failure")
                 //ログインidのパラメータ名
-                .usernameParameter("mail")
+                .usernameParameter("name")
                 //パスワードのパラメータ名
                 .passwordParameter("password").permitAll();
 
