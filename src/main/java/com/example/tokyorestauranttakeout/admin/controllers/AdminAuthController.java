@@ -1,4 +1,4 @@
-package com.example.tokyorestauranttakeout.controller;
+package com.example.tokyorestauranttakeout.admin.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class AuthController {
+public class AdminAuthController {
     /**
      * ログイン画面
      *
@@ -15,7 +15,7 @@ public class AuthController {
      */
     @GetMapping(value = "login")
     public ModelAndView loginForm(ModelAndView mav) {
-        mav.setViewName("/users/loginForm");
+        mav.setViewName("/admin/auth/loginForm");
         return mav;
     }
 
@@ -38,7 +38,7 @@ public class AuthController {
      */
     @PostMapping("success")
     public String loginSuccess() {
-        return "redirect:/?page=1";
+        return "redirect:/admin";
     }
 
     /**
@@ -59,7 +59,7 @@ public class AuthController {
      */
     @GetMapping("logout")
     public ModelAndView logoutForm(ModelAndView mav) {
-        mav.setViewName("users/logoutForm");
+        mav.setViewName("/admin/auth/logoutForm");
         return mav;
     }
 }

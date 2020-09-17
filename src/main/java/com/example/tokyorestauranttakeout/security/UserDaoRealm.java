@@ -20,11 +20,11 @@ public class UserDaoRealm implements UserDetailsService {
     AccountRepository accountRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("USER"));
 
-        Account account = accountRepository.selectByName(username);
+        Account account = accountRepository.selectByName(name);
 
         return new LoginUser(account.getName(), account.getPassword(), authorityList);
     }

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -53,7 +54,7 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        String[] permittedUrls = {"/css/**","/**", "/webjars/bootstrap/4.3.1/css/bootstrap.css", "/user/registerForm", "/signUp"};
+        String[] permittedUrls = {"/css/**", "/webjars/bootstrap/4.3.1/css/bootstrap.css", "/user/registerForm", "/signUp"};
 
         //認証がかからないエンドポイントを明示する。それ以外にはかかるようにする
         httpSecurity.authorizeRequests()
@@ -90,4 +91,5 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true).permitAll();
 
     }
+
 }
