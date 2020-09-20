@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
 @Controller
-public class AdminRestaurantsController {
+public class AdminRestaurantsController extends AdminControllerBase {
 
     @Autowired
     AdminRestaurantsService adminRestaurantsService;
@@ -31,6 +31,7 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("restaurantIndexResponse",
                 adminRestaurantsService.getIndexResponse());
         mav.setViewName("admin/restaurants/index");
@@ -45,6 +46,7 @@ public class AdminRestaurantsController {
     @GetMapping("/admin/restaurants/{restaurantId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer restaurantId) {
+        mav.addObject("account", getAccount());
         mav.addObject("showResponse",
                 adminRestaurantsService.getShowResponse(restaurantId));
 
@@ -59,6 +61,7 @@ public class AdminRestaurantsController {
      */
     @GetMapping("/admin/restaurants/register")
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("registerFormResponse", adminRestaurantsService.getCreateFormResponse());
         mav.setViewName("admin/restaurants/registerForm");
         return mav;
@@ -90,6 +93,7 @@ public class AdminRestaurantsController {
     @GetMapping("/admin/restaurants/update/{restaurantId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer restaurantId) {
+        mav.addObject("account", getAccount());
         adminRestaurantsService.getUpdateFormResponse(restaurantId);
         mav.addObject("updateFormResponse",
                 adminRestaurantsService.getUpdateFormResponse(restaurantId));
@@ -123,6 +127,7 @@ public class AdminRestaurantsController {
     @GetMapping("/admin/restaurants/delete/{restaurantId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer restaurantId) {
+        mav.addObject("account", getAccount());
         mav.addObject("deleteFormResponse",adminRestaurantsService.getDeleteFormResponse(restaurantId));
         mav.setViewName("admin/restaurants/deleteForm");
         return mav;

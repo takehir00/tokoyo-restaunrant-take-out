@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
 @Controller
-public class AdminWardAreasController {
+public class AdminWardAreasController extends AdminControllerBase {
     @Autowired
     AdminWardAreaService adminWardAreaService;
 
@@ -34,6 +34,7 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("wardAreaIndexResponse", adminWardAreaService.getIndexResponse());
         mav.setViewName("admin/ward-areas/index");
         return mav;
@@ -47,6 +48,7 @@ public class AdminWardAreasController {
     @GetMapping("/admin/ward-areas/{wardAreaId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer wardAreaId) {
+        mav.addObject("account", getAccount());
         AdminWardAreaShowResponse m = adminWardAreaService.getShowResponse(wardAreaId);
         mav.addObject("wardAreaShowResponse",
                 adminWardAreaService.getShowResponse(wardAreaId));
@@ -61,6 +63,7 @@ public class AdminWardAreasController {
      */
     @GetMapping("/admin/ward-areas/register")
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("createFormResponse", adminWardAreaService.getCreateFormResponse());
         mav.setViewName("admin/ward-areas/registerForm");
         return mav;
@@ -85,6 +88,7 @@ public class AdminWardAreasController {
     @GetMapping("/admin/ward-areas/update/{wardAreaId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer wardAreaId) {
+        mav.addObject("account", getAccount());
         mav.addObject("updateFormResponse", adminWardAreaService.getUpdateForm(wardAreaId));
         mav.setViewName("admin/ward-areas/updateForm");
         return mav;
@@ -115,7 +119,7 @@ public class AdminWardAreasController {
     @GetMapping("/admin/ward-areas/delete/{wardAreaId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer wardAreaId) {
-
+        mav.addObject("account", getAccount());
         mav.addObject("deleteFormResponse",adminWardAreaService.getDeleteFormResponse(wardAreaId));
         mav.setViewName("admin/ward-areas/deleteForm");
         return mav;

@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
 @Controller
-public class AdminQuestionsController {
+public class AdminQuestionsController extends AdminControllerBase {
 
     @Autowired
     AdminQuestionService adminQuestionService;
@@ -32,6 +32,7 @@ public class AdminQuestionsController {
      */
     @GetMapping("/admin/questions")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("questionIndexResponse", adminQuestionService.getIndexResponse());
         mav.setViewName("admin/questions/index");
         return mav;
@@ -45,6 +46,7 @@ public class AdminQuestionsController {
     @GetMapping("/admin/questions/{questionId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer questionId) {
+        mav.addObject("account", getAccount());
         mav.addObject("showResponse",
                 adminQuestionService.getShowResponse(questionId));
         mav.setViewName("admin/questions/show");
@@ -58,6 +60,7 @@ public class AdminQuestionsController {
      */
     @GetMapping("/admin/questions/register")
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.setViewName("admin/questions/registerForm");
         return mav;
     }
@@ -88,6 +91,7 @@ public class AdminQuestionsController {
     @GetMapping("/admin/questions/update/{questionId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer questionId) {
+        mav.addObject("account", getAccount());
         mav.addObject("updateFormResponse",
                 adminQuestionService.getUpdateFormResponse(questionId));
         mav.setViewName("admin/questions/updateForm");
@@ -120,6 +124,7 @@ public class AdminQuestionsController {
     @GetMapping("/admin/questions/delete/{questionId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer questionId) {
+        mav.addObject("account", getAccount());
         mav.addObject("deleteFormResponse",
                 adminQuestionService.getDeleteFormResponse(questionId));
         mav.setViewName("admin/questions/deleteForm");

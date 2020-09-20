@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
 @Controller
-public class AdminAccountController {
+public class AdminAccountController extends AdminControllerBase {
     
     @Autowired
     AdminAccountService adminAccountService;
@@ -33,6 +33,7 @@ public class AdminAccountController {
      */
     @GetMapping("/admin/accounts")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("accountIndexResponse", adminAccountService.getIndexResponse());
         mav.setViewName("admin/accounts/index");
         return mav;
@@ -46,6 +47,7 @@ public class AdminAccountController {
     @GetMapping("/admin/accounts/{accountId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer accountId) {
+        mav.addObject("account", getAccount());
         mav.addObject("showResponse",
                 adminAccountService.getShowResponse(accountId));
         mav.setViewName("admin/accounts/show");
@@ -59,6 +61,7 @@ public class AdminAccountController {
      */
     @GetMapping("/admin/accounts/register")
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.setViewName("admin/accounts/registerForm");
         return mav;
     }
@@ -89,6 +92,7 @@ public class AdminAccountController {
     @GetMapping("/admin/accounts/update/{accountId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer accountId) {
+        mav.addObject("account", getAccount());
         mav.addObject("updateFormResponse",
                 adminAccountService.getUpdateFormResponse(accountId));
         mav.setViewName("admin/accounts/updateForm");
@@ -121,6 +125,7 @@ public class AdminAccountController {
     @GetMapping("/admin/accounts/delete/{accountId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer accountId) {
+        mav.addObject("account", getAccount());
         mav.addObject("deleteFormResponse",
                 adminAccountService.getDeleteFormResponse(accountId));
         mav.setViewName("admin/accounts/deleteForm");

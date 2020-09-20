@@ -19,7 +19,7 @@ import java.io.IOException;
 
 
 @Controller
-public class AdminMenusController {
+public class AdminMenusController extends AdminControllerBase  {
     @Autowired
     AdminMenuService adminMenuService;
 
@@ -30,6 +30,7 @@ public class AdminMenusController {
      */
     @GetMapping("/admin/menus")
     public ModelAndView index(ModelAndView mav) throws IOException {
+        mav.addObject("account", getAccount());
         mav.addObject("menuIndexResponse",
                 adminMenuService.getIndexResponse());
         mav.setViewName("admin/menus/index");
@@ -44,6 +45,7 @@ public class AdminMenusController {
     @GetMapping("/admin/menus/{menuId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer menuId) {
+        mav.addObject("account", getAccount());
         mav.addObject("showResponse",
                 adminMenuService.getShowResponse(menuId));
 
@@ -58,6 +60,7 @@ public class AdminMenusController {
      */
     @GetMapping("/admin/menus/register")
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("registerFormResponse", adminMenuService.getRegisterFormResponse());
         mav.setViewName("admin/menus/registerForm");
         return mav;
@@ -89,6 +92,7 @@ public class AdminMenusController {
     @GetMapping("/admin/menus/update/{menuId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer menuId) {
+        mav.addObject("account", getAccount());
         mav.addObject("updateFormResponse",adminMenuService.getUpdateFormResponse(menuId));
         mav.setViewName("admin/menus/updateForm");
         return mav;
@@ -119,6 +123,7 @@ public class AdminMenusController {
     @GetMapping("/admin/menus/delete/{menuId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer menuId) {
+        mav.addObject("account", getAccount());
         mav.addObject("deleteFormResponse",
                 adminMenuService.getDeleteFormResponse(menuId));
         mav.setViewName("admin/menus/deleteForm");

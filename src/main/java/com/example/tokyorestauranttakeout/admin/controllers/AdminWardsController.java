@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
 @Controller
-public class AdminWardsController {
+public class AdminWardsController extends AdminControllerBase {
 
     @Autowired
     AdminWardService adminWardService;
@@ -31,6 +31,7 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards")
     public ModelAndView index(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.addObject("wardIndexResponse", adminWardService.getIndexResponse());
         mav.setViewName("admin/wards/index");
         return mav;
@@ -44,6 +45,7 @@ public class AdminWardsController {
     @GetMapping("/admin/wards/{wardId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer wardId) {
+        mav.addObject("account", getAccount());
         mav.addObject("ward", adminWardService.getShowResponse(wardId));
         mav.setViewName("admin/wards/show");
         return mav;
@@ -56,6 +58,7 @@ public class AdminWardsController {
      */
     @GetMapping("/admin/wards/register")
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.addObject("account", getAccount());
         mav.setViewName("admin/wards/registerForm");
         return mav;
     }
@@ -86,6 +89,7 @@ public class AdminWardsController {
     @GetMapping("/admin/wards/update/{wardId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer wardId) {
+        mav.addObject("account", getAccount());
         mav.addObject("wardUpdateForm", adminWardService.getUpdateForm(wardId));
         mav.setViewName("admin/wards/updateForm");
         return mav;
@@ -110,15 +114,14 @@ public class AdminWardsController {
     @GetMapping("/admin/wards/delete/{wardId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer wardId) {
-        AdminWardDeleteResponse adminWardDeleteResponse =
-                adminWardService.getDeleteFormResponse(wardId);
+        mav.addObject("account", getAccount());
         mav.addObject("deleteFormResponse",adminWardService.getDeleteFormResponse(wardId));
         mav.setViewName("admin/wards/deleteForm");
         return mav;
     }
 
     /**
-     * 削除画面表示
+     * 削除画面
      * @return
      */
     @PostMapping("/admin/wards/delete")
