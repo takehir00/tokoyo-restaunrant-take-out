@@ -54,7 +54,7 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        String[] permittedUrls = {"/css/**", "/webjars/bootstrap/4.3.1/css/bootstrap.css", "/user/registerForm", "/signUp"};
+        String[] permittedUrls = {"/css/**","/images/**", "/webjars/bootstrap/4.3.1/css/bootstrap.css", "/client/**"};
 
         //認証がかからないエンドポイントを明示する。それ以外にはかかるようにする
         httpSecurity.authorizeRequests()

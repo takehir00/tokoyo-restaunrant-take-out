@@ -18,7 +18,7 @@ public class WardAreasController {
      * @param mav
      * @return
      */
-    @GetMapping("/")
+    @GetMapping("/client")
     public ModelAndView index(ModelAndView mav) {
         mav.addObject("wardAreaIndexResponse", wardAreaService.getIndexResponse());
         mav.setViewName("client/wardAreas/index");
@@ -30,7 +30,7 @@ public class WardAreasController {
      * @param mav
      * @return
      */
-    @GetMapping("/wardarea/{wardAreaId}")
+    @GetMapping("/client/wardarea/{wardAreaId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer wardAreaId) {
         mav.addObject("wardAreaShowResponse", wardAreaService.getShowResponse(wardAreaId));

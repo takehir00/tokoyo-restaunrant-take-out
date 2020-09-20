@@ -25,7 +25,7 @@ public class QuestionsController {
      * @param mav
      * @return
      */
-    @GetMapping("/questions")
+    @GetMapping("/client/questions")
     public ModelAndView index(ModelAndView mav) {
         mav.setViewName("client/questions/index");
         return mav;
@@ -40,7 +40,7 @@ public class QuestionsController {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/questions/register")
+    @PostMapping("/client/questions/register")
     public String register(
             @ModelAttribute("registerForm") QuestionRegisterForm registerForm,
             BindingResult bindingResult,
