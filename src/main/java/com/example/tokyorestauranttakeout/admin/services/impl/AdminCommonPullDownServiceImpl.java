@@ -1,7 +1,9 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
+import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardAreaModel;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.services.AdminCommonPullDownService;
+import com.example.tokyorestauranttakeout.repositories.WardAreaRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 public class AdminCommonPullDownServiceImpl implements AdminCommonPullDownService {
     @Autowired
     WardRepository wardRepository;
+    @Autowired
+    WardAreaRepository wardAreaRepository;
 
     @Override
     public List<PullDownFormWardModel> getWardList() {
@@ -22,6 +26,17 @@ public class AdminCommonPullDownServiceImpl implements AdminCommonPullDownServic
                     wardModel.id = ward.getId();
                     wardModel.name = ward.getName();
                     return wardModel;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PullDownFormWardAreaModel> getWardAreaList() {
+        return wardAreaRepository.selectAll().stream()
+                .map(wardArea -> {
+                    PullDownFormWardAreaModel pullDownFormWardAreaModel = new PullDownFormWardAreaModel();
+                    pullDownFormWardAreaModel.id = wardArea.getId();
+                    pullDownFormWardAreaModel.name = wardArea.getName();
+                    return pullDownFormWardAreaModel;
                 }).collect(Collectors.toList());
     }
 }

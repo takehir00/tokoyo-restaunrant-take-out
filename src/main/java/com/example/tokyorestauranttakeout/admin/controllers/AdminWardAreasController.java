@@ -1,6 +1,5 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
-import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.AdminWardAreaDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
@@ -113,7 +112,6 @@ public class AdminWardAreasController extends AdminControllerBase {
                         (WardAreaUpdateForm) modelMap.get("wardAreaUpdateForm")));
         mav.addObject("org.springframework.validation.BindingResult.wardAreaUpdateForm", modelMap.get("bindingResult"));
         mav.addObject("pullDownWardList", adminCommonPullDownService.getWardList());
-
         mav.setViewName("admin/ward-areas/updateForm");
         return mav;
     }

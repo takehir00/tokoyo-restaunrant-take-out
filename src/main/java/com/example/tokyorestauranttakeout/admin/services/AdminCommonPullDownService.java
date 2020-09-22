@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
+import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardAreaModel;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 
 import java.util.List;
@@ -10,4 +11,10 @@ public interface AdminCommonPullDownService {
      * @return
      */
     List<PullDownFormWardModel> getWardList();
+
+    /**
+     * プルダウン用区内エリアリストの取得
+     * @return
+     */
+    List<PullDownFormWardAreaModel> getWardAreaList();
 }

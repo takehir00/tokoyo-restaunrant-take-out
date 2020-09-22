@@ -7,13 +7,10 @@ import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardAr
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.restaurants.AdminRestaurantShowModel;
-import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
 import com.example.tokyorestauranttakeout.admin.responses.restaurants.*;
 import com.example.tokyorestauranttakeout.admin.services.AdminRestaurantsService;
 import com.example.tokyorestauranttakeout.entity.CustomRestaurant;
-import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.Restaurant;
-import com.example.tokyorestauranttakeout.entity.WardArea;
 import com.example.tokyorestauranttakeout.repositories.RestaurantRepository;
 import com.example.tokyorestauranttakeout.repositories.WardAreaRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
@@ -124,33 +121,18 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
     }
 
     @Override
-    public AdminRestaurantsUpdateFormResponse getUpdateFormResponse(Integer restaurantId) {
-        AdminRestaurantsUpdateFormResponse response = new AdminRestaurantsUpdateFormResponse();
-
+    public AdminRestaurantUpdateForm getUpdateForm(Integer restaurantId, AdminRestaurantUpdateForm restaurantUpdateFormRequest) {
         AdminRestaurantUpdateForm updateForm = new AdminRestaurantUpdateForm();
 
-        Restaurant restaurant = restaurantRepository.selectById(restaurantId);
-        BeanUtils.copyProperties(restaurant,updateForm);
-        updateForm.imageConvertedByBase64 = restaurant.getImage();
-        response.updateForm = updateForm;
+        if (restaurantUpdateFormRequest != null) {
+            updateForm = restaurantUpdateFormRequest;
+        } else {
+            Restaurant restaurant = restaurantRepository.selectById(restaurantId);
+            BeanUtils.copyProperties(restaurant,updateForm);
+            updateForm.imageConvertedByBase64 = restaurant.getImage();
+        }
 
-        response.wardList = wardRepository.selectAll().stream()
-                .map(ward -> {
-                    PullDownFormWardModel wardModel = new PullDownFormWardModel();
-                    wardModel.id = ward.getId();
-                    wardModel.name = ward.getName();
-                    return wardModel;
-                }).collect(Collectors.toList());
-
-        response.wardAreaList =
-                wardAreaRepository.selectByWardId(restaurant.getWardId()).stream()
-                        .map(wardArea -> {
-                            PullDownFormWardAreaModel pullDownFormWardAreaModel = new PullDownFormWardAreaModel();
-                            pullDownFormWardAreaModel.id = wardArea.getId();
-                            pullDownFormWardAreaModel.name = wardArea.getName();
-                            return pullDownFormWardAreaModel;
-                        }).collect(Collectors.toList());
-        return response;
+        return updateForm;
     }
 
     @Override

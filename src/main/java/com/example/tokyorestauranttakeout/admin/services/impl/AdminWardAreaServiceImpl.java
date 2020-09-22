@@ -99,22 +99,19 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
 
     @Override
     public WardAreaUpdateForm getUpdateForm(Integer wardAreaId, WardAreaUpdateForm updateFormRequest) {
-        WardAreaUpdateForm response;
+        WardAreaUpdateForm updateForm = new WardAreaUpdateForm();
 
         if (updateFormRequest != null) {
-            response = updateFormRequest;
+            updateForm = updateFormRequest;
         } else {
-            WardAreaUpdateForm updateForm = new WardAreaUpdateForm();
             WardArea wardArea = wardAreaRepository.selectById(wardAreaId);
             updateForm.id = wardArea.getId();
             updateForm.name = wardArea.getName();
             updateForm.wardId = wardArea.getWardId();
             updateForm.imageConvertedByBase64 = wardArea.getImage();
             updateForm.mimeType = wardArea.getMimeType();
-            response = updateForm;
         }
-
-        return response;
+        return updateForm;
     }
 
     @Override
