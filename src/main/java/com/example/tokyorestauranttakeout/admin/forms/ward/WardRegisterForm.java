@@ -3,25 +3,14 @@ package com.example.tokyorestauranttakeout.admin.forms.ward;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 @Data
 public class WardRegisterForm {
 
+    @NotEmpty(message = "入力してください")
+    @Size(max = 100, message = "100文字以下で入力してください")
     public String name;
     public MultipartFile image;
-
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(String image) {
-//        this.image = image;
-//    }
 }

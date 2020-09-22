@@ -4,15 +4,14 @@ import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.AdminWardAreaDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.wardArea.WardAreaUpdateForm;
-import com.example.tokyorestauranttakeout.admin.models.wardArea.AdminWardAreaIndexModel;
-import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaIndexResponse;
-import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaShowResponse;
-import com.example.tokyorestauranttakeout.admin.responses.wardArea.AdminWardAreaUpdateFormResponse;
+import com.example.tokyorestauranttakeout.admin.services.AdminCommonPullDownService;
 import com.example.tokyorestauranttakeout.admin.services.AdminWardAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +25,9 @@ import java.io.IOException;
 public class AdminWardAreasController extends AdminControllerBase {
     @Autowired
     AdminWardAreaService adminWardAreaService;
+
+    @Autowired
+    AdminCommonPullDownService adminCommonPullDownService;
 
     /**
      * トップ画面表示
@@ -49,7 +51,6 @@ public class AdminWardAreasController extends AdminControllerBase {
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer wardAreaId) {
         mav.addObject("account", getAccount());
-        AdminWardAreaShowResponse m = adminWardAreaService.getShowResponse(wardAreaId);
         mav.addObject("wardAreaShowResponse",
                 adminWardAreaService.getShowResponse(wardAreaId));
         mav.setViewName("admin/ward-areas/show");
@@ -62,9 +63,18 @@ public class AdminWardAreasController extends AdminControllerBase {
      * @return
      */
     @GetMapping("/admin/ward-areas/register")
-    public ModelAndView registerForm(ModelAndView mav) {
+    public ModelAndView registerForm(
+            ModelAndView mav,
+            @ModelAttribute("modelMap") ModelMap modelMap) {
+        WardAreaRegisterForm wardAreaRegisterForm = new WardAreaRegisterForm();
+        if (modelMap.get("wardAreaRegisterForm") != null) {
+            wardAreaRegisterForm = (WardAreaRegisterForm) modelMap.get("wardRegisterForm");
+        }
         mav.addObject("account", getAccount());
-        mav.addObject("createFormResponse", adminWardAreaService.getCreateFormResponse());
+        mav.addObject("wardAreaRegisterForm", wardAreaRegisterForm);
+        mav.addObject("org.springframework.validation.BindingResult.wardAreaRegisterForm", modelMap.get("bindingResult"));
+        mav.addObject("createFormResponse",
+                adminWardAreaService.getCreateFormResponse());
         mav.setViewName("admin/ward-areas/registerForm");
         return mav;
     }
@@ -73,9 +83,16 @@ public class AdminWardAreasController extends AdminControllerBase {
     @Transactional
     @PostMapping("/admin/ward-areas/register")
     public String register(
-            @ModelAttribute("wardAreaRegisterForm") WardAreaRegisterForm wardAreaRegisterForm,
+            @Validated @ModelAttribute("wardAreaRegisterForm") WardAreaRegisterForm wardAreaRegisterForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("wardAreaRegisterForm",wardAreaRegisterForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/admin/ward-areas/register";
+        }
         adminWardAreaService.create(wardAreaRegisterForm);
         return "redirect:/admin/ward-areas";
     }
@@ -87,9 +104,16 @@ public class AdminWardAreasController extends AdminControllerBase {
      */
     @GetMapping("/admin/ward-areas/update/{wardAreaId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Integer wardAreaId) {
+                                   @PathVariable Integer wardAreaId,
+                                   @ModelAttribute("modelMap") ModelMap modelMap) {
         mav.addObject("account", getAccount());
-        mav.addObject("updateFormResponse", adminWardAreaService.getUpdateForm(wardAreaId));
+        mav.addObject("wardAreaUpdateForm",
+                adminWardAreaService.getUpdateForm(
+                        wardAreaId,
+                        (WardAreaUpdateForm) modelMap.get("wardAreaUpdateForm")));
+        mav.addObject("org.springframework.validation.BindingResult.wardAreaUpdateForm", modelMap.get("bindingResult"));
+        mav.addObject("pullDownWardList", adminCommonPullDownService.getWardList());
+
         mav.setViewName("admin/ward-areas/updateForm");
         return mav;
     }
@@ -104,9 +128,16 @@ public class AdminWardAreasController extends AdminControllerBase {
     @Transactional
     @PostMapping("/admin/ward-areas/update")
     public String update(
-            @ModelAttribute("wardAreaUpdateForm") WardAreaUpdateForm wardAreaUpdateForm,
+            @Validated @ModelAttribute("wardAreaUpdateForm") WardAreaUpdateForm wardAreaUpdateForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("wardAreaUpdateForm",wardAreaUpdateForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/admin/ward-areas/update/" + wardAreaUpdateForm.getId();
+        }
         adminWardAreaService.update(wardAreaUpdateForm);
         return "redirect:/admin/ward-areas";
     }
@@ -120,7 +151,8 @@ public class AdminWardAreasController extends AdminControllerBase {
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer wardAreaId) {
         mav.addObject("account", getAccount());
-        mav.addObject("deleteFormResponse",adminWardAreaService.getDeleteFormResponse(wardAreaId));
+        mav.addObject("deleteFormResponse",
+                adminWardAreaService.getDeleteFormResponse(wardAreaId));
         mav.setViewName("admin/ward-areas/deleteForm");
         return mav;
     }

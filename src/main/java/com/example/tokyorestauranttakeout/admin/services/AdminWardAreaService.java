@@ -37,9 +37,10 @@ public interface AdminWardAreaService {
     /**
      * 更新フォーム取得
      * @param wardAreaId
+     * @param updateFormRequest
      * @return
      */
-    AdminWardAreaUpdateFormResponse getUpdateForm(Integer wardAreaId);
+    WardAreaUpdateForm getUpdateForm(Integer wardAreaId, WardAreaUpdateForm updateFormRequest);
 
     /**
      * 更新

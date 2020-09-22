@@ -8,7 +8,10 @@ import com.example.tokyorestauranttakeout.admin.services.AdminWardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,8 +60,18 @@ public class AdminWardsController extends AdminControllerBase {
      * @return
      */
     @GetMapping("/admin/wards/register")
-    public ModelAndView registerForm(ModelAndView mav) {
+    public ModelAndView registerForm(
+            ModelAndView mav,
+            @ModelAttribute("modelMap") ModelMap modelMap) {
+
+        WardRegisterForm wardRegisterForm = new WardRegisterForm();
+        if (modelMap.get("wardRegisterForm") != null) {
+            wardRegisterForm = (WardRegisterForm) modelMap.get("wardRegisterForm");
+        }
+        mav.addObject("wardRegisterForm", wardRegisterForm);
+        mav.addObject("org.springframework.validation.BindingResult.wardRegisterForm", modelMap.get("bindingResult"));
         mav.addObject("account", getAccount());
+
         mav.setViewName("admin/wards/registerForm");
         return mav;
     }
@@ -73,9 +86,16 @@ public class AdminWardsController extends AdminControllerBase {
     @Transactional
     @PostMapping("/admin/wards/register")
     public String register(
-            @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
+            @Validated @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("wardRegisterForm",wardRegisterForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/admin/wards/register";
+        }
         adminWardService.create(wardRegisterForm);
         return "redirect:/admin/wards";
     }
@@ -88,9 +108,16 @@ public class AdminWardsController extends AdminControllerBase {
      */
     @GetMapping("/admin/wards/update/{wardId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Integer wardId) {
+                                   @PathVariable Integer wardId,
+                                   @ModelAttribute("modelMap") ModelMap modelMap) {
         mav.addObject("account", getAccount());
-        mav.addObject("wardUpdateForm", adminWardService.getUpdateForm(wardId));
+        if (modelMap.get("wardUpdateForm") == null) {
+            mav.addObject("wardUpdateForm", adminWardService.getUpdateForm(wardId));
+        } else {
+            mav.addObject("wardUpdateForm", modelMap.get("wardUpdateForm"));
+        }
+        mav.addObject("org.springframework.validation.BindingResult.wardUpdateForm", modelMap.get("bindingResult"));
+
         mav.setViewName("admin/wards/updateForm");
         return mav;
     }
@@ -101,7 +128,17 @@ public class AdminWardsController extends AdminControllerBase {
      */
     @Transactional
     @PostMapping("/admin/wards/update")
-    public String update(@ModelAttribute("wardUpdateForm") WardUpdateForm wardUpdateForm) {
+    public String update(
+            @Validated @ModelAttribute("wardUpdateForm") WardUpdateForm wardUpdateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("wardUpdateForm",wardUpdateForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/admin/wards/update/" + wardUpdateForm.getId();
+        }
         adminWardService.update(wardUpdateForm);
         return "redirect:/admin/wards";
     }
