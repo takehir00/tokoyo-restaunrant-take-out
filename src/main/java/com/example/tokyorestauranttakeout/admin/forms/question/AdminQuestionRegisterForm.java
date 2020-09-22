@@ -7,10 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Data
-public class AdminQuestionUpdateForm {
-    public Integer id;
 
+@Data
+public class AdminQuestionRegisterForm {
     @NotEmpty(message = "入力してください")
     @Size(max = 100, message = "100文字以下で入力してください")
     private String title;

@@ -1,15 +1,15 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
-import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateForm;
-import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantDeleteForm;
-import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.services.AdminQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,8 +59,18 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @return
      */
     @GetMapping("/admin/questions/register")
-    public ModelAndView registerForm(ModelAndView mav) {
+    public ModelAndView registerForm(
+            ModelAndView mav,
+            @ModelAttribute("modelMap") ModelMap modelMap) {
+        AdminQuestionRegisterForm registerForm = new AdminQuestionRegisterForm();
+
+        if (modelMap.get("registerForm") != null) {
+            registerForm = (AdminQuestionRegisterForm) modelMap.get("registerForm");
+        }
+
         mav.addObject("account", getAccount());
+        mav.addObject("registerForm", registerForm);
+        mav.addObject("org.springframework.validation.BindingResult.registerForm", modelMap.get("bindingResult"));
         mav.setViewName("admin/questions/registerForm");
         return mav;
     }
@@ -76,9 +86,16 @@ public class AdminQuestionsController extends AdminControllerBase {
     @Transactional
     @PostMapping("/admin/questions/register")
     public String register(
-            @ModelAttribute("registerForm") AdminQuestionCreateForm registerForm,
+            @Validated @ModelAttribute("registerForm") AdminQuestionRegisterForm registerForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("registerForm",registerForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/admin/questions/register";
+        }
         adminQuestionService.create(registerForm);
         return "redirect:/admin/questions";
     }
@@ -90,10 +107,17 @@ public class AdminQuestionsController extends AdminControllerBase {
      */
     @GetMapping("/admin/questions/update/{questionId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Integer questionId) {
+                                   @PathVariable Integer questionId,
+                                   @ModelAttribute("modelMap") ModelMap modelMap) {
+
         mav.addObject("account", getAccount());
-        mav.addObject("updateFormResponse",
-                adminQuestionService.getUpdateFormResponse(questionId));
+        mav.addObject("updateForm",
+                adminQuestionService.getUpdateForm(
+                        questionId,
+                        (AdminQuestionUpdateForm) modelMap.get("updateForm")));
+        mav.addObject(
+                "org.springframework.validation.BindingResult.updateForm",
+                modelMap.get("bindingResult"));
         mav.setViewName("admin/questions/updateForm");
         return mav;
     }
@@ -109,9 +133,16 @@ public class AdminQuestionsController extends AdminControllerBase {
     @Transactional
     @PostMapping("/admin/questions/update")
     public String update(
-            @ModelAttribute("updateForm") AdminQuestionUpdateForm updateForm,
+            @Validated @ModelAttribute("updateForm") AdminQuestionUpdateForm updateForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("updateForm",updateForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/admin/questions/update/" + updateForm.getId();
+        }
         adminQuestionService.update(updateForm);
         return "redirect:/admin/questions";
     }

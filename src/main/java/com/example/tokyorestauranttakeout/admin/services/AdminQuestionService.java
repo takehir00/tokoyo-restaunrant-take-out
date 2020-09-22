@@ -1,7 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
 
-import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionDeleteForm;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionDeleteFormResponse;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateForm;
@@ -35,14 +35,15 @@ public interface AdminQuestionService {
      * 登録
      * @param registerForm
      */
-    void create(AdminQuestionCreateForm registerForm);
+    void create(AdminQuestionRegisterForm registerForm);
 
     /**
      * 更新画面
      * @param questionId
+     * @param updateForm
      * @return
      */
-    AdminQuestionUpdateFormResponse getUpdateFormResponse(Integer questionId);
+    AdminQuestionUpdateForm getUpdateForm(Integer questionId, AdminQuestionUpdateForm updateForm);
 
     /**
      * 更新

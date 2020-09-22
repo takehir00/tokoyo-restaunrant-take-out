@@ -21,25 +21,28 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id" th:value="${updateFormResponse.updateForm.id}" readonly>
+                            <input type="text" class="form-control" id="id" name="id" th:value="${updateForm.id}" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="title">件名</label>
-                            <input type="text" class="form-control" id="title" name="title" th:value="${updateFormResponse.updateForm.title}"  placeholder="件名を入力してください">
+                            <input type="text" class="form-control" id="title" name="title" th:value="${updateForm.title}"  placeholder="件名を入力してください">
+                            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="text">本文</label>
-                            <textarea placeholder="本文を入力してください" class="form-control" id="text" name="text" th:text="${updateFormResponse.updateForm.text}"></textarea>
+                            <textarea placeholder="本文を入力してください" class="form-control" id="text" name="text" th:text="${updateForm.text}"></textarea>
+                            <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="senderMailAddress">送信者メールアドレス</label>
-                            <input type="email" class="form-control" id="senderMailAddress" name="senderMailAddress" th:value="${updateFormResponse.updateForm.senderMailAddress}"   placeholder="送信者メールアドレスを入力してください">
+                            <input type="email" class="form-control" id="senderMailAddress" name="senderMailAddress" th:value="${updateForm.senderMailAddress}" placeholder="送信者メールアドレスを入力してください">
+                            <span th:if="${#fields.hasErrors('senderMailAddress')}" th:errors="*{senderMailAddress}"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -48,14 +51,15 @@
                                 <label class="col-form-label col-sm-2">解決フラグ</label>
                                 <div class="col-sm-10">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="resolvedFlg" id="resolvedFlg" value="false" th:checked="${updateFormResponse.updateForm.resolvedFlg==false}">
+                                        <input class="form-check-input" type="radio" name="resolvedFlg" id="resolvedFlg" value="false" th:checked="${updateForm.resolvedFlg==false}">
                                         <label class="form-check-label" for="resolvedFlg">未解決</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="resolvedFlg" id="unResolvedFlg" value="true" th:checked="${updateFormResponse.updateForm.resolvedFlg==true}">
+                                        <input class="form-check-input" type="radio" name="resolvedFlg" id="unResolvedFlg" value="true" th:checked="${updateForm.resolvedFlg==true}">
                                         <label class="form-check-label" for="unResolvedFlg">解決済み</label>
                                     </div>
                                 </div>
+                                <span th:if="${#fields.hasErrors('resolvedFlg')}" th:errors="*{resolvedFlg}"></span>
                             </div>
                         </div>
                     </div>
