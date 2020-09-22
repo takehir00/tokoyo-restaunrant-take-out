@@ -1,6 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
-import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionDeleteForm;
 import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestionDeleteFormResponse;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateForm;
@@ -34,7 +34,7 @@ public class AdminQuestionServiceImpl implements AdminQuestionService {
     }
 
     @Override
-    public void create(AdminQuestionCreateForm registerForm) {
+    public void create(AdminQuestionRegisterForm registerForm) {
         Date now = new Date();
         Question question = new Question();
         BeanUtils.copyProperties(registerForm, question);
@@ -44,13 +44,16 @@ public class AdminQuestionServiceImpl implements AdminQuestionService {
     }
 
     @Override
-    public AdminQuestionUpdateFormResponse getUpdateFormResponse(Integer questionId) {
-        AdminQuestionUpdateFormResponse response = new AdminQuestionUpdateFormResponse();
-        Question question = questionRepository.selectById(questionId);
+    public AdminQuestionUpdateForm getUpdateForm(Integer questionId, AdminQuestionUpdateForm updateFormRequest) {
         AdminQuestionUpdateForm updateForm = new AdminQuestionUpdateForm();
-        BeanUtils.copyProperties(question, updateForm);
-        response.updateForm = updateForm;
-        return response;
+
+        if (updateFormRequest != null) {
+            updateForm = updateFormRequest;
+        } else {
+            Question question = questionRepository.selectById(questionId);
+            BeanUtils.copyProperties(question, updateForm);
+        }
+        return updateForm;
     }
 
     @Override

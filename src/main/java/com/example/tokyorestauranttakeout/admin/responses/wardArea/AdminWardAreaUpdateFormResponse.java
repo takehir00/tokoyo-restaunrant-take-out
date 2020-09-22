@@ -6,8 +6,6 @@ import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardMo
 import java.util.List;
 
 public class AdminWardAreaUpdateFormResponse {
-    /** プルダウン用区リスト */
-    public List<PullDownFormWardModel> wardList;
     /** 登録フォーム */
     public WardAreaUpdateForm updateForm;
 

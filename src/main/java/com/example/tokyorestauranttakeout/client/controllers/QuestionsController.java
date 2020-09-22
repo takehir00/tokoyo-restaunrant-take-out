@@ -5,7 +5,9 @@ import com.example.tokyorestauranttakeout.client.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +27,18 @@ public class QuestionsController {
      * @param mav
      * @return
      */
-    @GetMapping("/questions")
-    public ModelAndView index(ModelAndView mav) {
+    @GetMapping("/client/questions")
+    public ModelAndView index(
+            ModelAndView mav,
+            @ModelAttribute("modelMap") ModelMap modelMap) {
+
+        QuestionRegisterForm registerForm = new QuestionRegisterForm();
+        if (modelMap.get("registerForm") != null) {
+            registerForm = (QuestionRegisterForm) modelMap.get("registerForm");
+        }
+
+        mav.addObject("registerForm", registerForm);
+        mav.addObject("org.springframework.validation.BindingResult.registerForm", modelMap.get("bindingResult"));
         mav.setViewName("client/questions/index");
         return mav;
     }
@@ -40,12 +52,19 @@ public class QuestionsController {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/questions/register")
+    @PostMapping("/client/questions/register")
     public String register(
-            @ModelAttribute("registerForm") QuestionRegisterForm registerForm,
+            @Validated @ModelAttribute("registerForm") QuestionRegisterForm registerForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("registerForm",registerForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/client/questions";
+        }
         questionService.create(registerForm);
-        return "redirect:/";
+        return "redirect:/client";
     }
 }

@@ -14,26 +14,29 @@
     <h3>問い合わせ</h3>
     <div class="question">
         <div class="form">
-            <form method="post" th:action="@{'/questions/register'}" th:object="${registerForm}">
+            <form method="post" th:action="@{'/client/questions/register'}" th:object="${registerForm}">
                 <div class="row">
                     <div class="form-group col-sm-12">
                         <label for="title">問い合わせ件名</label>
-                        <input type="text" class="form-control" id="title" placeholder="件名を入力してください" name="title">
+                        <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="件名を入力してください" name="title">
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-12">
                         <label for="senderMailAddress">メールアドレス</label>
-                        <input type="email" class="form-control" id="senderMailAddress" name="senderMailAddress" placeholder="メールアドレスを入力してください">
+                        <input type="email" class="form-control" id="senderMailAddress" name="senderMailAddress" th:field="*{senderMailAddress}" placeholder="メールアドレスを入力してください">
+                        <span th:if="${#fields.hasErrors('senderMailAddress')}" th:errors="*{senderMailAddress}"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-12">
                         <label for="text">問い合わせ本文</label>
-                        <textarea placeholder="問い合わせ本文を入力してください" id="text" class="form-control" name="text"></textarea>
+                        <textarea placeholder="問い合わせ本文を入力してください" id="text" class="form-control" name="text" th:field="*{text}"></textarea>
+                        <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">送信</button>
+                <button type="submit" class="btn btn-primary mb-1">送信</button>
             </form>
         </div>
     </div>

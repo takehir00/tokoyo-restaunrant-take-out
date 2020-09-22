@@ -21,30 +21,33 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id" th:value="${updateFormResponse.updateForm.id}" readonly>
+                            <input type="text" class="form-control" id="id" name="id" th:value="${updateForm.id}" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="name">メニュー名</label>
-                            <input type="text" class="form-control" id="name" name="name" th:value="${updateFormResponse.updateForm.name}" placeholder="メニュー名を入力してください">
+                            <input type="text" class="form-control" id="name" name="name" th:value="${updateForm.name}" placeholder="メニュー名を入力してください">
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="price">価格</label>
-                            <input type="text" class="form-control" id="price" name="price" th:value="${updateFormResponse.updateForm.price}" placeholder="価格を入力してください">
+                            <input type="text" class="form-control" id="price" name="price" th:value="${updateForm.price}" placeholder="価格を入力してください">
+                            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="image">画像</label>
                             <input type="file" class="form-control-file" id="image" name="image" >
+                            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <img th:src="@{data:{mimeType};base64,{image}(image=${updateFormResponse.updateForm.imageConvertedByBase64},mimeType=${updateFormResponse.updateForm.mimeType})}" class="img-fluid rounded">
+                            <img th:src="@{data:{mimeType};base64,{image}(image=${updateForm.imageConvertedByBase64},mimeType=${updateForm.mimeType})}" class="img-fluid rounded">
                         </div>
                     </div>
                     <div class="row">
@@ -63,14 +66,16 @@
                         <div class="form-group col-sm-12">
                             <label for="restaurantId">レストラン</label>
                             <select class="form-control" id="restaurantId" name="restaurantId">
-                                <option th:each="restaurant : ${updateFormResponse.restaurantList}" th:text="${restaurant.name}" th:value="${restaurant.id}" th:selected="${restaurant.id==updateFormResponse.updateForm.restaurantId}" ></option>
+                                <option th:each="restaurant : ${pullDownRestaurantList}" th:text="${restaurant.name}" th:value="${restaurant.id}" th:selected="${restaurant.id==updateForm.restaurantId}" ></option>
                             </select>
+                            <span th:if="${#fields.hasErrors('restaurantId')}" th:errors="*{restaurantId}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="priority">優先度</label>
-                            <input type="number" class="form-control" id="priority" name="priority" th:value="${updateFormResponse.updateForm.priority}">
+                            <input type="number" class="form-control" id="priority" name="priority" th:value="${updateForm.priority}">
+                            <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">更新</button>

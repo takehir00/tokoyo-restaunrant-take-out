@@ -11,7 +11,12 @@
 <body>
     <header th:fragment="copy">
         <div class="navbar bg-dark navbar-dark">
-            <a href="/" class="text-light navbar-brand">東京飲食テイクアウト情報館管理画面</a>
+            <div class="">
+                <a href="/admin" class="text-light navbar-brand">東京飲食テイクアウト情報館管理画面</a>
+            </div>
+            <div class="">
+                <a th:if="${account != null}" href="/logout" class="flex-row-reverse mr-2 text-light">ログアウト</a>
+            </div>
         </div>
     </header>
 </body>

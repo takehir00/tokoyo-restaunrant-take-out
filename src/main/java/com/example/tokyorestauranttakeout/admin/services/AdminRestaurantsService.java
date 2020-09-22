@@ -37,8 +37,9 @@ public interface AdminRestaurantsService {
     /**
      * 更新画面レスポンス取得
      * @param restaurantId
+     * @param restaurantUpdateForm
      */
-    AdminRestaurantsUpdateFormResponse getUpdateFormResponse(Integer restaurantId);
+    AdminRestaurantUpdateForm getUpdateForm(Integer restaurantId, AdminRestaurantUpdateForm restaurantUpdateForm);
 
     /**
      * 更新

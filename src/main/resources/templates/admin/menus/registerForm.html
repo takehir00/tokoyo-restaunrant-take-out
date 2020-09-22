@@ -21,33 +21,38 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="name">メニュー名</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="メニュー名を入力してください">
+                            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="メニュー名を入力してください">
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="price">価格</label>
-                            <input type="text" class="form-control" id="price" name="price" placeholder="価格を入力してください">
+                            <input type="text" class="form-control" id="price" name="price" th:field="*{price}" placeholder="価格を入力してください">
+                            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="image">画像</label>
                             <input type="file" class="form-control-file" id="image" name="image">
+                            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="restaurantId">レストラン</label>
                             <select class="form-control" id="restaurantId" name="restaurantId">
-                                <option th:each="restaurant : ${registerFormResponse.restaurantList}" th:text="${restaurant.name}" th:value="${restaurant.id}" ></option>
+                                <option th:each="restaurant : ${pullDownRestaurantList}" th:text="${restaurant.name}" th:value="${restaurant.id}" th:selected="${restaurant.id==registerForm.restaurantId}" ></option>
                             </select>
+                            <span th:if="${#fields.hasErrors('restaurantId')}" th:errors="*{restaurantId}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="priority">優先度</label>
-                            <input type="number" class="form-control" id="priority" name="priority">
+                            <input type="number" class="form-control" id="priority" name="priority" th:field="*{priority}">
+                            <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">登録</button>

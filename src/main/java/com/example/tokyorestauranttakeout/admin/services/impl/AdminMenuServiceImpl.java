@@ -3,7 +3,6 @@ package com.example.tokyorestauranttakeout.admin.services.impl;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
-import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormRestaurantModel;
 import com.example.tokyorestauranttakeout.admin.models.menu.AdminMenuIndexModel;
 import com.example.tokyorestauranttakeout.admin.models.menu.AdminMenuShowModel;
@@ -116,26 +115,17 @@ public class AdminMenuServiceImpl implements AdminMenuService {
     }
 
     @Override
-    public AdminMenuUpdateFormResponse getUpdateFormResponse(Integer menuId) {
-        AdminMenuUpdateFormResponse response = new AdminMenuUpdateFormResponse();
-
+    public AdminMenuUpdateForm getUpdateFormResponse(Integer menuId, AdminMenuUpdateForm updateFormRequest) {
         AdminMenuUpdateForm updateForm = new AdminMenuUpdateForm();
 
-        Menu menu = menuRepository.selectById(menuId);
-        BeanUtils.copyProperties(menu,updateForm);
-        updateForm.imageConvertedByBase64 = menu.getImage();
-        response.updateForm = updateForm;
-
-        response.restaurantList =
-                restaurantRepository.selectAll().stream()
-                        .map(restaurant -> {
-                            PullDownFormRestaurantModel pullDownFormRestaurantModel = new PullDownFormRestaurantModel();
-                            pullDownFormRestaurantModel.id = restaurant.getId();
-                            pullDownFormRestaurantModel.name = restaurant.getName();
-                            return pullDownFormRestaurantModel;
-                        }).collect(Collectors.toList());
-
-        return response;
+        if (updateFormRequest != null) {
+            updateForm = updateFormRequest;
+        } else {
+            Menu menu = menuRepository.selectById(menuId);
+            BeanUtils.copyProperties(menu,updateForm);
+            updateForm.imageConvertedByBase64 = menu.getImage();
+        }
+        return updateForm;
     }
 
     @Override

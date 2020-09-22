@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-top.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-sm-2　bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
+        <div class="col-sm-10">
+            <h3 class="admin-title border-bottom">アカウント</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">アカウント名</th>
+                    <th scope="col">作成日時</th>
+                    <th scope="col">更新日時</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="account : ${accountIndexResponse.accountIndexModelList}">
+                    <th scope="row" th:text="${account.id}"></th>
+                    <td th:text="${account.name}"></td>
+                    <td th:text="${account.createdAt}"></td>
+                    <td th:text="${account.updatedAt}"></td>
+                    <td>
+                        <a th:href="@{/admin/accounts/{accountId}(accountId=${account.id})}">詳細</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/accounts/update/{accountId}(accountId=${account.id})}">更新</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/accounts/delete/{accountId}(accountId=${account.id})}">削除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

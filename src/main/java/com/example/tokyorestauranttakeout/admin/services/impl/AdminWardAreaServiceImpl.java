@@ -98,26 +98,20 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
     }
 
     @Override
-    public AdminWardAreaUpdateFormResponse getUpdateForm(Integer wardAreaId) {
-        AdminWardAreaUpdateFormResponse response = new AdminWardAreaUpdateFormResponse();
-
+    public WardAreaUpdateForm getUpdateForm(Integer wardAreaId, WardAreaUpdateForm updateFormRequest) {
         WardAreaUpdateForm updateForm = new WardAreaUpdateForm();
-        WardArea wardArea = wardAreaRepository.selectById(wardAreaId);
-        updateForm.id = wardArea.getId();
-        updateForm.name = wardArea.getName();
-        updateForm.wardId = wardArea.getWardId();
-        updateForm.imageConvertedByBase64 = wardArea.getImage();
-        updateForm.mimeType = wardArea.getMimeType();
-        response.updateForm = updateForm;
 
-        response.wardList = wardRepository.selectAll().stream()
-                .map(ward -> {
-                    PullDownFormWardModel wardModel = new PullDownFormWardModel();
-                    wardModel.id = ward.getId();
-                    wardModel.name = ward.getName();
-                    return wardModel;
-                }).collect(Collectors.toList());
-        return response;
+        if (updateFormRequest != null) {
+            updateForm = updateFormRequest;
+        } else {
+            WardArea wardArea = wardAreaRepository.selectById(wardAreaId);
+            updateForm.id = wardArea.getId();
+            updateForm.name = wardArea.getName();
+            updateForm.wardId = wardArea.getWardId();
+            updateForm.imageConvertedByBase64 = wardArea.getImage();
+            updateForm.mimeType = wardArea.getMimeType();
+        }
+        return updateForm;
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.example.tokyorestauranttakeout.admin.services;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.menu.AdminMenuUpdateForm;
-import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
 import com.example.tokyorestauranttakeout.admin.responses.menu.*;
 import com.example.tokyorestauranttakeout.entity.Menu;
 
@@ -34,8 +33,9 @@ public interface AdminMenuService {
     /**
      * 更新画面レスポンス取得
      * @param menuId
+     * @param updateForm
      */
-    AdminMenuUpdateFormResponse getUpdateFormResponse(Integer menuId);
+    AdminMenuUpdateForm getUpdateFormResponse(Integer menuId, AdminMenuUpdateForm updateForm);
 
     /**
      * 更新

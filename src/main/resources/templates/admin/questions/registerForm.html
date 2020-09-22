@@ -21,19 +21,22 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="title">件名</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="件名を入力してください">
+                            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" placeholder="件名を入力してください" >
+                            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="text">本文</label>
-                            <textarea placeholder="本文を入力してください" class="form-control" id="text" name="text"></textarea>
+                            <textarea placeholder="本文を入力してください" class="form-control" id="text" name="text" th:field="*{text}"></textarea>
+                            <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="senderMailAddress">送信者メールアドレス</label>
-                            <input type="email" class="form-control" id="senderMailAddress" name="senderMailAddress" placeholder="送信者メールアドレスを入力してください">
+                            <input type="email" class="form-control" id="senderMailAddress" name="senderMailAddress" th:field="*{senderMailAddress}" placeholder="送信者メールアドレスを入力してください">
+                            <span th:if="${#fields.hasErrors('senderMailAddress')}" th:errors="*{senderMailAddress}"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -50,6 +53,7 @@
                                         <label class="form-check-label" for="unResolvedFlg">解決済み</label>
                                     </div>
                                 </div>
+                                <span th:if="${#fields.hasErrors('resolvedFlg')}" th:errors="*{resolvedFlg}"></span>
                             </div>
                         </div>
                     </div>

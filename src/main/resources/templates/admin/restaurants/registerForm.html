@@ -21,59 +21,68 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="name">レストラン名</label>
-                            <input type="text" class="form-control" id="name" name="name"  placeholder="区名を入力してください">
+                            <input type="text" class="form-control" id="name" name="name" th:field="*{name}"  placeholder="区名を入力してください">
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="address">住所</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="住所を入力してください" >
+                            <input type="text" class="form-control" id="address" name="address" th:field="*{address}" placeholder="住所を入力してください" >
+                            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="phoneNumber">電話番号</label>
-                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="電話番号を入力してください" >
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder="電話番号を入力してください" >
+                            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="image">画像</label>
                             <input type="file" class="form-control-file" id="image" name="image" >
+                            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="introduction">紹介文</label>
-                            <textarea placeholder="店舗紹介を入力してください" class="form-control" id="introduction" name="introduction"></textarea>
+                            <textarea placeholder="店舗紹介を入力してください" class="form-control" id="introduction" name="introduction" th:field="*{introduction}"></textarea>
+                            <span th:if="${#fields.hasErrors('introduction')}" th:errors="*{introduction}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="fromTime">営業開始時間</label>
-                            <input type="time" class="form-control" id="fromTime" name="fromTime" >
+                            <input type="time" class="form-control" id="fromTime" name="fromTime" th:field="*{fromTime}" >
+                            <span th:if="${#fields.hasErrors('fromTime')}" th:errors="*{fromTime}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="toTime">営業終了時間</label>
-                            <input type="time" class="form-control" id="toTime" name="toTime" >
+                            <input type="time" class="form-control" id="toTime" name="toTime" th:field="*{toTime}" >
+                            <span th:if="${#fields.hasErrors('toTime')}" th:errors="*{toTime}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="wardId">所属区名</label>
                             <select class="form-control" id="wardId" name="wardId">
-                                <option th:each="ward : ${registerFormResponse.wardList}" th:text="${ward.name}" th:value="${ward.id}" ></option>
+                                <option th:each="ward : ${pullDownWardList}" th:text="${ward.name}" th:value="${ward.id}" th:selected="${ward.id==registerForm.wardId}" ></option>
                             </select>
+                            <span th:if="${#fields.hasErrors('wardId')}" th:errors="*{wardId}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="wardAreaId">所属区内エリア名</label>
                             <select class="form-control" id="wardAreaId" name="wardAreaId">
-                                <option th:each="wardArea : ${registerFormResponse.wardAreaList}" th:text="${wardArea.name}" th:value="${wardArea.id}" ></option>
+                                <option th:each="wardArea : ${pullDownWardAreaList}" th:text="${wardArea.name}" th:value="${wardArea.id}" th:selected="${wardArea.id==registerForm.wardAreaId}" ></option>
                             </select>
+                            <span th:if="${#fields.hasErrors('wardAreaId')}" th:errors="*{wardAreaId}" ></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">登録</button>

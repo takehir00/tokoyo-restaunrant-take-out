@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="registerform">
+        <h3 class="registerform-title">ログアウトしますか？</h3>
+        <form method="post" th:action="@{'/logout'}">
+            <button type="submit" class="btn btn-primary">ログアウト</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

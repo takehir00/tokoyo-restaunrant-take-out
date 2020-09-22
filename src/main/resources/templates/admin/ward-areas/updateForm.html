@@ -21,24 +21,26 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id" th:value="${updateFormResponse.updateForm.id}" readonly>
+                            <input type="text" class="form-control" id="id" name="id" th:value="${wardAreaUpdateForm.id}" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="name">エリア名</label>
-                            <input type="text" class="form-control" id="name" name="name" th:value="${updateFormResponse.updateForm.name}" placeholder="区名を入力してください">
+                            <input type="text" class="form-control" id="name" name="name" th:value="${wardAreaUpdateForm.name}" placeholder="区名を入力してください">
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="image">画像</label>
                             <input type="file" class="form-control-file" id="image" name="image">
+                            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <img th:src="@{data:{mimeType};base64,{image}(image=${updateFormResponse.updateForm.imageConvertedByBase64},mimeType=${updateFormResponse.updateForm.mimeType})}" class="img-fluid rounded">
+                            <img th:src="@{data:{mimeType};base64,{image}(image=${wardAreaUpdateForm.imageConvertedByBase64},mimeType=${wardAreaUpdateForm.mimeType})}" class="img-fluid rounded">
                         </div>
                     </div>
                     <div class="row">
@@ -51,6 +53,7 @@
                                 <input class="form-check-input" type="radio" name="imageUpdateFlg" id="imageUpdate" value="true">
                                 <label class="form-check-label" for="imageUpdate">画像を更新する</label>
                             </div>
+                            <span th:if="${#fields.hasErrors('imageUpdateFlg')}" th:errors="*{imageUpdateFlg}"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -58,9 +61,10 @@
                             <div class="form-group col-sm-12">
                                 <label for="wardId">所属区名</label>
                                 <select class="form-control" id="wardId" name="wardId">
-                                    <option th:each="ward : ${updateFormResponse.wardList}" th:text="${ward.name}" th:value="${ward.id}" th:selected="${ward.id==updateFormResponse.updateForm.wardId}" ></option>
+                                    <option th:each="ward : ${pullDownWardList}" th:text="${ward.name}" th:value="${ward.id}" th:selected="${ward.id==wardAreaUpdateForm.wardId}" ></option>
                                 </select>
                             </div>
+                            <span th:if="${#fields.hasErrors('wardId')}" th:errors="*{wardId}"></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">更新</button>
