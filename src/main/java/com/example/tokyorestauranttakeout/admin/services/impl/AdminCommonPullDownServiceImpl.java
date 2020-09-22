@@ -1,8 +1,10 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
+import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormRestaurantModel;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardAreaModel;
 import com.example.tokyorestauranttakeout.admin.models.common.PullDownFormWardModel;
 import com.example.tokyorestauranttakeout.admin.services.AdminCommonPullDownService;
+import com.example.tokyorestauranttakeout.repositories.RestaurantRepository;
 import com.example.tokyorestauranttakeout.repositories.WardAreaRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class AdminCommonPullDownServiceImpl implements AdminCommonPullDownServic
     WardRepository wardRepository;
     @Autowired
     WardAreaRepository wardAreaRepository;
+    @Autowired
+    RestaurantRepository restaurantRepository;
 
     @Override
     public List<PullDownFormWardModel> getWardList() {
@@ -37,6 +41,17 @@ public class AdminCommonPullDownServiceImpl implements AdminCommonPullDownServic
                     pullDownFormWardAreaModel.id = wardArea.getId();
                     pullDownFormWardAreaModel.name = wardArea.getName();
                     return pullDownFormWardAreaModel;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PullDownFormRestaurantModel> getRestaurantList() {
+        return restaurantRepository.selectAll().stream()
+                .map(restaurant -> {
+                    PullDownFormRestaurantModel pullDownFormRestaurantModel = new PullDownFormRestaurantModel();
+                    pullDownFormRestaurantModel.id = restaurant.getId();
+                    pullDownFormRestaurantModel.name = restaurant.getName();
+                    return pullDownFormRestaurantModel;
                 }).collect(Collectors.toList());
     }
 }
