@@ -38,18 +38,19 @@ public class AdminAccountController extends AdminControllerBase {
 
     /**
      * 詳細画面表示
+     * 一覧画面に表示するだけで情報量十分なのでとりあえず実装しない
      * @param mav
      * @return
      */
-    @GetMapping("/admin/accounts/{accountId}")
-    public ModelAndView show(ModelAndView mav,
-                             @PathVariable Integer accountId) {
-        mav.addObject("account", getAccount());
-        mav.addObject("showResponse",
-                adminAccountService.getShowResponse(accountId));
-        mav.setViewName("admin/accounts/show");
-        return mav;
-    }
+//    @GetMapping("/admin/accounts/{accountId}")
+//    public ModelAndView show(ModelAndView mav,
+//                             @PathVariable Integer accountId) {
+//        mav.addObject("account", getAccount());
+//        mav.addObject("showResponse",
+//                adminAccountService.getShowResponse(accountId));
+//        mav.setViewName("admin/accounts/show");
+//        return mav;
+//    }
 
     /**
      * 登録画面表示

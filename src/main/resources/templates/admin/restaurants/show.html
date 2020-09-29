@@ -14,7 +14,7 @@
 <div th:insert="~{admin/header :: copy}"></div>
 <div class="container-fluid p-0">
     <div class="row no-gutters">
-        <div class="col-sm-2 bg-dark navbar-dark" th:insert="~{admin/sidebar :: copy}"></div>
+        <div class="col-sm-2" th:replace="~{admin/sidebar :: copy}"></div>
         <div class="col-sm-10">
             <h3 class="admin-title border-bottom">店舗詳細</h3>
             <div class="admin-detail">
