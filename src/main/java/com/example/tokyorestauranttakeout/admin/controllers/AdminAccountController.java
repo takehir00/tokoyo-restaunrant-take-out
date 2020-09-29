@@ -42,15 +42,7 @@ public class AdminAccountController extends AdminControllerBase {
      * @param mav
      * @return
      */
-//    @GetMapping("/admin/accounts/{accountId}")
-//    public ModelAndView show(ModelAndView mav,
-//                             @PathVariable Integer accountId) {
-//        mav.addObject("account", getAccount());
-//        mav.addObject("showResponse",
-//                adminAccountService.getShowResponse(accountId));
-//        mav.setViewName("admin/accounts/show");
-//        return mav;
-//    }
+
 
     /**
      * 登録画面表示
