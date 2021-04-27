@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <div class="registerform">
+                <h3 class="registerform-title">アカウント登録</h3>
+                <form method="post" th:action="@{'/client/accounts/register'}" th:object="${registerForm}">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" class="form-control" id="email" name="email" th:field="*{email}" placeholder="メールアドレスを入力してください">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="password">パスワード</label>
+                            <input type="password" class="form-control" id="password" name="password" th:field="*{password}" placeholder="パスワードを入力してください">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">登録</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

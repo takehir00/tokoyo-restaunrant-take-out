@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="registerform">
+        <h3 class="registerform-title">ログイン</h3>
+        <form method="post" th:action="@{'/login'}" th:object="${loginForm}">
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="email">メールアドレス</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="メールアドレスを入力してください">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="password">パスワード</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="パスワードを入力してください">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">ログイン</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
