@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ClientAccountRepository {
@@ -23,14 +24,18 @@ public class ClientAccountRepository {
      * @param email
      * @return
      */
-    public ClientAccount selectByEmail(String email) {
+    public Optional<ClientAccount> selectByEmail(String email) {
         ClientAccountExample example = new ClientAccountExample();
         ClientAccountExample.Criteria criteria = example.createCriteria();
         criteria.andEmailEqualTo(email);
 
         List<ClientAccount> clientAccountList = mapper.selectByExample(example);
+
+        if (clientAccountList.isEmpty()) {
+            return Optional.empty();
+        }
         //メールアドレスは一意なので１件目を取得
-        return clientAccountList.get(0);
+        return Optional.of(clientAccountList.get(0));
     }
 
     /**

@@ -32,6 +32,14 @@
                             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="passwordDigest">パスワードの確認入力</label>
+                            <input type="password" class="form-control" id="passwordDigest" name="passwordDigest" th:field="*{passwordDigest}" placeholder="確認のため入力してください">
+                            <span th:if="${#fields.hasErrors('passwordDigest')}" th:errors="*{passwordDigest}"></span>
+                            <span th:if="${#fields.hasErrors('validPasswordDigest')}" th:errors="*{validPasswordDigest}"></span>
+                        </div>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">登録</button>
                 </form>
