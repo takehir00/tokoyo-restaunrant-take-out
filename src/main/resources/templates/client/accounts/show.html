@@ -5,38 +5,29 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=UTF-8" />
     <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
-    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/top.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/account-show.css}" />
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
-    <link rel="stylesheet" media="all" th:href="@{/css/admin-top.css}" />
-    <link rel="stylesheet" media="all" th:href="@{/css/admin-show.css}" />
 </head>
 <body>
-<div th:insert="~{admin/header :: copy}"></div>
-<div class="container-fluid p-0">
-    <div class="row no-gutters">
-        <div class="col-sm-2" th:replace="~{admin/sidebar :: copy}"></div>
-        <div class="col-sm-10">
-            <h3 class="admin-title border-bottom">アカウント詳細</h3>
-            <div class="admin-detail">
-                <dl class="admin-detail-content">
-                    <dt>id</dt>
-                    <dd th:text="${showResponse.clientAccount.id}"></dd>
+<div th:insert="~{client/header :: copy}"></div>
+<div class="account-show contents container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <h3 class="border-bottom">あなたのアカウント情報</h3>
+            <div>
+                <dl>
                     <dt>メールアドレス</dt>
                     <dd th:text="${showResponse.clientAccount.email}"></dd>
                     <dt>アカウント名</dt>
                     <dd th:text="${showResponse.clientAccount.name}"></dd>
                 </dl>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <a th:href="@{/client/accounts/update/{accountId}(accountId=${showResponse.clientAccount.id})}">更新</a>
-                    </div>
-                    <div class="col-sm-2">
-                        <a th:href="@{/client/accounts/delete/{accountId}(accountId=${showResponse.clientAccount.id})}">削除</a>
-                    </div>
-                </div>
             </div>
         </div>
+        <div class="col-sm-3"></div>
     </div>
 </div>
+<div th:insert="~{client/footer :: copy}"></div>
 </body>
 </html>
