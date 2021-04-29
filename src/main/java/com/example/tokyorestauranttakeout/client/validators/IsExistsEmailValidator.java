@@ -6,7 +6,6 @@ import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.annotation.Annotation;
 
 public class IsExistsEmailValidator implements ConstraintValidator<IsExistsEmail, String> {
 
