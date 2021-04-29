@@ -10,11 +10,11 @@
     <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
 </head>
 <body>
-<div th:insert="~{admin/header :: copy}"></div>
-<div class="container-fluid p-0">
+<div th:insert="~{client/header :: copy}"></div>
+<div class="contents container">
     <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-10">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
             <div class="registerform">
                 <h3 class="registerform-title">アカウント登録</h3>
                 <form method="post" th:action="@{'/client/accounts/register'}" th:object="${registerForm}">
@@ -40,11 +40,11 @@
                             <span th:if="${#fields.hasErrors('validPasswordDigest')}" th:errors="*{validPasswordDigest}"></span>
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-primary">登録</button>
                 </form>
             </div>
         </div>
+        <div class="col-sm-3"></div>
     </div>
 </div>
 </body>
