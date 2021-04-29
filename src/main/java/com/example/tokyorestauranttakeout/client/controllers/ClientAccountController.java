@@ -88,9 +88,17 @@ public class ClientAccountController {
      */
     @GetMapping("/update/{accountId}")
     public ModelAndView updateForm(ModelAndView mav,
-                                   @PathVariable Integer accountId) {
-        mav.addObject("updateFormResponse",
-                clientAccountService.getUpdateFormResponse(accountId));
+                                   @PathVariable Integer accountId,
+                                   @ModelAttribute("modelMap") ModelMap modelMap) {
+
+        ClientAccountUpdateForm updateForm;
+        if (modelMap.get("updateForm") != null) {
+            updateForm = (ClientAccountUpdateForm) modelMap.get("updateForm");
+        } else {
+            updateForm = clientAccountService.getUpdateFormResponse(accountId);
+        }
+        mav.addObject("updateForm", updateForm);
+        mav.addObject("org.springframework.validation.BindingResult.updateForm", modelMap.get("bindingResult"));
         mav.setViewName("client/accounts/updateForm");
         return mav;
     }
@@ -106,9 +114,16 @@ public class ClientAccountController {
     @Transactional
     @PostMapping("/update")
     public String update(
-            @ModelAttribute("updateForm") ClientAccountUpdateForm updateForm,
+            @Validated @ModelAttribute("updateForm") ClientAccountUpdateForm updateForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("updateForm", updateForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:/client/accounts/update/" + updateForm.id;
+        }
         clientAccountService.update(updateForm);
         return "redirect:/client/accounts";
     }

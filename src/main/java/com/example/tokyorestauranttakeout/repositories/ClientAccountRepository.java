@@ -43,8 +43,8 @@ public class ClientAccountRepository {
      * @param accountId ID
      * @return クライアントアカウント
      */
-    public ClientAccount selectById(Integer accountId) {
-        return mapper.selectByPrimaryKey(accountId);
+    public Optional<ClientAccount> selectById(Integer accountId) {
+        return Optional.ofNullable(mapper.selectByPrimaryKey(accountId));
     }
 
     /**
