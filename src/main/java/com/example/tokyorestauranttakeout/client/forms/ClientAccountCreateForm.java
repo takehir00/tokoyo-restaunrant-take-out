@@ -10,20 +10,20 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class ClientAccountCreateForm {
 
-    @NotEmpty(message = "入力してください")
+    @NotEmpty(message = "{validate.common.notEmpty}")
     @IsExistsEmail
     public String email;
 
-    @NotEmpty(message = "入力してください")
+    @NotEmpty(message = "{validate.common.notEmpty}")
     public String password;
 
-    @NotEmpty(message = "入力してください")
+    @NotEmpty(message = "{validate.common.notEmpty}")
     public String passwordDigest;
 
     /**
      * パスワードダイジェスト比較チェック
      */
-    @AssertTrue(message = "確認パスワードが誤っています")
+    @AssertTrue(message = "{validate.account.isValidPasswordDigest}")
     public boolean isValidPasswordDigest() {
         if (StringUtils.isEmpty(passwordDigest)) {
             return true;
