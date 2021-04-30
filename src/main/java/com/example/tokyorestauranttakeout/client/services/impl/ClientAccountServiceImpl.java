@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class ClientAccountServiceImpl implements ClientAccountService {
@@ -68,11 +67,17 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 
     @Override
     public ClientAccountDeleteForm getDeleteFormResponse(Integer accountId) {
-        return null;
+        ClientAccount clientAccount = clientAccountRepository.selectById(accountId)
+                // TODO 独自例外作ってハンドリングして
+                // TODO アカウントが利用できません、ログインし直すかアカウントを登録し直してください画面を表示する。
+                .orElseThrow(RuntimeException::new);
+        ClientAccountDeleteForm deleteForm = new ClientAccountDeleteForm();
+        deleteForm.id = clientAccount.getId();
+        return deleteForm;
     }
 
     @Override
-    public void delete(ClientAccountDeleteForm deleteForm) {
-
+    public void delete(Integer accountId) {
+        clientAccountRepository.delete(accountId);
     }
 }

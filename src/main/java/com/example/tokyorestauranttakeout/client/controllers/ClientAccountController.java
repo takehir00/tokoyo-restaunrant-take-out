@@ -144,19 +144,16 @@ public class ClientAccountController {
 
     /**
      * 削除
-     * @param deleteForm
-     * @param bindingResult
      * @param attributes
      * @return
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/delete")
+    @DeleteMapping("/delete/{accountId}")
     public String delete(
-            @ModelAttribute("deleteForm") ClientAccountDeleteForm deleteForm,
-            BindingResult bindingResult,
+            @PathVariable Integer accountId,
             RedirectAttributes attributes) throws IOException {
-        clientAccountService.delete(deleteForm);
+        clientAccountService.delete(accountId);
         return "redirect:/client/accounts";
     }
 }

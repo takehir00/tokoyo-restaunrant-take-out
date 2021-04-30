@@ -41,7 +41,7 @@ public interface ClientAccountService {
 
     /**
      * 削除
-     * @param deleteForm
+     * @param accountId
      */
-    void delete(ClientAccountDeleteForm deleteForm);
+    void delete(Integer accountId);
 }

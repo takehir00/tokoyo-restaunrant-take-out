@@ -6,6 +6,4 @@ import lombok.Data;
 public class ClientAccountDeleteForm {
     /** ID */
     public Integer id;
-    /** アカウント名 */
-    public String name;
 }
