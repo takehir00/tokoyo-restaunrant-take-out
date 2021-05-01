@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.AdminServerPaths;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.question.AdminQuestionUpdateForm;
@@ -10,16 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping(AdminServerPaths.QUESTION)
 public class AdminQuestionsController extends AdminControllerBase {
 
     @Autowired
@@ -30,7 +29,7 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/questions")
+    @GetMapping
     public ModelAndView index(ModelAndView mav) {
         mav.addObject("account", getAccount());
         mav.addObject("questionIndexResponse", adminQuestionService.getIndexResponse());
@@ -43,7 +42,7 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/questions/{questionId}")
+    @GetMapping("/{questionId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer questionId) {
         mav.addObject("account", getAccount());
@@ -58,7 +57,7 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/questions/register")
+    @GetMapping("/register")
     public ModelAndView registerForm(
             ModelAndView mav,
             @ModelAttribute("modelMap") ModelMap modelMap) {
@@ -84,7 +83,7 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/questions/register")
+    @PostMapping("/register")
     public String register(
             @Validated @ModelAttribute("registerForm") AdminQuestionRegisterForm registerForm,
             BindingResult bindingResult,
@@ -94,10 +93,10 @@ public class AdminQuestionsController extends AdminControllerBase {
             modelMap.addAttribute("registerForm",registerForm);
             modelMap.addAttribute("bindingResult", bindingResult);
             attributes.addFlashAttribute("modelMap",modelMap);
-            return "redirect:/admin/questions/register";
+            return "redirect:" + AdminServerPaths.QUESTION + "/register";
         }
         adminQuestionService.create(registerForm);
-        return "redirect:/admin/questions";
+        return "redirect:" + AdminServerPaths.QUESTION;
     }
 
     /**
@@ -105,7 +104,7 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/questions/update/{questionId}")
+    @GetMapping("/update/{questionId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer questionId,
                                    @ModelAttribute("modelMap") ModelMap modelMap) {
@@ -131,7 +130,7 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/questions/update")
+    @PostMapping("/update")
     public String update(
             @Validated @ModelAttribute("updateForm") AdminQuestionUpdateForm updateForm,
             BindingResult bindingResult,
@@ -141,10 +140,10 @@ public class AdminQuestionsController extends AdminControllerBase {
             modelMap.addAttribute("updateForm",updateForm);
             modelMap.addAttribute("bindingResult", bindingResult);
             attributes.addFlashAttribute("modelMap",modelMap);
-            return "redirect:/admin/questions/update/" + updateForm.getId();
+            return "redirect:" + AdminServerPaths.QUESTION + "/update/" + updateForm.getId();
         }
         adminQuestionService.update(updateForm);
-        return "redirect:/admin/questions";
+        return "redirect:" + AdminServerPaths.QUESTION;
     }
 
     /**
@@ -152,7 +151,7 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/questions/delete/{questionId}")
+    @GetMapping("/delete/{questionId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer questionId) {
         mav.addObject("account", getAccount());
@@ -171,12 +170,12 @@ public class AdminQuestionsController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/questions/delete")
+    @PostMapping("/delete")
     public String delete(
             @ModelAttribute("deleteForm") AdminQuestionDeleteForm deleteForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
         adminQuestionService.delete(deleteForm);
-        return "redirect:/admin/questions";
+        return "redirect:" + AdminServerPaths.QUESTION;
     }
 }

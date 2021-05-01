@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.AdminServerPaths;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantCreateForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.restaurant.AdminRestaurantUpdateForm;
@@ -11,16 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping(AdminServerPaths.RESTAURANT)
 public class AdminRestaurantsController extends AdminControllerBase {
 
     @Autowired
@@ -33,7 +32,7 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/restaurants")
+    @GetMapping("")
     public ModelAndView index(ModelAndView mav) {
         mav.addObject("account", getAccount());
         mav.addObject("restaurantIndexResponse",
@@ -47,7 +46,7 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/restaurants/{restaurantId}")
+    @GetMapping("/{restaurantId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer restaurantId) {
         mav.addObject("account", getAccount());
@@ -63,7 +62,7 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/restaurants/register")
+    @GetMapping("/register")
     public ModelAndView registerForm(
             ModelAndView mav,
             @ModelAttribute("modelMap") ModelMap modelMap) {
@@ -90,7 +89,7 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/restaurants/register")
+    @PostMapping("/register")
     public String register(
             @Validated @ModelAttribute("registerForm") AdminRestaurantCreateForm registerForm,
             BindingResult bindingResult,
@@ -100,10 +99,10 @@ public class AdminRestaurantsController extends AdminControllerBase {
             modelMap.addAttribute("registerForm",registerForm);
             modelMap.addAttribute("bindingResult", bindingResult);
             attributes.addFlashAttribute("modelMap",modelMap);
-            return "redirect:/admin/restaurants/register";
+            return "redirect:" + AdminServerPaths.RESTAURANT + "/register";
         }
         adminRestaurantsService.create(registerForm);
-        return "redirect:/admin/restaurants";
+        return "redirect:" + AdminServerPaths.RESTAURANT;
     }
 
     /**
@@ -111,7 +110,7 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/restaurants/update/{restaurantId}")
+    @GetMapping("/update/{restaurantId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer restaurantId,
                                    @ModelAttribute("modelMap") ModelMap modelMap) {
@@ -136,7 +135,7 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/restaurants/update")
+    @PostMapping("/update")
     public String update(
             @Validated @ModelAttribute("restaurantUpdateForm") AdminRestaurantUpdateForm restaurantUpdateForm,
             BindingResult bindingResult,
@@ -146,10 +145,10 @@ public class AdminRestaurantsController extends AdminControllerBase {
             modelMap.addAttribute("restaurantUpdateForm",restaurantUpdateForm);
             modelMap.addAttribute("bindingResult", bindingResult);
             attributes.addFlashAttribute("modelMap",modelMap);
-            return "redirect:/admin/restaurants/update/" + restaurantUpdateForm.getId();
+            return "redirect:" + AdminServerPaths.RESTAURANT + "/update/" + restaurantUpdateForm.getId();
         }
         adminRestaurantsService.update(restaurantUpdateForm);
-        return "redirect:/admin/restaurants";
+        return "redirect:" + AdminServerPaths.RESTAURANT;
     }
 
     /**
@@ -157,7 +156,7 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/restaurants/delete/{restaurantId}")
+    @GetMapping("/delete/{restaurantId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer restaurantId) {
         mav.addObject("account", getAccount());
@@ -175,12 +174,12 @@ public class AdminRestaurantsController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/restaurants/delete")
+    @PostMapping("/delete")
     public String delete(
             @ModelAttribute("deleteForm") AdminRestaurantDeleteForm deleteForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
         adminRestaurantsService.delete(deleteForm);
-        return "redirect:/admin/restaurants";
+        return "redirect:" + AdminServerPaths.RESTAURANT;
     }
 }

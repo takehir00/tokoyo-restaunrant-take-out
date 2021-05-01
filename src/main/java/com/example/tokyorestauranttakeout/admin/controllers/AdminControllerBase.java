@@ -34,7 +34,7 @@ public class AdminControllerBase {
      * @return
      */
     protected Account getAccount() {
-        return accountRepository.selectByName(getName());
+        return accountRepository.selectByName(getName()).get();
     }
 
     /**

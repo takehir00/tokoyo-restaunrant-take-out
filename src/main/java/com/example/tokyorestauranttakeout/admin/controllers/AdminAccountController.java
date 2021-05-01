@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.AdminServerPaths;
 import com.example.tokyorestauranttakeout.admin.forms.account.AdminAccountCreateForm;
 import com.example.tokyorestauranttakeout.admin.forms.account.AdminAccountDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.account.AdminAccountUpdateForm;
@@ -8,16 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping(AdminServerPaths.ACCOUNT)
 public class AdminAccountController extends AdminControllerBase {
     
     @Autowired
@@ -28,7 +27,7 @@ public class AdminAccountController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/accounts")
+    @GetMapping()
     public ModelAndView index(ModelAndView mav) {
         mav.addObject("account", getAccount());
         mav.addObject("accountIndexResponse", adminAccountService.getIndexResponse());
@@ -49,7 +48,7 @@ public class AdminAccountController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/accounts/register")
+    @GetMapping("/register")
     public ModelAndView registerForm(ModelAndView mav) {
         mav.addObject("account", getAccount());
         mav.setViewName("admin/accounts/registerForm");
@@ -65,13 +64,13 @@ public class AdminAccountController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/accounts/register")
+    @PostMapping("/register")
     public String register(
             @ModelAttribute("registerForm") AdminAccountCreateForm registerForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
         adminAccountService.create(registerForm);
-        return "redirect:/admin/accounts";
+        return "redirect:" + AdminServerPaths.ACCOUNT;
     }
 
     /**
@@ -79,7 +78,7 @@ public class AdminAccountController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/accounts/update/{accountId}")
+    @GetMapping("/update/{accountId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer accountId) {
         mav.addObject("account", getAccount());
@@ -98,13 +97,13 @@ public class AdminAccountController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/accounts/update")
+    @PostMapping("/update")
     public String update(
             @ModelAttribute("updateForm") AdminAccountUpdateForm updateForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
         adminAccountService.update(updateForm);
-        return "redirect:/admin/accounts";
+        return "redirect:" + AdminServerPaths.ACCOUNT;
     }
 
     /**
@@ -112,7 +111,7 @@ public class AdminAccountController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/accounts/delete/{accountId}")
+    @GetMapping("/delete/{accountId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer accountId) {
         mav.addObject("account", getAccount());
@@ -131,12 +130,12 @@ public class AdminAccountController extends AdminControllerBase {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/admin/accounts/delete")
+    @PostMapping("/delete")
     public String delete(
             @ModelAttribute("deleteForm") AdminAccountDeleteForm deleteForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
         adminAccountService.delete(deleteForm);
-        return "redirect:/admin/accounts";
+        return "redirect:" + AdminServerPaths.ACCOUNT;
     }
 }
