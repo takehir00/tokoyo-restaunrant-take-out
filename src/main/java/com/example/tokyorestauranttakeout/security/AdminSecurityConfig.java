@@ -13,9 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * 管理画面セキュリティ設定
+ */
 @Configuration
 @EnableWebSecurity
-public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
+public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDaoRealm userDaoRealm;
@@ -27,17 +30,7 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
-     * 静的ファイルに認証をかけない
-     * @param web
-     */
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**");
-    }
-
-    /**
-     * UserDetaiインターフェースを実装した独自の認証レルムを使用する設定
-     *なんか判定したりとか？
+     * UserDetailインターフェースを実装した独自の認証レルムを使用する設定
      *
      * @param auth
      * @throws Exception
@@ -54,14 +47,10 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        String[] permittedUrls = {"/css/**","/images/**", "/webjars/bootstrap/4.3.1/css/bootstrap.css", "/client/**"};
 
-        //認証がかからないエンドポイントを明示する。それ以外にはかかるようにする
-        httpSecurity.authorizeRequests()
-                .antMatchers(permittedUrls).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling();
+        httpSecurity
+                .antMatcher("/admin/**")
+                .authorizeRequests();
 
         //ログイン設定
         httpSecurity.formLogin()
