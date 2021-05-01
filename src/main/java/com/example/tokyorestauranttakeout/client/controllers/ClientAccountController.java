@@ -136,7 +136,7 @@ public class ClientAccountController {
     @GetMapping("/delete/{accountId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer accountId) {
-        mav.addObject("deleteFormResponse",
+        mav.addObject("deleteForm",
                 clientAccountService.getDeleteFormResponse(accountId));
         mav.setViewName("client/accounts/deleteForm");
         return mav;
@@ -149,7 +149,7 @@ public class ClientAccountController {
      * @throws IOException
      */
     @Transactional
-    @DeleteMapping("/delete/{accountId}")
+    @PostMapping("/delete/{accountId}")
     public String delete(
             @PathVariable Integer accountId,
             RedirectAttributes attributes) throws IOException {
