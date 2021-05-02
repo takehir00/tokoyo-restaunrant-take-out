@@ -1,16 +1,16 @@
 package com.example.tokyorestauranttakeout.security;
 
+import com.example.tokyorestauranttakeout.AdminServerPaths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -18,6 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  */
 @Configuration
 @EnableWebSecurity
+@Order(SecurityOrderConst.ADMIN)
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -48,20 +49,23 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
+        // 管理画面パスにセキュリティをかける
         httpSecurity
-                .antMatcher("/admin/**")
-                .authorizeRequests();
+                .antMatcher(AdminServerPaths.ROOT + "/**")
+                .authorizeRequests(authorize ->
+                        authorize.anyRequest().authenticated()
+                );
 
         //ログイン設定
         httpSecurity.formLogin()
                 //ログイン画面のURL
-                .loginPage("/login")
+                .loginPage(AdminServerPaths.AUTH +"/login")
                 //認可を処理する
                 //.loginProcessingUrl("/authenticate")
                 //ログイン成功時の遷移先
-                .successForwardUrl("/success")
+                .successForwardUrl(AdminServerPaths.AUTH + "/success")
                 //ログイン失敗時の遷移先
-                .failureForwardUrl("/failure")
+                .failureForwardUrl(AdminServerPaths.AUTH + "/failure")
                 //ログインidのパラメータ名
                 .usernameParameter("name")
                 //パスワードのパラメータ名
@@ -73,7 +77,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
                 //cookieを破棄する
                 //.deleteCookies("/session")
                 //ログアウト画面のURL
-                .logoutUrl("/logout")
+                .logoutUrl(AdminServerPaths.AUTH + "/logout")
                 //ログアウト後の遷移先
                 //.logoutSuccessUrl("/logout")
                 //セッションを破棄する

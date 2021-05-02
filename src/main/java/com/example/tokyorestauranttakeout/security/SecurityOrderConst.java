@@ -6,12 +6,12 @@ package com.example.tokyorestauranttakeout.security;
 public class SecurityOrderConst {
 
     /**
-     * 認証不要パスセキュリティ
-     */
-    public final static int PUBLIC = 0;
-
-    /**
      * 管理画面セキュリティ
      */
-    public final static int ADMIN = 1;
+    public final static int ADMIN = 0;
+
+    /**
+     * 認証不要パスセキュリティ
+     */
+    public final static int PUBLIC = 1;
 }
