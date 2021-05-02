@@ -12,7 +12,7 @@
         <mapper resource="mapper/RestaurantMapper.xml"/>
         <mapper resource="mapper/CustomRestaurantMapper.xml"/>
         <mapper resource="mapper/QuestionMapper.xml"/>
-        <mapper resource="mapper/AccountMapper.xml"/>
+        <mapper resource="mapper/AdminAccountMapper.xml"/>
         <mapper resource="mapper/ClientAccountMapper.xml"/>
     </mappers>
 </configuration>

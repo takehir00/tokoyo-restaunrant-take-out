@@ -9,7 +9,8 @@ import com.example.tokyorestauranttakeout.admin.responses.account.AdminAccountIn
 import com.example.tokyorestauranttakeout.admin.responses.account.AdminAccountUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminAccountService;
 import com.example.tokyorestauranttakeout.entity.Account;
-import com.example.tokyorestauranttakeout.repositories.AccountRepository;
+import com.example.tokyorestauranttakeout.entity.AdminAccount;
+import com.example.tokyorestauranttakeout.repositories.AdminAccountRepository;
 import com.example.tokyorestauranttakeout.util.DateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ import java.util.stream.Collectors;
 public class AdminAccountServiceImpl implements AdminAccountService {
 
     @Autowired
-    AccountRepository accountRepository;
+    AdminAccountRepository accountRepository;
 
     @Override
     public AdminAccountIndexResponse getIndexResponse() {
         AdminAccountIndexResponse response = new AdminAccountIndexResponse();
-        List<Account> accountList = accountRepository.selectAll();
+        List<AdminAccount> accountList = accountRepository.selectAll();
         response.accountIndexModelList =
                 accountList.stream()
                         .map(account -> {
@@ -48,7 +49,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
     @Override
     public void create(AdminAccountCreateForm registerForm) {
         Date now = DateUtil.now();
-        Account account = new Account();
+        AdminAccount account = new AdminAccount();
         account.setName(registerForm.getName());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         account.setPassword(encoder.encode(registerForm.getPassword()));
@@ -60,7 +61,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
     @Override
     public AdminAccountUpdateFormResponse getUpdateFormResponse(Integer accountId) {
         AdminAccountUpdateFormResponse response = new AdminAccountUpdateFormResponse();
-        Account account = accountRepository.selectById(accountId);
+        AdminAccount account = accountRepository.selectById(accountId);
         AdminAccountUpdateForm updateForm = new AdminAccountUpdateForm();
         BeanUtils.copyProperties(account, updateForm);
         response.updateForm = updateForm;
@@ -69,7 +70,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
 
     @Override
     public void update(AdminAccountUpdateForm updateForm) {
-        Account account = accountRepository.selectById(updateForm.getId());
+        AdminAccount account = accountRepository.selectById(updateForm.getId());
         if (account != null) {
             account.setName(updateForm.getName());
             account.setUpdatedAt(DateUtil.now());
@@ -80,7 +81,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
     @Override
     public AdminAccountDeleteFormResponse getDeleteFormResponse(Integer accountId) {
         AdminAccountDeleteFormResponse response = new AdminAccountDeleteFormResponse();
-        Account account = accountRepository.selectById(accountId);
+        AdminAccount account = accountRepository.selectById(accountId);
         AdminAccountDeleteForm deleteForm = new AdminAccountDeleteForm();
         BeanUtils.copyProperties(account, deleteForm);
         response.deleteForm = deleteForm;

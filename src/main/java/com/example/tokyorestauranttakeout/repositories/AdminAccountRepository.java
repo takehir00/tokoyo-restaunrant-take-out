@@ -1,9 +1,10 @@
 package com.example.tokyorestauranttakeout.repositories;
 
-import com.example.tokyorestauranttakeout.entity.Account;
-import com.example.tokyorestauranttakeout.entity.AccountExample;
-import com.example.tokyorestauranttakeout.entity.AccountExample.Criteria;
-import com.example.tokyorestauranttakeout.mapper.AccountMapper;
+import com.example.tokyorestauranttakeout.entity.AdminAccount;
+import com.example.tokyorestauranttakeout.entity.AdminAccount;
+import com.example.tokyorestauranttakeout.entity.AdminAccountExample;
+import com.example.tokyorestauranttakeout.entity.AdminAccountExample.Criteria;
+import com.example.tokyorestauranttakeout.mapper.AdminAccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AccountRepository {
+public class AdminAccountRepository {
 
     @Autowired
-    private final AccountMapper accountMapper;
+    private final AdminAccountMapper accountMapper;
 
-    public AccountRepository(AccountMapper accountMapper) {
+    public AdminAccountRepository(AdminAccountMapper accountMapper) {
         this.accountMapper = accountMapper;
     }
 
@@ -25,12 +26,12 @@ public class AccountRepository {
      * @param name
      * @return
      */
-    public Optional<Account> selectByName(String name) {
-        AccountExample example = new AccountExample();
+    public Optional<AdminAccount> selectByName(String name) {
+        AdminAccountExample example = new AdminAccountExample();
         Criteria criteria = example.createCriteria();
         criteria.andNameEqualTo(name);
 
-        List<Account> accountList = accountMapper.selectByExample(example);
+        List<AdminAccount> accountList = accountMapper.selectByExample(example);
 
         if (accountList.isEmpty()) {
             return Optional.empty();
@@ -43,7 +44,7 @@ public class AccountRepository {
      * 登録
      * @param account
      */
-    public void create(Account account) {
+    public void create(AdminAccount account) {
         accountMapper.insert(account);
     }
 
@@ -51,8 +52,8 @@ public class AccountRepository {
      * 全件取得
      * @return
      */
-    public List<Account> selectAll() {
-        AccountExample example = new AccountExample();
+    public List<AdminAccount> selectAll() {
+        AdminAccountExample example = new AdminAccountExample();
         return accountMapper.selectByExample(example);
     }
 
@@ -61,7 +62,7 @@ public class AccountRepository {
      * @param accountId
      * @return
      */
-    public Account selectById(Integer accountId) {
+    public AdminAccount selectById(Integer accountId) {
         return accountMapper.selectByPrimaryKey(accountId);
     }
 
@@ -69,7 +70,7 @@ public class AccountRepository {
      * 更新
      * @param account
      */
-    public void update(Account account) {
+    public void update(AdminAccount account) {
         accountMapper.updateByPrimaryKey(account);
     }
 
