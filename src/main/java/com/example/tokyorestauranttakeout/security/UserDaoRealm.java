@@ -24,7 +24,10 @@ public class UserDaoRealm implements UserDetailsService {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("USER"));
 
-        Account account = accountRepository.selectByName(name);
+        Account account = accountRepository.selectByName(name)
+                .orElseThrow(() -> {
+                    throw new UsernameNotFoundException("your name not found");
+                });
 
         return new LoginUser(account.getName(), account.getPassword(), authorityList);
     }

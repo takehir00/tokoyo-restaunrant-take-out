@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.AdminServerPaths;
 import com.example.tokyorestauranttakeout.admin.forms.ward.WardDeleteForm;
 import com.example.tokyorestauranttakeout.admin.forms.ward.WardRegisterForm;
 import com.example.tokyorestauranttakeout.admin.forms.ward.WardUpdateForm;
@@ -12,16 +13,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping(AdminServerPaths.WARD)
 public class AdminWardsController extends AdminControllerBase {
 
     @Autowired
@@ -32,7 +31,7 @@ public class AdminWardsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards")
+    @GetMapping
     public ModelAndView index(ModelAndView mav) {
         mav.addObject("account", getAccount());
         mav.addObject("wardIndexResponse", adminWardService.getIndexResponse());
@@ -45,7 +44,7 @@ public class AdminWardsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/{wardId}")
+    @GetMapping("/{wardId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer wardId) {
         mav.addObject("account", getAccount());
@@ -59,7 +58,7 @@ public class AdminWardsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/register")
+    @GetMapping("/register")
     public ModelAndView registerForm(
             ModelAndView mav,
             @ModelAttribute("modelMap") ModelMap modelMap) {
@@ -84,7 +83,7 @@ public class AdminWardsController extends AdminControllerBase {
      * @return
      */
     @Transactional
-    @PostMapping("/admin/wards/register")
+    @PostMapping("/register")
     public String register(
             @Validated @ModelAttribute("wardRegisterForm") WardRegisterForm wardRegisterForm,
             BindingResult bindingResult,
@@ -94,7 +93,7 @@ public class AdminWardsController extends AdminControllerBase {
             modelMap.addAttribute("wardRegisterForm",wardRegisterForm);
             modelMap.addAttribute("bindingResult", bindingResult);
             attributes.addFlashAttribute("modelMap",modelMap);
-            return "redirect:/admin/wards/register";
+            return "redirect:" + AdminServerPaths.WARD + "/register";
         }
         adminWardService.create(wardRegisterForm);
         return "redirect:/admin/wards";
@@ -106,7 +105,7 @@ public class AdminWardsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/update/{wardId}")
+    @GetMapping("/update/{wardId}")
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Integer wardId,
                                    @ModelAttribute("modelMap") ModelMap modelMap) {
@@ -127,7 +126,7 @@ public class AdminWardsController extends AdminControllerBase {
      * @return
      */
     @Transactional
-    @PostMapping("/admin/wards/update")
+    @PostMapping("/update")
     public String update(
             @Validated @ModelAttribute("wardUpdateForm") WardUpdateForm wardUpdateForm,
             BindingResult bindingResult,
@@ -137,10 +136,10 @@ public class AdminWardsController extends AdminControllerBase {
             modelMap.addAttribute("wardUpdateForm",wardUpdateForm);
             modelMap.addAttribute("bindingResult", bindingResult);
             attributes.addFlashAttribute("modelMap",modelMap);
-            return "redirect:/admin/wards/update/" + wardUpdateForm.getId();
+            return "redirect:" + AdminServerPaths.WARD + "/update/" + wardUpdateForm.getId();
         }
         adminWardService.update(wardUpdateForm);
-        return "redirect:/admin/wards";
+        return "redirect:" + AdminServerPaths.WARD;
     }
 
     /**
@@ -148,7 +147,7 @@ public class AdminWardsController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping("/admin/wards/delete/{wardId}")
+    @GetMapping("/delete/{wardId}")
     public ModelAndView deleteForm(ModelAndView mav,
                                    @PathVariable Integer wardId) {
         mav.addObject("account", getAccount());
@@ -161,10 +160,10 @@ public class AdminWardsController extends AdminControllerBase {
      * 削除画面
      * @return
      */
-    @PostMapping("/admin/wards/delete")
+    @PostMapping("/delete")
     public String delete(
             @ModelAttribute("wardDeleteForm") WardDeleteForm wardDeleteForm) {
         adminWardService.delete(wardDeleteForm.getId());
-        return "redirect:/admin/wards";
+        return "redirect:" + AdminServerPaths.WARD;
     }
 }

@@ -10,6 +10,7 @@ import com.example.tokyorestauranttakeout.admin.responses.account.AdminAccountUp
 import com.example.tokyorestauranttakeout.admin.services.AdminAccountService;
 import com.example.tokyorestauranttakeout.entity.Account;
 import com.example.tokyorestauranttakeout.repositories.AccountRepository;
+import com.example.tokyorestauranttakeout.util.DateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,7 +47,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
 
     @Override
     public void create(AdminAccountCreateForm registerForm) {
-        Date now = new Date();
+        Date now = DateUtil.now();
         Account account = new Account();
         account.setName(registerForm.getName());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -70,8 +71,8 @@ public class AdminAccountServiceImpl implements AdminAccountService {
     public void update(AdminAccountUpdateForm updateForm) {
         Account account = accountRepository.selectById(updateForm.getId());
         if (account != null) {
-            Date now = new Date();
             account.setName(updateForm.getName());
+            account.setUpdatedAt(DateUtil.now());
             accountRepository.update(account);
         }
     }

@@ -1,11 +1,14 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
+import com.example.tokyorestauranttakeout.AdminServerPaths;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(AdminServerPaths.AUTH)
 public class AdminAuthController {
     /**
      * ログイン画面
@@ -13,7 +16,7 @@ public class AdminAuthController {
      * @param mav
      * @return
      */
-    @GetMapping(value = "login")
+    @GetMapping("/login")
     public ModelAndView loginForm(ModelAndView mav) {
         mav.setViewName("/admin/auth/loginForm");
         return mav;
@@ -25,7 +28,7 @@ public class AdminAuthController {
      * @param
      * @return
      */
-    @PostMapping("login")
+    @PostMapping("/login")
     public String login() {
         return "forward:/authenticate";
     }
@@ -36,9 +39,9 @@ public class AdminAuthController {
      * @param
      * @return
      */
-    @PostMapping("success")
+    @PostMapping("/success")
     public String loginSuccess() {
-        return "redirect:/admin";
+        return "redirect:" + AdminServerPaths.ROOT;
     }
 
     /**
@@ -46,9 +49,9 @@ public class AdminAuthController {
      *
      * @return
      */
-    @PostMapping("failure")
+    @PostMapping("/failure")
     public String loginFailure() {
-        return "redirect:/login";
+        return "redirect:" + AdminServerPaths.AUTH + "/login";
     }
 
     /**
@@ -57,7 +60,7 @@ public class AdminAuthController {
      * @param mav
      * @return
      */
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public ModelAndView logoutForm(ModelAndView mav) {
         mav.setViewName("/admin/auth/logoutForm");
         return mav;

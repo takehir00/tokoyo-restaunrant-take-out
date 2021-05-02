@@ -14,11 +14,11 @@
 <div class="container-fluid p-0">
     <div class="registerform">
         <h3 class="registerform-title">ログイン</h3>
-        <form method="post" th:action="@{'/admin/auth/login'}" th:object="${loginForm}">
+        <form method="post" th:action="@{'/login'}" th:object="${loginForm}">
             <div class="row">
                 <div class="form-group col-sm-12">
-                    <label for="name">アカウント名</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="アカウント名を入力してください">
+                    <label for="email">メールアドレス</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="メールアドレスを入力してください">
                 </div>
             </div>
             <div class="row">

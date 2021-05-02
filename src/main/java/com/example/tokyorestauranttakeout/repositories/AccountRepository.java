@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AccountRepository {
@@ -24,14 +25,18 @@ public class AccountRepository {
      * @param name
      * @return
      */
-    public Account selectByName(String name) {
+    public Optional<Account> selectByName(String name) {
         AccountExample example = new AccountExample();
         Criteria criteria = example.createCriteria();
         criteria.andNameEqualTo(name);
 
         List<Account> accountList = accountMapper.selectByExample(example);
+
+        if (accountList.isEmpty()) {
+            return Optional.empty();
+        }
         //アカウント名は一意なので１件目を取得
-        return accountList.get(0);
+        return Optional.of(accountList.get(0));
     }
 
     /**

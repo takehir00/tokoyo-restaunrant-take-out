@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/account-show.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{client/header :: copy}"></div>
+<div class="account-show contents container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <h3 class="border-bottom">アカウント更新</h3>
+            <form method="post" th:action="@{'/client/accounts/update'}" th:object="${updateForm}">
+                <input type="hidden" class="form-control" id="id" name="id" th:field="*{id}" readonly>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="name">アカウント名</label>
+                        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="アカウント名を入力してください">
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">更新</button>
+            </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+<div th:insert="~{client/footer :: copy}"></div>
+</body>
+</html>
