@@ -1,18 +1,18 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.entity.Account;
-import com.example.tokyorestauranttakeout.repositories.AccountRepository;
+import com.example.tokyorestauranttakeout.entity.AdminAccount;
+import com.example.tokyorestauranttakeout.repositories.AdminAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AdminControllerBase {
 
     @Autowired
-    AccountRepository accountRepository;
+    AdminAccountRepository adminAccountRepository;
 
     /**
      * ユーザープリンシパルからユーザー名を取得する
@@ -33,8 +33,8 @@ public class AdminControllerBase {
      *
      * @return
      */
-    protected Account getAccount() {
-        return accountRepository.selectByName(getName()).get();
+    protected AdminAccount getAccount() {
+        return adminAccountRepository.selectByName(getName()).get();
     }
 
     /**

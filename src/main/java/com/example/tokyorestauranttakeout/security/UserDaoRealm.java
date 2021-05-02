@@ -1,7 +1,7 @@
 package com.example.tokyorestauranttakeout.security;
 
-import com.example.tokyorestauranttakeout.entity.Account;
-import com.example.tokyorestauranttakeout.repositories.AccountRepository;
+import com.example.tokyorestauranttakeout.entity.AdminAccount;
+import com.example.tokyorestauranttakeout.repositories.AdminAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,18 +17,18 @@ import java.util.List;
 public class UserDaoRealm implements UserDetailsService {
 
     @Autowired
-    AccountRepository accountRepository;
+    AdminAccountRepository adminAccountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("USER"));
 
-        Account account = accountRepository.selectByName(name)
+        AdminAccount adminAccount = adminAccountRepository.selectByName(name)
                 .orElseThrow(() -> {
                     throw new UsernameNotFoundException("your name not found");
                 });
 
-        return new LoginUser(account.getName(), account.getPassword(), authorityList);
+        return new LoginUser(adminAccount.getName(), adminAccount.getPassword(), authorityList);
     }
 }

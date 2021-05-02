@@ -29,7 +29,7 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="client_account"></table>
+        <table tableName="admin_account"></table>
 <!--        <table tableName="account"></table>-->
 <!--        <table tableName="menu"></table>-->
 <!--        <table tableName="ward"></table>-->
