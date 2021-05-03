@@ -27,6 +27,11 @@ public class AdminRoleRepositoryImpl implements AdminRoleRepository {
     }
 
     @Override
+    public void update(AdminRole adminRole) {
+        adminRoleMapper.updateByPrimaryKey(adminRole);
+    }
+
+    @Override
     public List<AdminRole> selectAll() {
         AdminRoleExample example = new AdminRoleExample();
         return adminRoleMapper.selectByExample(example);
