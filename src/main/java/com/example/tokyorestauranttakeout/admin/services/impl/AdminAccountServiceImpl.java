@@ -8,7 +8,6 @@ import com.example.tokyorestauranttakeout.admin.responses.account.AdminAccountDe
 import com.example.tokyorestauranttakeout.admin.responses.account.AdminAccountIndexResponse;
 import com.example.tokyorestauranttakeout.admin.responses.account.AdminAccountUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminAccountService;
-import com.example.tokyorestauranttakeout.entity.Account;
 import com.example.tokyorestauranttakeout.entity.AdminAccount;
 import com.example.tokyorestauranttakeout.repositories.AdminAccountRepository;
 import com.example.tokyorestauranttakeout.util.DateUtil;

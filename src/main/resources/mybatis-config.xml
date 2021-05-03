@@ -14,5 +14,6 @@
         <mapper resource="mapper/QuestionMapper.xml"/>
         <mapper resource="mapper/AdminAccountMapper.xml"/>
         <mapper resource="mapper/ClientAccountMapper.xml"/>
+        <mapper resource="mapper/AdminRoleMapper.xml"/>
     </mappers>
 </configuration>
