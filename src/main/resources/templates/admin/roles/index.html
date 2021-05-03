@@ -28,13 +28,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="role : ${adminRoleIndexResponse.adminRoleIndexModelList}">
+                <tr th:each="role : ${adminRoleIndexResponse.adminRoleModelList}">
                     <th scope="row" th:text="${role.id}"></th>
                     <td th:text="${role.name}"></td>
                     <td th:text="${role.createdAt}"></td>
                     <td th:text="${role.updatedAt}"></td>
                     <td>
-                        <a th:href="@{/admin/accounts/delete/{roleId}(roleId=${role.id})}">削除</a>
+                        <a th:href="@{/admin/roles/delete/{roleId}(roleId=${role.id})}">削除</a>
                     </td>
                 </tr>
                 </tbody>

@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.admin.services;
 
 import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleCreateForm;
+import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleDeleteFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleIndexResponse;
 
 public interface AdminRoleService {
@@ -16,4 +17,9 @@ public interface AdminRoleService {
      * @param registerForm 登録フォーム
      */
     void create(AdminRoleCreateForm registerForm);
+
+
+    AdminRoleDeleteFormResponse getDeleteFormResponse(Integer roleId);
+
+    void delete(Integer roleId);
 }

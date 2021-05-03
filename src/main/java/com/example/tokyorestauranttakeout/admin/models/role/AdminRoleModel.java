@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class AdminRoleIndexModel {
+public class AdminRoleModel {
     /** ID */
     public Integer id;
     /** ロール名 */

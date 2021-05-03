@@ -8,12 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class AdminRoleRepositoryImpl implements AdminRoleRepository {
 
     @Autowired
     AdminRoleMapper adminRoleMapper;
+
+    @Override
+    public Optional<AdminRole> get(Integer id) {
+        return Optional.ofNullable(adminRoleMapper.selectByPrimaryKey(id));
+    }
 
     @Override
     public void create(AdminRole adminRole) {

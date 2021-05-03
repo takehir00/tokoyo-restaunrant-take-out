@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -83,6 +80,35 @@ public class AdminRoleController {
             return "redirect:" + AdminServerPaths.ROLE +  "/register";
         }
         adminRoleService.create(registerForm);
+        return "redirect:" + AdminServerPaths.ROLE;
+    }
+
+    /**
+     * 削除画面表示
+     * @param mav
+     * @return
+     */
+    @GetMapping("/delete/{roleId}")
+    public ModelAndView deleteForm(@AuthenticationPrincipal AdminLoginUser adminLoginUser,
+                                   ModelAndView mav,
+                                   @PathVariable Integer roleId) {
+        mav.addObject("account", adminLoginUser);
+        mav.addObject("deleteFormResponse",
+                adminRoleService.getDeleteFormResponse(roleId));
+        mav.setViewName("admin/roles/deleteForm");
+        return mav;
+    }
+
+    /**
+     * 削除
+     * @return
+     * @throws IOException
+     */
+    @Transactional
+    @PostMapping("/delete/{roleId}")
+    public String delete(
+            @PathVariable Integer roleId) throws IOException {
+        adminRoleService.delete(roleId);
         return "redirect:" + AdminServerPaths.ROLE;
     }
 }

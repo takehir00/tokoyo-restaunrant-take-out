@@ -1,7 +1,8 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleCreateForm;
-import com.example.tokyorestauranttakeout.admin.models.role.AdminRoleIndexModel;
+import com.example.tokyorestauranttakeout.admin.models.role.AdminRoleModel;
+import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleDeleteFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleIndexResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminRoleService;
 import com.example.tokyorestauranttakeout.entity.AdminRole;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,12 +27,12 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     public AdminRoleIndexResponse getIndexResponse() {
         AdminRoleIndexResponse response = new AdminRoleIndexResponse();
         List<AdminRole> roleList = adminRoleRepository.selectAll();
-        response.adminRoleIndexModelList =
+        response.adminRoleModelList =
                 roleList.stream()
                         .map(role -> {
-                            AdminRoleIndexModel adminRoleIndexModel = new AdminRoleIndexModel();
-                            BeanUtils.copyProperties(role, adminRoleIndexModel);
-                            return adminRoleIndexModel;
+                            AdminRoleModel adminRoleModel = new AdminRoleModel();
+                            BeanUtils.copyProperties(role, adminRoleModel);
+                            return adminRoleModel;
                         }).collect(Collectors.toList());
         return response;
     }
@@ -43,5 +45,27 @@ public class AdminRoleServiceImpl implements AdminRoleService {
         adminRole.setCreatedAt(now);
         adminRole.setUpdatedAt(now);
         adminRoleRepository.create(adminRole);
+    }
+
+    @Override
+    public AdminRoleDeleteFormResponse getDeleteFormResponse(Integer roleId) {
+        AdminRoleDeleteFormResponse response = new AdminRoleDeleteFormResponse();
+
+        AdminRole adminRole = adminRoleRepository.get(roleId)
+                .orElseThrow(RuntimeException::new);
+
+        AdminRoleModel model = new AdminRoleModel();
+        model.id = adminRole.getId();
+        model.name = adminRole.getName();
+        model.createdAt = adminRole.getCreatedAt();
+        model.updatedAt = adminRole.getUpdatedAt();
+
+        response.adminRoleModel = model;
+        return response;
+    }
+
+    @Override
+    public void delete(Integer roleId) {
+        adminRoleRepository.delete(roleId);
     }
 }
