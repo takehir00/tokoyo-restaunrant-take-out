@@ -22,7 +22,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDaoRealm userDaoRealm;
+    private AdminUserDaoRealm adminUserDaoRealm;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -38,7 +38,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDaoRealm)
+        auth.userDetailsService(adminUserDaoRealm)
                 .passwordEncoder(passwordEncoder());
     }
 
