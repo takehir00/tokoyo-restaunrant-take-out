@@ -27,7 +27,7 @@ public class AdminAccountController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping()
+    @GetMapping
     public ModelAndView index(ModelAndView mav) {
         mav.addObject("account", getAccount());
         mav.addObject("accountIndexResponse", adminAccountService.getIndexResponse());

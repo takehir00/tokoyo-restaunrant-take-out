@@ -16,6 +16,11 @@ public class AdminServerPaths {
     public final static String ACCOUNT = ROOT + "/accounts";
 
     /**
+     * ロール管理画面パス
+     */
+    public final static String ROLE = ROOT + "/roles";
+
+    /**
      * 認証機能パス
      */
     public final static String AUTH = ROOT + "/auth";
