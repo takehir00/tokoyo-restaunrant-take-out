@@ -8,7 +8,9 @@ import com.example.tokyorestauranttakeout.admin.services.AdminAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,7 +29,7 @@ public class AdminAccountController extends AdminControllerBase {
      * @param mav
      * @return
      */
-    @GetMapping()
+    @GetMapping
     public ModelAndView index(ModelAndView mav) {
         mav.addObject("account", getAccount());
         mav.addObject("accountIndexResponse", adminAccountService.getIndexResponse());
@@ -49,8 +51,15 @@ public class AdminAccountController extends AdminControllerBase {
      * @return
      */
     @GetMapping("/register")
-    public ModelAndView registerForm(ModelAndView mav) {
+    public ModelAndView registerForm(ModelAndView mav,
+                                     @ModelAttribute("modelMap") ModelMap modelMap) {
+        AdminAccountCreateForm registerForm = new AdminAccountCreateForm();
+        if (modelMap.get("registerForm") != null) {
+            registerForm = (AdminAccountCreateForm) modelMap.get("registerForm");
+        }
         mav.addObject("account", getAccount());
+        mav.addObject("registerForm", registerForm);
+        mav.addObject("org.springframework.validation.BindingResult.registerForm", modelMap.get("bindingResult"));
         mav.setViewName("admin/accounts/registerForm");
         return mav;
     }
@@ -66,9 +75,16 @@ public class AdminAccountController extends AdminControllerBase {
     @Transactional
     @PostMapping("/register")
     public String register(
-            @ModelAttribute("registerForm") AdminAccountCreateForm registerForm,
+            @Validated @ModelAttribute("registerForm") AdminAccountCreateForm registerForm,
             BindingResult bindingResult,
             RedirectAttributes attributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("registerForm",registerForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:" + AdminServerPaths.ACCOUNT +  "/register";
+        }
         adminAccountService.create(registerForm);
         return "redirect:" + AdminServerPaths.ACCOUNT;
     }

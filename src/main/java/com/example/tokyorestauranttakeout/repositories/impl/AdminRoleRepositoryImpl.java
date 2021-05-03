@@ -4,21 +4,21 @@ import com.example.tokyorestauranttakeout.entity.AdminRole;
 import com.example.tokyorestauranttakeout.entity.AdminRoleExample;
 import com.example.tokyorestauranttakeout.mapper.AdminRoleMapper;
 import com.example.tokyorestauranttakeout.repositories.AdminRoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class AdminRoleRepositoryImpl implements AdminRoleRepository {
 
-    private final AdminRoleMapper adminRoleMapper;
+    @Autowired
+    AdminRoleMapper adminRoleMapper;
 
-    /**
-     * 依存関係を指定して生成
-     * @param adminRoleMapper 管理画面ロールマッパー
-     */
-    public AdminRoleRepositoryImpl(AdminRoleMapper adminRoleMapper) {
-        this.adminRoleMapper = adminRoleMapper;
+    @Override
+    public Optional<AdminRole> get(Integer id) {
+        return Optional.ofNullable(adminRoleMapper.selectByPrimaryKey(id));
     }
 
     @Override

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>東京テイクアウト飲食店情報館</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/sidebar.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin-show.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-sm-2" th:replace="~{admin/sidebar :: copy}"></div>
+        <div class="col-sm-10">
+            <div class="registerform">
+                <h3 class="registerform-title">ロール削除確認画面</h3>
+                <form th:method="delete" th:action="@{/admin/roles/delete/{roleId}(roleId=${deleteFormResponse.adminRoleModel.id})}" th:object="${deleteForm}">
+                    <div class="admin-detail">
+                        <dl class="admin-detail-content">
+                            <dt>id</dt>
+                            <dd th:text="${deleteFormResponse.adminRoleModel.id}"></dd>
+                            <dt>ロール名</dt>
+                            <dd th:text="${deleteFormResponse.adminRoleModel.name}"></dd>
+                            <dt>作成日時</dt>
+                            <dd th:text="${deleteFormResponse.adminRoleModel.createdAt}"></dd>
+                            <dt>更新日時</dt>
+                            <dd th:text="${deleteFormResponse.adminRoleModel.updatedAt}"></dd>
+                        </dl>
+                        <button type="submit" class="btn btn-primary">削除する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

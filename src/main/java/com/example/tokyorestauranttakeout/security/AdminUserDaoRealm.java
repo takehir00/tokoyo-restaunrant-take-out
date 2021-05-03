@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserDaoRealm implements UserDetailsService {
+public class AdminUserDaoRealm implements UserDetailsService {
 
     @Autowired
     AdminAccountRepository adminAccountRepository;
@@ -29,6 +29,6 @@ public class UserDaoRealm implements UserDetailsService {
                     throw new UsernameNotFoundException("your name not found");
                 });
 
-        return new LoginUser(adminAccount.getName(), adminAccount.getPassword(), authorityList);
+        return new AdminLoginUser(adminAccount.getName(), adminAccount.getPassword(), authorityList);
     }
 }

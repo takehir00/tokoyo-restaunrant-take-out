@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-public class LoginUser extends User {
-    public LoginUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+public class AdminLoginUser extends User {
+    public AdminLoginUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 }
