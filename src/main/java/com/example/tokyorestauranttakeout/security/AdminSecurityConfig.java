@@ -53,7 +53,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .antMatcher(AdminServerPaths.ROOT + "/**")
                 .authorizeRequests(authorize ->
-                        authorize.anyRequest().authenticated()
+                        authorize.anyRequest().permitAll()
                 );
 
         //ログイン設定

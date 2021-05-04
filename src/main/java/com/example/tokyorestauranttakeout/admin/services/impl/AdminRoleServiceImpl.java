@@ -1,9 +1,11 @@
 package com.example.tokyorestauranttakeout.admin.services.impl;
 
 import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleUpdateForm;
 import com.example.tokyorestauranttakeout.admin.models.role.AdminRoleModel;
 import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleDeleteFormResponse;
 import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleIndexResponse;
+import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminRoleService;
 import com.example.tokyorestauranttakeout.entity.AdminRole;
 import com.example.tokyorestauranttakeout.repositories.AdminRoleRepository;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,6 +46,30 @@ public class AdminRoleServiceImpl implements AdminRoleService {
         adminRole.setCreatedAt(now);
         adminRole.setUpdatedAt(now);
         adminRoleRepository.create(adminRole);
+    }
+
+    @Override
+    public AdminRoleUpdateFormResponse getUpdateFormResponse(Integer roleId) {
+        AdminRoleUpdateFormResponse response = new AdminRoleUpdateFormResponse();
+
+        AdminRole adminRole = adminRoleRepository.get(roleId)
+                .orElseThrow(RuntimeException::new);
+
+        AdminRoleUpdateForm updateForm = new AdminRoleUpdateForm();
+        updateForm.setName(adminRole.getName());
+
+        response.roleId = adminRole.getId();
+        response.updateForm = updateForm;
+        return response;
+    }
+
+    @Override
+    public void update(Integer roleId, AdminRoleUpdateForm updateForm) {
+        AdminRole adminRole = adminRoleRepository.get(roleId)
+                .orElseThrow(RuntimeException::new);
+        adminRole.setName(updateForm.getName());
+
+        adminRoleRepository.update(adminRole);
     }
 
     @Override

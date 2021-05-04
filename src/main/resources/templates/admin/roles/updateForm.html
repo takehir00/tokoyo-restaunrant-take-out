@@ -16,16 +16,16 @@
         <div class="col-sm-2" th:replace="~{admin/sidebar :: copy}"></div>
         <div class="col-sm-10">
             <div class="registerform">
-                <h3 class="registerform-title">ロール登録</h3>
-                <form method="post" th:action="@{'/admin/roles/register'}" th:object="${registerForm}">
+                <h3 class="registerform-title">ロール更新</h3>
+                <form th:method="post" th:action="@{/admin/roles/update/{roleId}(roleId=${roleId})}" th:object="${updateForm}">
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="name">ロール名</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="ロール名を入力してください">
+                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="ロール名を入力してください">
                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">登録</button>
+                    <button type="submit" class="btn btn-primary">更新</button>
                 </form>
             </div>
         </div>
