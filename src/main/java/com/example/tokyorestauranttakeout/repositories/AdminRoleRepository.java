@@ -18,16 +18,22 @@ public interface AdminRoleRepository {
     Optional<AdminRole> get(Integer id);
 
     /**
+     * 一覧取得
+     * @return 管理画面ロール一覧リスト
+     */
+    List<AdminRole> selectAll();
+
+    /**
      * 登録
      * @param adminRole 管理画面ロール
      */
     void create(AdminRole adminRole);
 
     /**
-     * 一覧取得
-     * @return 管理画面ロール一覧リスト
+     * 更新
+     * @param adminRole 管理画面ロール
      */
-    List<AdminRole> selectAll();
+    void update(AdminRole adminRole);
 
     /**
      * 削除

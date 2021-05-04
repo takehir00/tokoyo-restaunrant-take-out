@@ -2,6 +2,8 @@ package com.example.tokyorestauranttakeout.admin.controllers;
 
 import com.example.tokyorestauranttakeout.AdminServerPaths;
 import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleCreateForm;
+import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleUpdateForm;
+import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminRoleService;
 import com.example.tokyorestauranttakeout.security.AdminLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +82,59 @@ public class AdminRoleController {
             return "redirect:" + AdminServerPaths.ROLE +  "/register";
         }
         adminRoleService.create(registerForm);
+        return "redirect:" + AdminServerPaths.ROLE;
+    }
+
+    /**
+     * 更新画面表示
+     * @param mav
+     * @return
+     */
+    @GetMapping("/update/{roleId}")
+    public ModelAndView updateForm(@AuthenticationPrincipal AdminLoginUser adminLoginUser,
+                                   ModelAndView mav,
+                                   @PathVariable Integer roleId,
+                                   @ModelAttribute("modelMap") ModelMap modelMap) {
+        // バリデーションエラーがあった場合
+        if (modelMap.get("updateForm") != null) {
+            AdminRoleUpdateForm updateForm =
+                    (AdminRoleUpdateForm) modelMap.get("updateForm");
+            mav.addObject("roleId", roleId);
+            mav.addObject("updateForm", updateForm);
+        } else {
+            AdminRoleUpdateFormResponse updateFormResponse = adminRoleService.getUpdateFormResponse(roleId);
+            mav.addObject("roleId", updateFormResponse.getRoleId());
+            mav.addObject("updateForm", updateFormResponse.getUpdateForm());
+        }
+        mav.addObject("account", adminLoginUser);
+        mav.addObject("org.springframework.validation.BindingResult.updateForm", modelMap.get("bindingResult"));
+        mav.setViewName("admin/roles/updateForm");
+        return mav;
+    }
+
+    /**
+     * 更新
+     * @param updateForm
+     * @param bindingResult
+     * @param attributes
+     * @return
+     * @throws IOException
+     */
+    @Transactional
+    @PostMapping("/update/{roleId}")
+    public String update(
+            @Validated @ModelAttribute("updateForm") AdminRoleUpdateForm updateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes,
+            @PathVariable Integer roleId) throws IOException {
+        if (bindingResult.hasErrors()) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("updateForm", updateForm);
+            modelMap.addAttribute("bindingResult", bindingResult);
+            attributes.addFlashAttribute("modelMap",modelMap);
+            return "redirect:" + AdminServerPaths.ROLE + "/update/" + roleId;
+        }
+        adminRoleService.update(roleId,updateForm);
         return "redirect:" + AdminServerPaths.ROLE;
     }
 
