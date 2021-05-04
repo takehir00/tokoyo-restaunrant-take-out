@@ -1,6 +1,7 @@
-package com.example.tokyorestauranttakeout.security;
+package com.example.tokyorestauranttakeout.security.admin;
 
 import com.example.tokyorestauranttakeout.AdminServerPaths;
+import com.example.tokyorestauranttakeout.security.SecurityOrderConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

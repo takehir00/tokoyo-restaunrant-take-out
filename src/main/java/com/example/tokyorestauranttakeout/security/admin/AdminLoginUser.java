@@ -1,4 +1,4 @@
-package com.example.tokyorestauranttakeout.security;
+package com.example.tokyorestauranttakeout.security.admin;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
