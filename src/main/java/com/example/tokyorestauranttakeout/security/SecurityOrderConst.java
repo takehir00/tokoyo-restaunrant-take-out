@@ -11,7 +11,12 @@ public class SecurityOrderConst {
     public final static int ADMIN = 0;
 
     /**
+     * クライアント画面セキュリティ
+     */
+    public final static int CLIENT = 1;
+
+    /**
      * 認証不要パスセキュリティ
      */
-    public final static int PUBLIC = 1;
+    public final static int PUBLIC = 2;
 }
