@@ -1,7 +1,7 @@
 package com.example.tokyorestauranttakeout;
 
 /**
- * 管理画面サーバー関連定数
+ * 管理画面パス
  */
 public class AdminServerPaths {
 
