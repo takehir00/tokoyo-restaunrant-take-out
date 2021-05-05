@@ -3,6 +3,7 @@ package com.example.tokyorestauranttakeout.security.client;
 import com.example.tokyorestauranttakeout.entity.ClientAccount;
 import com.example.tokyorestauranttakeout.repositories.ClientAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +23,7 @@ public class ClientUserDaoRealm implements UserDetailsService {
                     throw new UsernameNotFoundException("your email not found");
                 });
         return new ClientLoginUser(
+                clientAccount.getId(),
                 clientAccount.getEmail(),
                 clientAccount.getPassword(),
                 clientAccount.getName(),

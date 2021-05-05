@@ -7,11 +7,18 @@ import java.util.Collection;
 
 public class ClientLoginUser extends User {
 
+    private final Integer userId;
+
     private String name;
 
-    public ClientLoginUser(String email, String password, String name,Collection<? extends GrantedAuthority> authorities) {
+    public ClientLoginUser(Integer userId,String email, String password, String name, Collection<? extends GrantedAuthority> authorities) {
         super(email, password, authorities);
         this.name = name;
+        this.userId = userId;
+    }
+
+    public Integer getUserId() {
+        return userId;
     }
 
     public String getName() {

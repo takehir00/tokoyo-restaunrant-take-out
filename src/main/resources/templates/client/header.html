@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>TOSHIMA飲食テイクアウト情報館</title>
     <meta http-equiv="Content-Type"
@@ -11,7 +11,17 @@
 <body>
     <header th:fragment="copy">
         <div class="navbar bg-dark navbar-dark">
-            <a href="/client" class="text-light navbar-brand">TOSHIMA飲食テイクアウト情報館</a>
+            <div class="">
+                <a href="/client/pub" class="text-light navbar-brand">TOSHIMA飲食テイクアウト情報館</a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="flex-row-reverse mr-2 text-light">
+                <a th:href="@{/client/accounts/{accountId}(accountId=${#authorization.getAuthentication().getPrincipal().getUserId()})}"  th:text="${#authentication.name}"  class="mr-3 text-light"></a>
+                <a th:href="@{/client/auth/logout}" class="mr-2 text-light">ログアウト</a>
+            </div>
+            <div th:unless="${#authorization.expression('isAuthenticated()')}" class="flex-row-reverse mr-2 text-light">
+                <a class="mr-3 text-light" th:href="@{/client/accounts/register}">アカウント登録</a>
+                <a class="mr-2 text-light" th:href="@{/client/auth/login}">ログイン</a>
+            </div>
         </div>
         <div class="jumbotron top-image">
             <div class="container">
