@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.security.client;
 
 import com.example.tokyorestauranttakeout.AdminServerPaths;
+import com.example.tokyorestauranttakeout.ClientServerPaths;
 import com.example.tokyorestauranttakeout.security.SecurityOrderConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,10 +26,8 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private  ClientUserDaoRealm clientUserDaoRealm;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * UserDetailインターフェースを実装した独自の認証レルムを使用する設定
@@ -39,7 +38,7 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(clientUserDaoRealm)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
     /**
@@ -49,22 +48,23 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // クライアント画面パスにセキュリティをかける
-        httpSecurity
-                .antMatcher(AdminServerPaths.ROOT + "/**")
-                .authorizeRequests(authorize ->
-                        authorize.anyRequest().authenticated()
-                );
+        httpSecurity.authorizeRequests(authorize ->
+                authorize.antMatchers(
+                        ClientServerPaths.PUB + "/**",
+                                    ClientServerPaths.ACCOUNT + "/register").permitAll()
+                        .antMatchers(
+                                ClientServerPaths.ROOT + "/**").authenticated());
 
         //ログイン設定
         httpSecurity.formLogin()
                 //ログイン画面のURL
-                .loginPage(AdminServerPaths.AUTH +"/login")
+                .loginPage(ClientServerPaths.AUTH +"/login")
                 //認可を処理する
                 //.loginProcessingUrl("/authenticate")
                 //ログイン成功時の遷移先
-                .successForwardUrl(AdminServerPaths.AUTH + "/success")
+                .successForwardUrl(ClientServerPaths.AUTH + "/success")
                 //ログイン失敗時の遷移先
-                .failureForwardUrl(AdminServerPaths.AUTH + "/failure")
+                .failureForwardUrl(ClientServerPaths.AUTH + "/failure")
                 //ログインidのパラメータ名
                 .usernameParameter("email")
                 //パスワードのパラメータ名
@@ -72,13 +72,13 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //ログアウト設定
         httpSecurity.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("hoge"))
+                //.logoutRequestMatcher(new AntPathRequestMatcher("hoge"))
                 //cookieを破棄する
                 //.deleteCookies("/session")
                 //ログアウト画面のURL
-                .logoutUrl(AdminServerPaths.AUTH + "/logout")
+                .logoutUrl(ClientServerPaths.AUTH + "/logout")
                 //ログアウト後の遷移先
-                //.logoutSuccessUrl("/logout")
+                .logoutSuccessUrl(ClientServerPaths.PUB)
                 //セッションを破棄する
                 .invalidateHttpSession(true).permitAll();
     }

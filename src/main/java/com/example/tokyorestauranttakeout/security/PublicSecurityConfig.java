@@ -1,6 +1,7 @@
 package com.example.tokyorestauranttakeout.security;
 
 import com.example.tokyorestauranttakeout.AdminServerPaths;
+import com.example.tokyorestauranttakeout.ClientServerPaths;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,15 +25,12 @@ public class PublicSecurityConfig extends WebSecurityConfigurerAdapter {
         String[] permittedUrls = {
                 "/css/**",
                 "/images/**",
-                "/webjars/bootstrap/4.3.1/css/bootstrap.css",
-                "/pub/**",
-                "/client/register"};
+                "/webjars/bootstrap/4.3.1/css/bootstrap.css",};
 
         //認証がかからないエンドポイントを明示する。
         httpSecurity.authorizeRequests()
                 .antMatchers(permittedUrls)
                 .permitAll()
-                .anyRequest().authenticated();
-
+                .anyRequest().denyAll();
     }
 }

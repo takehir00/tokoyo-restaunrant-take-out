@@ -1,7 +1,7 @@
 package com.example.tokyorestauranttakeout.client.controllers;
 
+import com.example.tokyorestauranttakeout.ClientServerPaths;
 import com.example.tokyorestauranttakeout.client.forms.ClientAccountCreateForm;
-import com.example.tokyorestauranttakeout.client.forms.ClientAccountDeleteForm;
 import com.example.tokyorestauranttakeout.client.forms.ClientAccountUpdateForm;
 import com.example.tokyorestauranttakeout.client.services.ClientAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/client/accounts")
+@RequestMapping(ClientServerPaths.ACCOUNT)
 public class ClientAccountController {
 
     @Autowired
     ClientAccountService clientAccountService;
-
-    /**
-     * 詳細画面
-     * @param mav
-     * @return
-     */
-    @GetMapping("/{accountId}")
-    public ModelAndView show(ModelAndView mav,
-                             @PathVariable Integer accountId) {
-        mav.addObject("showResponse",
-                clientAccountService.getShowResponse(accountId));
-        mav.setViewName("client/accounts/show");
-        return mav;
-    }
 
     /**
      * 登録画面表示
@@ -80,6 +66,22 @@ public class ClientAccountController {
         clientAccountService.create(registerForm);
         return "redirect:/client/login";
     }
+
+    /**
+     * 詳細画面
+     * @param mav
+     * @return
+     */
+    @GetMapping("/{accountId}")
+    public ModelAndView show(ModelAndView mav,
+                             @PathVariable Integer accountId) {
+        mav.addObject("showResponse",
+                clientAccountService.getShowResponse(accountId));
+        mav.setViewName("client/accounts/show");
+        return mav;
+    }
+
+
 
     /**
      * 更新画面表示
