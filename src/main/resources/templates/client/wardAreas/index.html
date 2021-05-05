@@ -14,7 +14,7 @@
         <h2 class="border-bottom">エリアを選ぶ</h2>
         <div class="wards row" >
             <div class="ward col-sm-3" th:each="wardArea : ${wardAreaIndexResponse.wardAreaIndexModelList}">
-                <a class="border-bottom" th:text="${wardArea.name}" th:href="@{/client/wardarea/{wardAreaId}(wardAreaId=${wardArea.id})}"></a>
+                <a class="border-bottom" th:text="${wardArea.name}" th:href="@{/client/pub/wardarea/{wardAreaId}(wardAreaId=${wardArea.id})}"></a>
                 <img th:src="@{data:{mimeType};base64,{image}(image=${wardArea.image},mimeType=${wardArea.mimeType})}" class="img-fluid rounded">
             </div>
         </div>
