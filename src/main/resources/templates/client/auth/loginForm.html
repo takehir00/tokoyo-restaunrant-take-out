@@ -10,11 +10,11 @@
     <link rel="stylesheet" media="all" th:href="@{/css/admin-registerform.css}" />
 </head>
 <body>
-<div th:insert="~{admin/header :: copy}"></div>
+<div th:insert="~{client/header :: copy}"></div>
 <div class="container-fluid p-0">
     <div class="registerform">
         <h3 class="registerform-title">ログイン</h3>
-        <form method="post" th:action="@{'/login'}" th:object="${loginForm}">
+        <form method="post" th:action="@{'/client/auth/login'}" th:object="${loginForm}">
             <div class="row">
                 <div class="form-group col-sm-12">
                     <label for="email">メールアドレス</label>

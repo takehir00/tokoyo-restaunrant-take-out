@@ -1,6 +1,7 @@
-package com.example.tokyorestauranttakeout.security;
+package com.example.tokyorestauranttakeout.security.admin;
 
 import com.example.tokyorestauranttakeout.AdminServerPaths;
+import com.example.tokyorestauranttakeout.security.SecurityOrderConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,11 +25,8 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AdminUserDaoRealm adminUserDaoRealm;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * UserDetailインターフェースを実装した独自の認証レルムを使用する設定
@@ -39,7 +37,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(adminUserDaoRealm)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
     /**

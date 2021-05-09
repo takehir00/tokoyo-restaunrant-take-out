@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.client.controllers;
 
+import com.example.tokyorestauranttakeout.ClientServerPaths;
 import com.example.tokyorestauranttakeout.client.forms.QuestionRegisterForm;
 import com.example.tokyorestauranttakeout.client.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping(ClientServerPaths.QUESTION)
 public class QuestionsController {
 
     @Autowired
@@ -27,7 +30,7 @@ public class QuestionsController {
      * @param mav
      * @return
      */
-    @GetMapping("/client/questions")
+    @GetMapping
     public ModelAndView index(
             ModelAndView mav,
             @ModelAttribute("modelMap") ModelMap modelMap) {
@@ -52,7 +55,7 @@ public class QuestionsController {
      * @throws IOException
      */
     @Transactional
-    @PostMapping("/client/questions/register")
+    @PostMapping("/register")
     public String register(
             @Validated @ModelAttribute("registerForm") QuestionRegisterForm registerForm,
             BindingResult bindingResult,
@@ -62,9 +65,9 @@ public class QuestionsController {
             modelMap.addAttribute("registerForm",registerForm);
             modelMap.addAttribute("bindingResult", bindingResult);
             attributes.addFlashAttribute("modelMap",modelMap);
-            return "redirect:/client/questions";
+            return "redirect:" + ClientServerPaths.QUESTION;
         }
         questionService.create(registerForm);
-        return "redirect:/client";
+        return "redirect:" + ClientServerPaths.PUB;
     }
 }

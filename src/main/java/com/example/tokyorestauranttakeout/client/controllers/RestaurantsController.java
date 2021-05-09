@@ -1,13 +1,16 @@
 package com.example.tokyorestauranttakeout.client.controllers;
 
+import com.example.tokyorestauranttakeout.ClientServerPaths;
 import com.example.tokyorestauranttakeout.client.services.RestaurantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(ClientServerPaths.RESTAURANT)
 public class RestaurantsController {
 
     @Autowired
@@ -18,7 +21,7 @@ public class RestaurantsController {
      * @param mav
      * @return
      */
-    @GetMapping("/client/restaurants")
+    @GetMapping
     public ModelAndView index(ModelAndView mav) {
         mav.setViewName("client/restaurants/index");
         return mav;
@@ -29,7 +32,7 @@ public class RestaurantsController {
      * @param mav
      * @return
      */
-    @GetMapping("/client/restaurants/{restaurantId}")
+    @GetMapping("/{restaurantId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Integer restaurantId) {
         mav.addObject("restaurantsShowResponse",

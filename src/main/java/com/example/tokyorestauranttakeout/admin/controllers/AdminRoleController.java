@@ -5,7 +5,7 @@ import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleCreateForm;
 import com.example.tokyorestauranttakeout.admin.forms.role.AdminRoleUpdateForm;
 import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleUpdateFormResponse;
 import com.example.tokyorestauranttakeout.admin.services.AdminRoleService;
-import com.example.tokyorestauranttakeout.security.AdminLoginUser;
+import com.example.tokyorestauranttakeout.security.admin.AdminLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

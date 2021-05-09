@@ -38,6 +38,7 @@ dependencies {
 	}
 	compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.2.0.RELEASE'
 	compile "org.springframework.boot:spring-boot-starter-security"
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	testImplementation 'org.springframework.security:spring-security-test'
 
 }

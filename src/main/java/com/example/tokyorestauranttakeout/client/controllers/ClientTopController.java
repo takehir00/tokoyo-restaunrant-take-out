@@ -5,14 +5,15 @@ import com.example.tokyorestauranttakeout.client.services.WardAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * クライアントトップ画面コントローラー
+ */
 @Controller
-@RequestMapping(ClientServerPaths.WARD_AREA)
-public class WardAreasController {
-
+@RequestMapping(ClientServerPaths.PUB)
+public class ClientTopController {
     @Autowired
     WardAreaService wardAreaService;
 
@@ -21,11 +22,10 @@ public class WardAreasController {
      * @param mav
      * @return
      */
-    @GetMapping("/{wardAreaId}")
-    public ModelAndView show(ModelAndView mav,
-                             @PathVariable Integer wardAreaId) {
-        mav.addObject("wardAreaShowResponse", wardAreaService.getShowResponse(wardAreaId));
-        mav.setViewName("client/wardAreas/show");
+    @GetMapping
+    public ModelAndView index(ModelAndView mav) {
+        mav.addObject("wardAreaIndexResponse", wardAreaService.getIndexResponse());
+        mav.setViewName("client/wardAreas/index");
         return mav;
     }
 }
