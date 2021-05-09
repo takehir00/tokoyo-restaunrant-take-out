@@ -1,6 +1,5 @@
 package com.example.tokyorestauranttakeout;
 
-import com.example.tokyorestauranttakeout.security.CustomLoginUrlAuthenticationEntryPoint;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,11 +30,5 @@ public class ApplicationConfiguration {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-
-    @Bean
-    public CustomLoginUrlAuthenticationEntryPoint customLoginUrlAuthenticationEntryPoint() {
-        return new CustomLoginUrlAuthenticationEntryPoint(ClientServerPaths.AUTH +"/login");
     }
 }

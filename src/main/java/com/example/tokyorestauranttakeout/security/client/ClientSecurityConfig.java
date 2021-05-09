@@ -1,25 +1,15 @@
 package com.example.tokyorestauranttakeout.security.client;
 
-import com.example.tokyorestauranttakeout.AdminServerPaths;
 import com.example.tokyorestauranttakeout.ClientServerPaths;
-import com.example.tokyorestauranttakeout.security.CustomLoginUrlAuthenticationEntryPoint;
 import com.example.tokyorestauranttakeout.security.SecurityOrderConst;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * クライアント画面セキュリティ設定
@@ -34,9 +24,6 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private CustomLoginUrlAuthenticationEntryPoint customLoginUrlAuthenticationEntryPoint;
 
     /**
      * UserDetailインターフェースを実装した独自の認証レルムを使用する設定
@@ -77,10 +64,7 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
                 //ログインidのパラメータ名
                 .usernameParameter("email")
                 //パスワードのパラメータ名
-                .passwordParameter("password").permitAll()
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(customLoginUrlAuthenticationEntryPoint);
+                .passwordParameter("password").permitAll();
 
         //ログアウト設定
         httpSecurity.logout()
