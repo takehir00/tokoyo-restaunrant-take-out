@@ -1,0 +1,28 @@
+<configuration>
+
+<!--    ルートロガー用ログ出力設定アペンダー-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--    アクセスロガー用出力設定アペンダー-->
+    <appender name="ACCESS_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>log/TokyoRestaurantAccess.log</file>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--    アクセスロガー-->
+    <logger name="com.example.tokyorestauranttakeout.client.controllers.AuthController" level="INFO" >
+        <appender-ref ref="ACCESS_LOG" />
+    </logger>
+
+<!--    ルートロガー-->
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

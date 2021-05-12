@@ -1,6 +1,9 @@
 package com.example.tokyorestauranttakeout.client.controllers;
 
 import com.example.tokyorestauranttakeout.ClientServerPaths;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +22,8 @@ public class AuthController {
      */
     @GetMapping("/login")
     public ModelAndView login(ModelAndView mav) {
+        Logger logger = LoggerFactory.getLogger(AuthController.class);
+        logger.info("Login画面に遷移しました");
         mav.setViewName("client/auth/loginForm");
         return mav;
     }
