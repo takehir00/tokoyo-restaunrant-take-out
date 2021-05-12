@@ -17,7 +17,7 @@
     </appender>
 
 <!--    アクセスロガー-->
-    <logger name="com.example.tokyorestauranttakeout.client.controllers.AuthController" level="INFO" >
+    <logger name="com.example.tokyorestauranttakeout.client.controllers.AuthController" level="INFO" additivity="false" >
         <appender-ref ref="ACCESS_LOG" />
     </logger>
 
