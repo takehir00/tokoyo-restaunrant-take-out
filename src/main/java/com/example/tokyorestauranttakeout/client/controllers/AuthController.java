@@ -22,8 +22,6 @@ public class AuthController {
      */
     @GetMapping("/login")
     public ModelAndView login(ModelAndView mav) {
-        Logger logger = LoggerFactory.getLogger(AuthController.class);
-        logger.info("Login画面に遷移しました");
         mav.setViewName("client/auth/loginForm");
         return mav;
     }

@@ -1,5 +1,7 @@
 <configuration>
 
+    <property name="APPLICATION_LOG_FILE" value="log/TokyoRestaurantApplication" />
+
 <!--    ルートロガー用ログ出力設定アペンダー-->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -7,9 +9,26 @@
         </encoder>
     </appender>
 
+    <appender name="APPLICATION_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${APPLICATION_LOG_FILE}.log</file>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg  %ex%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${APPLICATION_LOG_FILE}.%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+    </appender>
+
 <!--    アクセスロガー用出力設定アペンダー-->
-    <appender name="ACCESS_LOG" class="ch.qos.logback.core.FileAppender">
+    <appender name="ACCESS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/TokyoRestaurantAccess.log</file>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>TokyoRestaurantAccess.%d{yyyyMMdd}.log</fileNamePattern>
+                    <maxHistory>5</maxHistory>
+                </rollingPolicy>
 
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -17,12 +36,13 @@
     </appender>
 
 <!--    アクセスロガー-->
-    <logger name="com.example.tokyorestauranttakeout.client.controllers.AuthController" level="INFO" additivity="false" >
+    <logger name="com.example.tokyorestauranttakeout.LoggingInterceptor" level="INFO" additivity="false" >
         <appender-ref ref="ACCESS_LOG" />
     </logger>
 
 <!--    ルートロガー-->
     <root level="debug">
         <appender-ref ref="STDOUT" />
+        <appender-ref ref="APPLICATION_LOG" />
     </root>
 </configuration>
