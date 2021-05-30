@@ -1,6 +1,5 @@
 package com.example.tokyorestauranttakeout.admin.controllers;
 
-import com.example.tokyorestauranttakeout.entity.Account;
 import com.example.tokyorestauranttakeout.entity.AdminAccount;
 import com.example.tokyorestauranttakeout.repositories.AdminAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;

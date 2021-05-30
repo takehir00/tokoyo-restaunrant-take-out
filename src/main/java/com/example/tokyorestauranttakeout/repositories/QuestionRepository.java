@@ -8,55 +8,36 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public class QuestionRepository {
-
-    @Autowired
-    private final QuestionMapper questionMapper;
-
-    public QuestionRepository(QuestionMapper questionMapper) {
-        this.questionMapper = questionMapper;
-    }
+public interface QuestionRepository {
 
     /**
      * 登録
      * @param question
      */
-    public void create(Question question) {
-        questionMapper.insert(question);
-    }
+    void create(Question question);
 
     /**
      * 全件取得
      * @return
      */
-    public List<Question> selectAll() {
-        QuestionExample example = new QuestionExample();
-        return questionMapper.selectByExample(example);
-    }
+    List<Question> selectAll();
 
     /**
      * IDで取得
      * @param questionId
      * @return
      */
-    public Question selectById(Integer questionId) {
-        return questionMapper.selectByPrimaryKey(questionId);
-    }
+    Question selectById(Integer questionId);
 
     /**
      * 更新
      * @param question
      */
-    public void update(Question question) {
-        questionMapper.updateByPrimaryKey(question);
-    }
+    void update(Question question);
 
     /**
      * 削除
      * @param id
      */
-    public void delete(Integer id) {
-        questionMapper.deleteByPrimaryKey(id);
-    }
+    void delete(Integer id);
 }
