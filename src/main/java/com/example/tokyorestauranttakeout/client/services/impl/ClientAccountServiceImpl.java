@@ -9,7 +9,6 @@ import com.example.tokyorestauranttakeout.entity.ClientAccount;
 import com.example.tokyorestauranttakeout.repositories.ClientAccountRepository;
 import com.example.tokyorestauranttakeout.util.DateUtil;
 import com.example.tokyorestauranttakeout.util.PasswordUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,8 +16,14 @@ import java.util.Date;
 @Service
 public class ClientAccountServiceImpl implements ClientAccountService {
 
-    @Autowired
-    ClientAccountRepository clientAccountRepository;
+    private final ClientAccountRepository clientAccountRepository;
+
+    private final PasswordUtil passwordUtil;
+
+    public ClientAccountServiceImpl(ClientAccountRepository clientAccountRepository, PasswordUtil passwordUtil) {
+        this.clientAccountRepository = clientAccountRepository;
+        this.passwordUtil = passwordUtil;
+    }
 
     @Override
     public ClientAccountShowResponse getShowResponse(Integer accountId) {
@@ -35,7 +40,7 @@ public class ClientAccountServiceImpl implements ClientAccountService {
         Date now = new Date();
         ClientAccount clientAccount = new ClientAccount();
         clientAccount.setEmail(registerForm.getEmail());
-        clientAccount.setPassword(PasswordUtil.encode(registerForm.getPassword()));
+        clientAccount.setPassword(passwordUtil.encode(registerForm.getPassword()));
         clientAccount.setCreatedAt(now);
         clientAccount.setUpdatedAt(now);
         clientAccountRepository.create(clientAccount);
