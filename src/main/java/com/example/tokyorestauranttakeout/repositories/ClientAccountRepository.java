@@ -9,75 +9,44 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class ClientAccountRepository {
-
-    @Autowired
-    private final ClientAccountMapper mapper;
-
-    public ClientAccountRepository(ClientAccountMapper mapper) {
-        this.mapper = mapper;
-    }
+public interface ClientAccountRepository {
 
     /**
      * メールアドレスで検索
      * @param email
      * @return
      */
-    public Optional<ClientAccount> selectByEmail(String email) {
-        ClientAccountExample example = new ClientAccountExample();
-        ClientAccountExample.Criteria criteria = example.createCriteria();
-        criteria.andEmailEqualTo(email);
-
-        List<ClientAccount> clientAccountList = mapper.selectByExample(example);
-
-        if (clientAccountList.isEmpty()) {
-            return Optional.empty();
-        }
-        //メールアドレスは一意なので１件目を取得
-        return Optional.of(clientAccountList.get(0));
-    }
+    Optional<ClientAccount> selectByEmail(String email);
 
     /**
      * IDで取得
      * @param accountId ID
      * @return クライアントアカウント
      */
-    public Optional<ClientAccount> selectById(Integer accountId) {
-        return Optional.ofNullable(mapper.selectByPrimaryKey(accountId));
-    }
+    Optional<ClientAccount> selectById(Integer accountId);
 
     /**
      * 全権取得
      * @return クライアントアカウントリスト
      */
-    public List<ClientAccount> selectAll() {
-        ClientAccountExample example = new ClientAccountExample();
-        return mapper.selectByExample(example);
-    }
+    List<ClientAccount> selectAll();
 
     /**
      * 登録
      * @param clientAccount クライアントアカウント
      */
-    public void create(ClientAccount clientAccount) {
-        mapper.insert(clientAccount);
-    }
+    void create(ClientAccount clientAccount);
 
     /**
      * 更新
      * @param clientAccount
      */
-    public void update(ClientAccount clientAccount) {
-        mapper.updateByPrimaryKey(clientAccount);
-    }
+    void update(ClientAccount clientAccount);
 
     /**
      * 削除
      * @param id
      */
-    public void delete(Integer id) {
-        mapper.deleteByPrimaryKey(id);
-    }
+    void delete(Integer id);
 
 }

@@ -12,46 +12,27 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 
-@Component
-public class MenuRepository {
-    @Autowired
-    private final MenuMapper menuMapper;
-    @Autowired
-    private final CustomMenuMapper customMenuMapper;
-
-    public MenuRepository(MenuMapper mapper, CustomMenuMapper customMenuMapper) throws IOException {
-        this.menuMapper = mapper;
-        this.customMenuMapper = customMenuMapper;
-    }
+public interface MenuRepository {
 
     /**
      * 全件取得
      * @return
      */
-    public List<CustomMenu> selectAllWithRestaurant() {
-        return customMenuMapper.select();
-    }
+    List<CustomMenu> selectAllWithRestaurant();
 
     /**
      * 店舗IDで取得
      * @param restaurantId
      * @return
      */
-    public List<Menu> selectByRestaurantId(Integer restaurantId) {
-        MenuExample example = new MenuExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andRestaurantIdEqualTo(restaurantId);
-        return menuMapper.selectByExampleWithBLOBs(example);
-    }
+    List<Menu> selectByRestaurantId(Integer restaurantId);
 
     /**
      * IDで取得
      * @param id
      * @return
      */
-    public CustomMenu selectByIdWithRestaurant(Integer id){
-        return customMenuMapper.selectByPrimaryKey(id);
-    }
+    CustomMenu selectByIdWithRestaurant(Integer id);
 
     /**
      * idで検索
@@ -59,31 +40,23 @@ public class MenuRepository {
      * @return
      * @throws IOException
      */
-    public Menu selectById(Integer id){
-        return menuMapper.selectByPrimaryKey(id);
-    }
+    Menu selectById(Integer id);
 
     /**
      * 登録
      * @param menu
      */
-    public void create(Menu menu) {
-        menuMapper.insert(menu);
-    }
+    void create(Menu menu);
 
     /**
      * 更新
      * @param menu
      */
-    public void update(Menu menu) {
-        menuMapper.updateByPrimaryKeyWithBLOBs(menu);
-    }
+    void update(Menu menu);
 
     /**
      * 削除
      * @param id
      */
-    public void delete(Integer id) {
-        menuMapper.deleteByPrimaryKey(id);
-    }
+    void delete(Integer id);
 }

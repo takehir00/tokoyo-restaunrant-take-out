@@ -9,54 +9,36 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 
-@Component
-public class WardRepository {
-    @Autowired
-    private final WardMapper mapper;
-
-    public WardRepository(WardMapper mapper) throws IOException {
-        this.mapper = mapper;
-    }
+public interface WardRepository {
 
     /**
      * 全件取得
      * @return
      */
-    public List<Ward> selectAll() {
-        WardExample example = new WardExample();
-        return mapper.selectByExample(example);
-    }
+    List<Ward> selectAll();
 
     /**
      * 登録
      * @param ward
      */
-    public void create(Ward ward) {
-        mapper.insert(ward);
-    }
+    void create(Ward ward);
 
     /**
      * IDで取得
      * @param wardId
      * @return
      */
-    public Ward selectById(Integer wardId) {
-        return mapper.selectByPrimaryKey(wardId);
-    }
+    Ward selectById(Integer wardId);
 
     /**
      * 更新
      * @param ward
      */
-    public void update(Ward ward) {
-        mapper.updateByPrimaryKey(ward);
-    }
+    void update(Ward ward);
 
     /**
      * 削除
      * @param wardId
      */
-    public void delete(Integer wardId) {
-        mapper.deleteByPrimaryKey(wardId);
-    }
+    void delete(Integer wardId);
 }
