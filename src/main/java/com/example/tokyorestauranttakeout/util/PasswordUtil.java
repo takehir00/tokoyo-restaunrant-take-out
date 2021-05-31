@@ -4,5 +4,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public interface PasswordUtil {
 
-    String encode(String decodedPassword);
+    /**
+     * パスワードをエンコードする
+     *
+     * @param rawPassword エンコード前のパスワード
+     * @return エンコードしたパスワード
+     */
+    String encode(String rawPassword);
 }
