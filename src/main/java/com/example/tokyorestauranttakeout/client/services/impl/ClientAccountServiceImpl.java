@@ -7,11 +7,11 @@ import com.example.tokyorestauranttakeout.client.responses.ClientAccountShowResp
 import com.example.tokyorestauranttakeout.client.services.ClientAccountService;
 import com.example.tokyorestauranttakeout.entity.ClientAccount;
 import com.example.tokyorestauranttakeout.repositories.ClientAccountRepository;
-import com.example.tokyorestauranttakeout.util.DateUtil;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import com.example.tokyorestauranttakeout.util.PasswordUtil;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 public class ClientAccountServiceImpl implements ClientAccountService {
@@ -37,7 +37,7 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 
     @Override
     public void create(ClientAccountCreateForm registerForm) {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         ClientAccount clientAccount = new ClientAccount();
         clientAccount.setEmail(registerForm.getEmail());
         clientAccount.setPassword(passwordUtil.encode(registerForm.getPassword()));
@@ -53,7 +53,7 @@ public class ClientAccountServiceImpl implements ClientAccountService {
                 // TODO アカウントが利用できません、ログインし直すかアカウントを登録し直してください画面を表示する。
                 .orElseThrow(RuntimeException::new);
         clientAccount.setName(updateForm.name);
-        clientAccount.setUpdatedAt(DateUtil.now());
+        clientAccount.setUpdatedAt(DateTimeUtil.now());
         clientAccountRepository.update(clientAccount);
     }
 

@@ -9,10 +9,12 @@ import com.example.tokyorestauranttakeout.admin.responses.ward.AdminWardShowResp
 import com.example.tokyorestauranttakeout.admin.services.AdminWardService;
 import com.example.tokyorestauranttakeout.entity.Ward;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -53,7 +55,7 @@ public class AdminWardServiceImpl implements AdminWardService {
 
     @Override
     public void create(WardRegisterForm wardRegisterForm) throws IOException {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         Ward ward = new Ward();
         ward.setName(wardRegisterForm.name);
         byte[] data = wardRegisterForm.getImage().getBytes();
@@ -76,7 +78,7 @@ public class AdminWardServiceImpl implements AdminWardService {
 
     @Override
     public void update(WardUpdateForm wardUpdateForm) {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         Ward ward = wardRepository.selectById(wardUpdateForm.id);
         ward.setName(wardUpdateForm.name);
         ward.setUpdatedAt(now);

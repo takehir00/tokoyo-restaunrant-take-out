@@ -14,6 +14,7 @@
 
         <javaTypeResolver >
             <property name="forceBigDecimals" value="false" />
+            <property name="useJSR310Types" value="true" />
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="com.example.tokyorestauranttakeout.entity" targetProject="src/main/java">
@@ -28,10 +29,10 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.tokyorestauranttakeout.mapper"  targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <table tableName="admin_role"></table>
+<!--        <table tableName="admin_role"></table>-->
 
 <!--        <table tableName="admin_account"></table>-->
-<!--        <table tableName="account"></table>-->
+<!--        <table tableName="client_account"></table>-->
 <!--        <table tableName="menu"></table>-->
 <!--        <table tableName="ward"></table>-->
 <!--        <table tableName="ward_area"></table>-->

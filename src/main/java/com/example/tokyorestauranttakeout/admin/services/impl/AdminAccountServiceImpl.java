@@ -10,12 +10,13 @@ import com.example.tokyorestauranttakeout.admin.responses.account.AdminAccountUp
 import com.example.tokyorestauranttakeout.admin.services.AdminAccountService;
 import com.example.tokyorestauranttakeout.entity.AdminAccount;
 import com.example.tokyorestauranttakeout.repositories.AdminAccountRepository;
-import com.example.tokyorestauranttakeout.util.DateUtil;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
 
     @Override
     public void create(AdminAccountCreateForm registerForm) {
-        Date now = DateUtil.now();
+        LocalDateTime now = DateTimeUtil.now();
         AdminAccount account = new AdminAccount();
         account.setName(registerForm.getName());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -72,7 +73,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
         AdminAccount account = accountRepository.selectById(updateForm.getId());
         if (account != null) {
             account.setName(updateForm.getName());
-            account.setUpdatedAt(DateUtil.now());
+            account.setUpdatedAt(DateTimeUtil.now());
             accountRepository.update(account);
         }
     }

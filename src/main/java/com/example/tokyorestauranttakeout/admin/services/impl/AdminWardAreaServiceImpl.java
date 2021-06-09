@@ -12,11 +12,13 @@ import com.example.tokyorestauranttakeout.entity.CustomWardArea;
 import com.example.tokyorestauranttakeout.entity.WardArea;
 import com.example.tokyorestauranttakeout.repositories.WardAreaRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import com.example.tokyorestauranttakeout.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,7 +51,7 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
 
     @Override
     public void create(WardAreaRegisterForm wardAreaRegisterForm) throws IOException {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         WardArea wardArea = new WardArea();
         wardArea.setName(wardAreaRegisterForm.getName());
         if (wardAreaRegisterForm.image != null ) {
@@ -119,7 +121,7 @@ public class AdminWardAreaServiceImpl implements AdminWardAreaService {
         WardArea wardArea =
                 wardAreaRepository.selectById(wardAreaUpdateForm.getId());
         if (wardArea != null) {
-            Date now = new Date();
+            LocalDateTime now = DateTimeUtil.now();
             wardArea.setName(wardAreaUpdateForm.getName());
 
             if (wardAreaUpdateForm.imageUpdateFlg) {

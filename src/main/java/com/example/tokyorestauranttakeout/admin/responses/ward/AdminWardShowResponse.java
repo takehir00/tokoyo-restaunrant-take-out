@@ -1,6 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.responses.ward;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class AdminWardShowResponse {
     /** id */
@@ -12,7 +12,7 @@ public class AdminWardShowResponse {
     /** MIME_TYPE */
     public String mimeType;
     /** 作成日時 */
-    public Date createdAt;
+    public LocalDateTime createdAt;
     /** 更新日時 */
-    public Date updatedAt;
+    public LocalDateTime updatedAt;
 }

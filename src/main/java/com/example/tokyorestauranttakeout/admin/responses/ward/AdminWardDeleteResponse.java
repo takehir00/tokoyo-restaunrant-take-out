@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.responses.ward;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AdminWardDeleteResponse {
@@ -12,7 +13,7 @@ public class AdminWardDeleteResponse {
     /** MIME_TYPE */
     public String mimeType;
     /** 作成日時 */
-    public Date createdAt;
+    public LocalDateTime createdAt;
     /** 更新日時 */
-    public Date updatedAt;
+    public LocalDateTime updatedAt;
 }

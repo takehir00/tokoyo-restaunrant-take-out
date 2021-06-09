@@ -4,11 +4,12 @@ import com.example.tokyorestauranttakeout.client.forms.QuestionRegisterForm;
 import com.example.tokyorestauranttakeout.client.services.QuestionService;
 import com.example.tokyorestauranttakeout.entity.Question;
 import com.example.tokyorestauranttakeout.repositories.QuestionRepository;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -17,7 +18,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void create(QuestionRegisterForm registerForm) {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         Question question = new Question();
         BeanUtils.copyProperties(registerForm, question);
         question.setResolvedFlg(false);
