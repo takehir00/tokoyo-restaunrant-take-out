@@ -13,10 +13,12 @@ import com.example.tokyorestauranttakeout.admin.responses.question.AdminQuestion
 import com.example.tokyorestauranttakeout.admin.services.AdminQuestionService;
 import com.example.tokyorestauranttakeout.entity.Question;
 import com.example.tokyorestauranttakeout.repositories.QuestionRepository;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +37,7 @@ public class AdminQuestionServiceImpl implements AdminQuestionService {
 
     @Override
     public void create(AdminQuestionRegisterForm registerForm) {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         Question question = new Question();
         BeanUtils.copyProperties(registerForm, question);
         question.setCreatedAt(now);
@@ -60,7 +62,7 @@ public class AdminQuestionServiceImpl implements AdminQuestionService {
     public void update(AdminQuestionUpdateForm updateForm) {
         Question question = questionRepository.selectById(updateForm.getId());
         if (question != null) {
-            Date now = new Date();
+            LocalDateTime now = DateTimeUtil.now();
             BeanUtils.copyProperties(updateForm, question);
             question.setUpdatedAt(now);
             questionRepository.update(question);

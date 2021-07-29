@@ -9,11 +9,12 @@ import com.example.tokyorestauranttakeout.admin.responses.role.AdminRoleUpdateFo
 import com.example.tokyorestauranttakeout.admin.services.AdminRoleService;
 import com.example.tokyorestauranttakeout.entity.AdminRole;
 import com.example.tokyorestauranttakeout.repositories.AdminRoleRepository;
-import com.example.tokyorestauranttakeout.util.DateUtil;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
     @Override
     public void create(AdminRoleCreateForm registerForm) {
-        Date now = DateUtil.now();
+        LocalDateTime now = DateTimeUtil.now();
         AdminRole adminRole = new AdminRole();
         adminRole.setName(registerForm.getName());
         adminRole.setCreatedAt(now);

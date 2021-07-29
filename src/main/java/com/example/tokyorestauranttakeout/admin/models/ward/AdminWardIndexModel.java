@@ -1,5 +1,6 @@
 package com.example.tokyorestauranttakeout.admin.models.ward;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AdminWardIndexModel {
@@ -8,7 +9,7 @@ public class AdminWardIndexModel {
     /** 区名 */
     public String name;
     /** 作成日時 */
-    public Date createdAt;
+    public LocalDateTime createdAt;
     /** 更新日時 */
-    public Date updatedAt;
+    public LocalDateTime updatedAt;
 }

@@ -12,12 +12,14 @@ import com.example.tokyorestauranttakeout.entity.CustomMenu;
 import com.example.tokyorestauranttakeout.entity.Menu;
 import com.example.tokyorestauranttakeout.repositories.MenuRepository;
 import com.example.tokyorestauranttakeout.repositories.RestaurantRepository;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import com.example.tokyorestauranttakeout.util.FileUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -96,7 +98,7 @@ public class AdminMenuServiceImpl implements AdminMenuService {
 
     @Override
     public void create(AdminMenuRegisterForm registerForm) {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         Menu menu = new Menu();
         BeanUtils.copyProperties(registerForm, menu);
         menu.setCreatedAt(now);
@@ -132,7 +134,7 @@ public class AdminMenuServiceImpl implements AdminMenuService {
     public void update(AdminMenuUpdateForm updateForm) throws IOException {
         Menu menu = menuRepository.selectById(updateForm.getId());
         if (menu != null) {
-            Date now = new Date();
+            LocalDateTime now = DateTimeUtil.now();
             BeanUtils.copyProperties(updateForm, menu);
 
             if (updateForm.imageUpdateFlg) {

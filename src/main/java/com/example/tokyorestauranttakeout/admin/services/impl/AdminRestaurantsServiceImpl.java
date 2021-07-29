@@ -14,12 +14,14 @@ import com.example.tokyorestauranttakeout.entity.Restaurant;
 import com.example.tokyorestauranttakeout.repositories.RestaurantRepository;
 import com.example.tokyorestauranttakeout.repositories.WardAreaRepository;
 import com.example.tokyorestauranttakeout.repositories.WardRepository;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import com.example.tokyorestauranttakeout.util.FileUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,7 +85,7 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
 
     @Override
     public void create(AdminRestaurantCreateForm registerForm) {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         Restaurant restaurant = new Restaurant();
         restaurant.setName(registerForm.getName());
         restaurant.setAddress(registerForm.getAddress());
@@ -140,7 +142,7 @@ public class AdminRestaurantsServiceImpl implements AdminRestaurantsService {
         Restaurant restaurant =
                 restaurantRepository.selectById(restaurantUpdateForm.getId());
         if (restaurant != null) {
-            Date now = new Date();
+            LocalDateTime now = DateTimeUtil.now();
             BeanUtils.copyProperties(restaurantUpdateForm, restaurant);
 
             if (restaurantUpdateForm.imageUpdateFlg) {

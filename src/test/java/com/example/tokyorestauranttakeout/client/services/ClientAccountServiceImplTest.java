@@ -7,6 +7,7 @@ import com.example.tokyorestauranttakeout.client.responses.ClientAccountShowResp
 import com.example.tokyorestauranttakeout.client.services.impl.ClientAccountServiceImpl;
 import com.example.tokyorestauranttakeout.entity.ClientAccount;
 import com.example.tokyorestauranttakeout.repositories.ClientAccountRepository;
+import com.example.tokyorestauranttakeout.util.DateTimeUtil;
 import com.example.tokyorestauranttakeout.util.PasswordUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -96,7 +97,7 @@ public class ClientAccountServiceImplTest {
     @Test
     public void testGetShowResponse() {
         Integer accountId = 1;
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         ClientAccount clientAccount = new ClientAccount();
         clientAccount.setEmail(email);
         clientAccount.setPassword(password);
@@ -174,7 +175,7 @@ public class ClientAccountServiceImplTest {
     public void testUpdate() {
         // モック設定
         when(passwordUtil.encode(password)).thenReturn(encodedPassword);
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         ClientAccount clientAccount = new ClientAccount();
         clientAccount.setEmail(email);
         clientAccount.setPassword(password);
@@ -186,7 +187,7 @@ public class ClientAccountServiceImplTest {
         // テスト用リクエストフォーム
         ClientAccountUpdateForm updateForm = new ClientAccountUpdateForm();
         updateForm.id = accountId;
-        updateForm.name = password;
+        updateForm.name = name;
 
         // 更新機能が正常に動作するか確認
         service.update(updateForm);
@@ -199,7 +200,7 @@ public class ClientAccountServiceImplTest {
         verify(clientAccountRepository, times(1))
                 .update(clientAccountCaptor.capture());
         assertThat(email).isEqualTo(clientAccountCaptor.getValue().getEmail());
-        assertThat(encodedPassword).isEqualTo(clientAccountCaptor.getValue().getPassword());
+        assertThat(name).isEqualTo(clientAccountCaptor.getValue().getName());
     }
 
     /**
@@ -207,7 +208,7 @@ public class ClientAccountServiceImplTest {
      */
     @Test
     public void testGetUpdateFormResponse() {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         ClientAccount clientAccount = new ClientAccount();
         clientAccount.setId(accountId);
         clientAccount.setEmail(email);
@@ -255,7 +256,7 @@ public class ClientAccountServiceImplTest {
      */
     @Test
     public void testGetDeleteFormResponse() {
-        Date now = new Date();
+        LocalDateTime now = DateTimeUtil.now();
         ClientAccount clientAccount = new ClientAccount();
         clientAccount.setId(accountId);
         clientAccount.setEmail(email);

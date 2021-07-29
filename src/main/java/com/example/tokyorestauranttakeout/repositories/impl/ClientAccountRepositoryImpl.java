@@ -31,11 +31,8 @@ public class ClientAccountRepositoryImpl implements ClientAccountRepository {
 
         List<ClientAccount> clientAccountList = mapper.selectByExample(example);
 
-        if (clientAccountList.isEmpty()) {
-            return Optional.empty();
-        }
         //メールアドレスは一意なので１件目を取得
-        return Optional.of(clientAccountList.get(0));
+        return Optional.ofNullable(clientAccountList.get(0));
     }
 
     /**
